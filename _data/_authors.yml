@@ -1,0 +1,15 @@
+Adriaan M. Dokter:
+  name    : "Adriaan M. Dokter"
+  avatar  : "/assets/images/bio-photo.jpg"
+  bio     : "I’m an ecologist studying migration and population dynamics of birds"
+  location: "Ithaca, NY, USA"
+  links:
+    - label: "Cornell Lab of Ornithology"
+      icon: "fas fa-fw fa-link"
+      url: "https://www.birds.cornell.edu/home/staff/adriaan-dokter/"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/AdriaanDokter"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/adokter"
