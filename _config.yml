@@ -19,7 +19,6 @@ email: amd427@cornell.edu
 description: >- # this means to ignore newlines until "baseurl:"
   Personal webpage
 url: https://adokter.github.io
-baseurl: "/new_site"
 twitter_username: AdriaanDokter
 github_username: adokter
 minimal_mistakes_skin: default
