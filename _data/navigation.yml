@@ -1,12 +1,26 @@
-# main links
 main:
-  - title: "Quick-Start Guide"
-    url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/
+  - title: "Home"
+    url: /
+  - title: "Research"
+    url: /research/
+  - title: "Code"
+    url: /code/
+  - title: "Publications"
+    url: /publications/
+  - title: "Opportunities"
+    url: /opportunities/
+  - title: "Contact"
+    url: /contact/
+sidebar-code:
+  - title: "bioRad"
+    children:
+      - title: "bioRad documentation"
+        url: https://adokter.github.io/biorad
+      - title: "bioRad Github"
+        url: https://github.com/adokter/bioRad
+  - title: "vol2bird"
+    children:
+      - title: "vol2bird documentation"
+        url: https://adokter.github.io/vol2bird
+      - title: "bioRad Github"
+        url: https://github.com/adokter/vol2bird
