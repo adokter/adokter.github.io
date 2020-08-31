@@ -5,7 +5,6 @@ layout: single
 author_profile: true
 ---
 
-
 #### Cornell Lab of Ornithology
 
 Dr. Adriaan M. Dokter<br />

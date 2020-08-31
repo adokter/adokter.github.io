@@ -4,7 +4,7 @@ title: "Research"
 author_profile: true
 layout: collection
 collection: posts
-entries_layout: grid
+#entries_layout: grid
 classes: wide
 ---
 
