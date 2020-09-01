@@ -7,6 +7,7 @@ tags:
   - project
 header:
   image: /assets/images/transects-banner.jpg
+  caption: graphic by Jillian Ditner
 ---
 
 I recently got awarded an NSF Macrosystems award to study avian demography from a large-scale perspective, in collaboration with Ali Johnston and Frank La Sorte. We currently have  a [job opening](/opportunities/) for a postdoctoral associate to work on this exciting project. Here a brief summary of what we want to achieve.
