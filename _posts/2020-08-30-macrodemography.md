@@ -1,5 +1,5 @@
 ---
-title: "NSF Macrosystems award"
+title: "NSF Macrodemography project"
 excerpt_separator: "<!--more-->"
 categories:
   - Blog
