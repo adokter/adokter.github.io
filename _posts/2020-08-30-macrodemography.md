@@ -9,7 +9,8 @@ header:
   image: /assets/images/transects-banner.jpg
 ---
 
-I recently got awarded an NSF Macrosystems award to study avian demography from a large-scale perspective. Here a brief general summary of what we want to achieve.
+I recently got awarded an NSF Macrosystems award to study avian demography from a large-scale perspective, in collaboration with Ali Johnston and Frank La Sorte. 
+Here a brief summary of what we want to achieve.
 
 ### Macro-demography of North America's migratory avifauna
 
