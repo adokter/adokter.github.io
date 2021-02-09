@@ -9,7 +9,7 @@ author_profile: true
 Click [here](https://scholar.google.com/citations?user=d-FRqdcAAAAJ&hl=en)
 
 ### Peer-reviewed articles:
-1.      Gangoso L, Viana DS, **Dokter AM**, Shamoun‐Baranes J, Figuerola J, Barbosa SA, Bouten W. (2020) Cascading effects of climate variability on the breeding success of an edge population of an apex predator. *Journal of Animal Ecology*, in press, [DOI 10.1111/1365-2656.13304](https://doi.org/10.1111/1365-2656.13304)
+1.      Gangoso L, Viana DS, **Dokter AM**, Shamoun‐Baranes J, Figuerola J, Barbosa SA, Bouten W. (2020) Cascading effects of climate variability on the breeding success of an edge population of an apex predator. *Journal of Animal Ecology*, 89 (11), 2631-2643, [DOI 10.1111/1365-2656.13304](https://doi.org/10.1111/1365-2656.13304)
 1.      Fokkema W, van der Jeugd HP, Lameris TK, **Dokter AM**, Ebbinge BS, de Roos AM, Nolet BA, Piersma T, Olff H. (2020) Ontogenetic niche shifts as a driver of seasonal migration. *Oecologia*, 193, 285–297, [DOI 10.1007/s00442-020-04682-0](https://doi.org/10.1007/s00442-020-04682-0)
 1.      Kranstauber B, Bouten W, Leijnse H, Wijers B-C, Verlinden L, Shamoun-Baranes J, **Dokter AM**. (2020) High-Resolution Spatial Distribution of Bird Movements Estimated from a Weather Radar Network. *Remote Sensing*, 12, 635, [DOI 10.3390/rs12040635](https://doi.org/10.3390/rs12040635)
 1.      Rosenberg KV, **Dokter AM**, Blancher PJ, Sauer JR, Smith AC, Smith PA, Stanton JC, Panjabi A, Helft L, Parr M, Marra PP. (2019) Decline of the North American avifauna. *Science*, 366, 120-124, [DOI 10.1126/science.aaw1313](https://doi.org/10.1126/science.aaw1313)
