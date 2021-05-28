@@ -9,6 +9,9 @@ author_profile: true
 Click [here](https://scholar.google.com/citations?user=d-FRqdcAAAAJ&hl=en)
 
 ### Peer-reviewed articles:
+
+1.      Shamoun-Baranes J, Bauer S, Chapman JW, Desmet P, **Dokter AM**, Farnsworth A, Haest B, Koistinen J, Kranstauber B, Liechti F, Mason THE, Nilsson C, Nussbaumer R, Schmid B, Weisshaupt N, Leijnse H. (2021) Weather radars' role in biodiversity monitoring. *Science* 372 (6539), 248, [DOI 10.1126/science.abi4680](https://doi.org/10.1126/science.abi4680)
+1.      Lameris TK, **Dokter AM**, van der Jeugd HP, Bouten W, Koster J, Sand SH, Westerduin C and Nolet BA, (2021). Nocturnal foraging lifts time constraints in winter for migratory geese but hardly speeds up fueling. *Behavioral Ecology*, araa152, [DOI 10.1093/beheco/araa152]((https://doi.org/10.1093/beheco/araa152)
 1.      Gangoso L, Viana DS, **Dokter AM**, Shamoun‐Baranes J, Figuerola J, Barbosa SA, Bouten W. (2020) Cascading effects of climate variability on the breeding success of an edge population of an apex predator. *Journal of Animal Ecology*, 89 (11), 2631-2643, [DOI 10.1111/1365-2656.13304](https://doi.org/10.1111/1365-2656.13304)
 1.      Fokkema W, van der Jeugd HP, Lameris TK, **Dokter AM**, Ebbinge BS, de Roos AM, Nolet BA, Piersma T, Olff H. (2020) Ontogenetic niche shifts as a driver of seasonal migration. *Oecologia*, 193, 285–297, [DOI 10.1007/s00442-020-04682-0](https://doi.org/10.1007/s00442-020-04682-0)
 1.      Kranstauber B, Bouten W, Leijnse H, Wijers B-C, Verlinden L, Shamoun-Baranes J, **Dokter AM**. (2020) High-Resolution Spatial Distribution of Bird Movements Estimated from a Weather Radar Network. *Remote Sensing*, 12, 635, [DOI 10.3390/rs12040635](https://doi.org/10.3390/rs12040635)
