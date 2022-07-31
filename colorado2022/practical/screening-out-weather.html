@@ -142,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-correlation-coefficient"><i class="fa fa-check"></i><b>3.1</b> using correlation coefficient</a></li>
 <li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-depolarization-ratio"><i class="fa fa-check"></i><b>3.2</b> using depolarization ratio</a></li>
-<li class="chapter" data-level="3.3" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-mistnet"><i class="fa fa-check"></i><b>3.3</b> using MistNet:</a></li>
+<li class="chapter" data-level="3.3" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-mistnet"><i class="fa fa-check"></i><b>3.3</b> using MistNet</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vertical-profiles.html"><a href="vertical-profiles.html"><i class="fa fa-check"></i><b>4</b> Vertical profiles</a>
 <ul>
@@ -206,8 +206,8 @@ First we add the depolarization ratio (DR) as a parameter. We’ll express DR on
 <span id="cb9-2"><a href="screening-out-weather.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DR&quot;</span>, <span class="at">zlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">25</span>,<span class="sc">-</span><span class="dv">5</span>), <span class="at">palette =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">100</span>))</span></code></pre></div>
 </div>
 <div id="using-mistnet" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> using MistNet:<a href="screening-out-weather.html#using-mistnet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="screening-out-weather.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># apply the MistNet model to the polar volume file:</span></span>
+<h2><span class="header-section-number">3.3</span> using MistNet<a href="screening-out-weather.html#using-mistnet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="screening-out-weather.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># apply the MistNet model to the polar volume file and load it as a polar volume (pvol):</span></span>
 <span id="cb10-2"><a href="screening-out-weather.html#cb10-2" aria-hidden="true" tabindex="-1"></a>my_pvol <span class="ot">&lt;-</span> <span class="fu">apply_mistnet</span>(my_pvolfiles[<span class="dv">1</span>])</span>
 <span id="cb10-3"><a href="screening-out-weather.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># mistnet will add additional parameters to the</span></span>
 <span id="cb10-4"><a href="screening-out-weather.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># elevation scans at 0.5, 1.5, 2.5, 3.5 and 4.5 degrees</span></span>

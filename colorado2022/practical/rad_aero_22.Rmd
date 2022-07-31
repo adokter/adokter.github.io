@@ -193,9 +193,9 @@ my_ppi_clean <- calculate_param(my_ppi, DBZH = ifelse(DR < -12, NA, DBZH))
 map(my_ppi, map = basemap, param = "DBZH", zlim = c(-20, 40))
 map(my_ppi_clean, map = basemap, param = "DBZH", zlim = c(-20, 40))
 ```
-## using MistNet:
+## using MistNet
 ```{r, eval=SHOW_ANSWERS}
-# apply the MistNet model to the polar volume file:
+# apply the MistNet model to the polar volume file and load it as a polar volume (pvol):
 my_pvol <- apply_mistnet(my_pvolfiles[1])
 # mistnet will add additional parameters to the
 # elevation scans at 0.5, 1.5, 2.5, 3.5 and 4.5 degrees
