@@ -141,7 +141,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="screening-out-weather.html"><a href="screening-out-weather.html"><i class="fa fa-check"></i><b>3</b> Screening out weather</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-correlation-coefficient"><i class="fa fa-check"></i><b>3.1</b> using correlation coefficient</a></li>
-<li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-depolarization-ratio"><i class="fa fa-check"></i><b>3.2</b> using depolarization ratio</a></li>
+<li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-mistnet"><i class="fa fa-check"></i><b>3.2</b> using MistNet</a></li>
+<li class="chapter" data-level="3.3" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-depolarization-ratio"><i class="fa fa-check"></i><b>3.3</b> using depolarization ratio</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vertical-profiles.html"><a href="vertical-profiles.html"><i class="fa fa-check"></i><b>4</b> Vertical profiles</a>
 <ul>
@@ -198,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="getting-started.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bring up the package general help page:</span></span>
 <span id="cb3-2"><a href="getting-started.html#cb3-2" aria-hidden="true" tabindex="-1"></a>?bioRad</span></code></pre></div>
 <p>Start by making a new directory on your local machine that you will use for this practical:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="getting-started.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a new local directory on your machine where to download data for this practical</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="getting-started.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a new local directory on your machine for this practical</span></span>
 <span id="cb4-2"><a href="getting-started.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># replace the string below with the path of that directory:</span></span>
 <span id="cb4-3"><a href="getting-started.html#cb4-3" aria-hidden="true" tabindex="-1"></a>HOME <span class="ot">&lt;-</span> <span class="st">&quot;your/personal/working/directory/&quot;</span></span>
 <span id="cb4-4"><a href="getting-started.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># check that the directory exists. If the next statement evaluates to FALSE, something went wrong: the directory does not exist or you didn&#39;t specify its path correctly</span></span>
@@ -206,8 +207,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-6"><a href="getting-started.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># we will make HOME our work directory, the default folder in which R will look</span></span>
 <span id="cb4-7"><a href="getting-started.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for files, and where it will output newly generated files.</span></span>
 <span id="cb4-8"><a href="getting-started.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(HOME)</span>
-<span id="cb4-9"><a href="getting-started.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally, we set the local time zone to UTC, so all plotted time axes will be in UTC</span></span>
-<span id="cb4-10"><a href="getting-started.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">TZ =</span> <span class="st">&quot;UTC&quot;</span>)</span></code></pre></div>
+<span id="cb4-9"><a href="getting-started.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># next, we will create two directories where we will be storing data:</span></span>
+<span id="cb4-10"><a href="getting-started.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;./data_vpts&quot;</span>) <span class="co"># here we will store vertical profile time series (vpts data)</span></span>
+<span id="cb4-11"><a href="getting-started.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;./data_pvol&quot;</span>) <span class="co"># here we will store polar volumes (pvol data)</span></span>
+<span id="cb4-12"><a href="getting-started.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally, we set the local time zone to UTC, so all plotted time axes will be in UTC</span></span>
+<span id="cb4-13"><a href="getting-started.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">TZ =</span> <span class="st">&quot;UTC&quot;</span>)</span></code></pre></div>
+<p>Next, download the two files posted in the <code>#biorad</code> channel, and put them in the newly created <code>data_vpts</code> folder</p>
 <p>Your R session is now properly set up.</p>
 </div>
             </section>

@@ -141,7 +141,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="screening-out-weather.html"><a href="screening-out-weather.html"><i class="fa fa-check"></i><b>3</b> Screening out weather</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-correlation-coefficient"><i class="fa fa-check"></i><b>3.1</b> using correlation coefficient</a></li>
-<li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-depolarization-ratio"><i class="fa fa-check"></i><b>3.2</b> using depolarization ratio</a></li>
+<li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-mistnet"><i class="fa fa-check"></i><b>3.2</b> using MistNet</a></li>
+<li class="chapter" data-level="3.3" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-depolarization-ratio"><i class="fa fa-check"></i><b>3.3</b> using depolarization ratio</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vertical-profiles.html"><a href="vertical-profiles.html"><i class="fa fa-check"></i><b>4</b> Vertical profiles</a>
 <ul>
@@ -243,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-6"><a href="basic-visualization-of-radar-scans.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we are ready to plot the ppi, for example let&#39;s plot reflectivity factor DBZH:</span></span>
 <span id="cb18-7"><a href="basic-visualization-of-radar-scans.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_ppi, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>)</span></code></pre></div>
 <p><img src="rad_aero_22_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p><strong>Exercise 2:</strong> This case shows an incoming precipitation front, characterized by localized but intense thunderstorms, as well as biological scattering. Make also a ppi plot of the correlation coefficient (RHOHV) and radial velocity (VRADH). Verify which regions are precipitation, and its approximate direction of movement
+<p><strong>Exercise 2:</strong> This case shows an incoming precipitation front, characterized by localized but intense thunderstorms, as well as biological scattering. Make also a ppi plot of the correlation coefficient (RHOHV) and radial velocity (VRADH). Verify which regions are precipitation, and the approximate direction of movement
 of biology and precipitation.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="basic-visualization-of-radar-scans.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the correlation coefficient (RHOHV):</span></span>
 <span id="cb19-2"><a href="basic-visualization-of-radar-scans.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_ppi, <span class="at">param =</span> <span class="st">&quot;RHOHV&quot;</span>)</span></code></pre></div>

@@ -141,7 +141,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="screening-out-weather.html"><a href="screening-out-weather.html"><i class="fa fa-check"></i><b>3</b> Screening out weather</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-correlation-coefficient"><i class="fa fa-check"></i><b>3.1</b> using correlation coefficient</a></li>
-<li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-depolarization-ratio"><i class="fa fa-check"></i><b>3.2</b> using depolarization ratio</a></li>
+<li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-mistnet"><i class="fa fa-check"></i><b>3.2</b> using MistNet</a></li>
+<li class="chapter" data-level="3.3" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-depolarization-ratio"><i class="fa fa-check"></i><b>3.3</b> using depolarization ratio</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vertical-profiles.html"><a href="vertical-profiles.html"><i class="fa fa-check"></i><b>4</b> Vertical profiles</a>
 <ul>
@@ -199,27 +200,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.2</span> Processing multiple polar volumes<a href="processing-many-polar-volumes.html#processing-multiple-polar-volumes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This section contains an example for processing a directory of polar volumes into profiles:</p>
 <p>First we download more files, and prepare an output directory for storing the processed profiles:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="processing-many-polar-volumes.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we download more data, for a total of one additional hour for the same radar:</span></span>
-<span id="cb108-2"><a href="processing-many-polar-volumes.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">download_pvolfiles</span>(<span class="at">date_min=</span><span class="fu">as.POSIXct</span>(<span class="st">&quot;2017-05-04 01:40:00&quot;</span>), <span class="at">date_max=</span><span class="fu">as.POSIXct</span>(<span class="st">&quot;2017-05-04 02:40:00&quot;</span>), <span class="at">radar=</span><span class="st">&quot;KHGX&quot;</span>, <span class="at">directory=</span><span class="st">&quot;./data_pvol&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="processing-many-polar-volumes.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we download more data, for a total of one additional hour for the same radar:</span></span>
+<span id="cb110-2"><a href="processing-many-polar-volumes.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">download_pvolfiles</span>(<span class="at">date_min=</span><span class="fu">as.POSIXct</span>(<span class="st">&quot;2017-05-04 01:40:00&quot;</span>), <span class="at">date_max=</span><span class="fu">as.POSIXct</span>(<span class="st">&quot;2017-05-04 02:40:00&quot;</span>), <span class="at">radar=</span><span class="st">&quot;KHGX&quot;</span>, <span class="at">directory=</span><span class="st">&quot;./data_pvol&quot;</span>)</span></code></pre></div>
 <pre><code>## Downloading data from noaa-nexrad-level2 for radar KHGX spanning over 1 days</code></pre>
 <pre><code>## 
 ## Downloading pvol for 2017/05/04/KHGX/</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="processing-many-polar-volumes.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We will process all the polar volume files downloaded so far:</span></span>
-<span id="cb111-2"><a href="processing-many-polar-volumes.html#cb111-2" aria-hidden="true" tabindex="-1"></a>my_pvolfiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;./data_pvol&quot;</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern=</span><span class="st">&quot;KHGX&quot;</span>)</span>
-<span id="cb111-3"><a href="processing-many-polar-volumes.html#cb111-3" aria-hidden="true" tabindex="-1"></a>my_pvolfiles</span>
-<span id="cb111-4"><a href="processing-many-polar-volumes.html#cb111-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create output directory for processed profiles</span></span>
-<span id="cb111-5"><a href="processing-many-polar-volumes.html#cb111-5" aria-hidden="true" tabindex="-1"></a>outputdir <span class="ot">&lt;-</span> <span class="st">&quot;./data_vp&quot;</span></span>
-<span id="cb111-6"><a href="processing-many-polar-volumes.html#cb111-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(outputdir)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="processing-many-polar-volumes.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We will process all the polar volume files downloaded so far:</span></span>
+<span id="cb113-2"><a href="processing-many-polar-volumes.html#cb113-2" aria-hidden="true" tabindex="-1"></a>my_pvolfiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;./data_pvol&quot;</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern=</span><span class="st">&quot;KHGX&quot;</span>)</span>
+<span id="cb113-3"><a href="processing-many-polar-volumes.html#cb113-3" aria-hidden="true" tabindex="-1"></a>my_pvolfiles</span>
+<span id="cb113-4"><a href="processing-many-polar-volumes.html#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create output directory for processed profiles</span></span>
+<span id="cb113-5"><a href="processing-many-polar-volumes.html#cb113-5" aria-hidden="true" tabindex="-1"></a>outputdir <span class="ot">&lt;-</span> <span class="st">&quot;./data_vp&quot;</span></span>
+<span id="cb113-6"><a href="processing-many-polar-volumes.html#cb113-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(outputdir)</span></code></pre></div>
 <p>We will use the following custom settings for processing:
 * We will use MistNet to screen out precipitation
 * we will calculate profile layers of 50 meter width
 * we will calculate 60 profile layers, so up to 50*60=3000 meter altitude</p>
 <p>Note that we enclose the <code>calculate_vp()</code> function in <code>tryCatch()</code> to keep going after errors with specific files</p>
 <p>Having generated the profiles, we can read them into R:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="processing-many-polar-volumes.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we assume outputdir contains the path to the directory with processed profiles</span></span>
-<span id="cb112-2"><a href="processing-many-polar-volumes.html#cb112-2" aria-hidden="true" tabindex="-1"></a>my_vpfiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(outputdir, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern=</span><span class="st">&quot;KHGX&quot;</span>)</span>
-<span id="cb112-3"><a href="processing-many-polar-volumes.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print them</span></span>
-<span id="cb112-4"><a href="processing-many-polar-volumes.html#cb112-4" aria-hidden="true" tabindex="-1"></a>my_vpfiles</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="processing-many-polar-volumes.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we assume outputdir contains the path to the directory with processed profiles</span></span>
+<span id="cb114-2"><a href="processing-many-polar-volumes.html#cb114-2" aria-hidden="true" tabindex="-1"></a>my_vpfiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(outputdir, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern=</span><span class="st">&quot;KHGX&quot;</span>)</span>
+<span id="cb114-3"><a href="processing-many-polar-volumes.html#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print them</span></span>
+<span id="cb114-4"><a href="processing-many-polar-volumes.html#cb114-4" aria-hidden="true" tabindex="-1"></a>my_vpfiles</span></code></pre></div>
 <pre><code>##  [1] &quot;./data_vp/KHGX20170504_012843_V06_vp.h5&quot;
 ##  [2] &quot;./data_vp/KHGX20170504_013405_V06_vp.h5&quot;
 ##  [3] &quot;./data_vp/KHGX20170504_013934_V06_vp.h5&quot;
@@ -234,44 +235,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [12] &quot;./data_vp/KHGX20170504_022848_V06_vp.h5&quot;
 ## [13] &quot;./data_vp/KHGX20170504_023417_V06_vp.h5&quot;
 ## [14] &quot;./data_vp/KHGX20170504_023946_V06_vp.h5&quot;</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="processing-many-polar-volumes.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read them</span></span>
-<span id="cb114-2"><a href="processing-many-polar-volumes.html#cb114-2" aria-hidden="true" tabindex="-1"></a>my_vplist <span class="ot">&lt;-</span> <span class="fu">read_vpfiles</span>(my_vpfiles)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="processing-many-polar-volumes.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read them</span></span>
+<span id="cb116-2"><a href="processing-many-polar-volumes.html#cb116-2" aria-hidden="true" tabindex="-1"></a>my_vplist <span class="ot">&lt;-</span> <span class="fu">read_vpfiles</span>(my_vpfiles)</span></code></pre></div>
 <p>You can now continue with visualizing and post-processing as we did earlier:</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="processing-many-polar-volumes.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a time series of profiles:</span></span>
-<span id="cb115-2"><a href="processing-many-polar-volumes.html#cb115-2" aria-hidden="true" tabindex="-1"></a>my_vpts <span class="ot">&lt;-</span> <span class="fu">bind_into_vpts</span>(my_vplist)</span>
-<span id="cb115-3"><a href="processing-many-polar-volumes.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot them between 0 - 3 km altitude:</span></span>
-<span id="cb115-4"><a href="processing-many-polar-volumes.html#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_vpts, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="processing-many-polar-volumes.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a time series of profiles:</span></span>
+<span id="cb117-2"><a href="processing-many-polar-volumes.html#cb117-2" aria-hidden="true" tabindex="-1"></a>my_vpts <span class="ot">&lt;-</span> <span class="fu">bind_into_vpts</span>(my_vplist)</span>
+<span id="cb117-3"><a href="processing-many-polar-volumes.html#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot them between 0 - 3 km altitude:</span></span>
+<span id="cb117-4"><a href="processing-many-polar-volumes.html#cb117-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_vpts, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>))</span></code></pre></div>
 <pre><code>## Warning in plot.vpts(my_vpts, ylim = c(0, 3000)): Irregular time-series: missing
 ## profiles will not be visible. Use &#39;regularize_vpts&#39; to make time series regular.</code></pre>
-<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="processing-many-polar-volumes.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co"># because of the rain moving in, our ability to estimate bird profiles slowly drops:</span></span>
-<span id="cb117-2"><a href="processing-many-polar-volumes.html#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s visualize rain by plotting all aerial reflectivity:</span></span>
-<span id="cb117-3"><a href="processing-many-polar-volumes.html#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_vpts, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>), <span class="at">quantity=</span><span class="st">&quot;DBZH&quot;</span>)</span></code></pre></div>
+<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="processing-many-polar-volumes.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># because of the rain moving in, our ability to estimate bird profiles slowly drops:</span></span>
+<span id="cb119-2"><a href="processing-many-polar-volumes.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s visualize rain by plotting all aerial reflectivity:</span></span>
+<span id="cb119-3"><a href="processing-many-polar-volumes.html#cb119-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_vpts, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>), <span class="at">quantity=</span><span class="st">&quot;DBZH&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning in plot.vpts(my_vpts, ylim = c(0, 3000), quantity = &quot;DBZH&quot;): Irregular
 ## time-series: missing profiles will not be visible. Use &#39;regularize_vpts&#39; to make
 ## time series regular.</code></pre>
-<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-46-2.png" width="672" />
+<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-48-2.png" width="672" />
 Note that we enclose the <code>calculate_vp()</code> function in <code>tryCatch()</code> to keep going after errors with specific files</p>
 </div>
 <div id="parallel-processing" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Parallel processing<a href="processing-many-polar-volumes.html#parallel-processing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We may use one of the parallelization packages in R to further speed up our processing. We will use <code>mclapply()</code> from package <code>parallel</code>. First we wrap up the processing statements in a function, so we can make a single call to a single file. We will disable MistNet, as this deep-learning model does not parallelize well on a cpu machine.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="processing-many-polar-volumes.html#cb119-1" aria-hidden="true" tabindex="-1"></a>process_file <span class="ot">&lt;-</span> <span class="cf">function</span>(file_in){</span>
-<span id="cb119-2"><a href="processing-many-polar-volumes.html#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># construct output filename from input filename</span></span>
-<span id="cb119-3"><a href="processing-many-polar-volumes.html#cb119-3" aria-hidden="true" tabindex="-1"></a>  file_out <span class="ot">&lt;-</span> <span class="fu">paste</span>(outputdir, <span class="st">&quot;/&quot;</span>, <span class="fu">basename</span>(file_in), <span class="st">&quot;_vp.h5&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb119-4"><a href="processing-many-polar-volumes.html#cb119-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run calculate_vp()</span></span>
-<span id="cb119-5"><a href="processing-many-polar-volumes.html#cb119-5" aria-hidden="true" tabindex="-1"></a>  vp <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">calculate_vp</span>(file_in, file_out, <span class="at">mistnet =</span> <span class="cn">FALSE</span>, <span class="at">h_layer=</span><span class="dv">50</span>, <span class="at">n_layer=</span><span class="dv">60</span>), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
-<span id="cb119-6"><a href="processing-many-polar-volumes.html#cb119-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.vp</span>(vp)){</span>
-<span id="cb119-7"><a href="processing-many-polar-volumes.html#cb119-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return TRUE if we calculated a profile</span></span>
-<span id="cb119-8"><a href="processing-many-polar-volumes.html#cb119-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">TRUE</span>)</span>
-<span id="cb119-9"><a href="processing-many-polar-volumes.html#cb119-9" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span>{</span>
-<span id="cb119-10"><a href="processing-many-polar-volumes.html#cb119-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return FALSE if we did not</span></span>
-<span id="cb119-11"><a href="processing-many-polar-volumes.html#cb119-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">FALSE</span>)</span>
-<span id="cb119-12"><a href="processing-many-polar-volumes.html#cb119-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb119-13"><a href="processing-many-polar-volumes.html#cb119-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb119-14"><a href="processing-many-polar-volumes.html#cb119-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb119-15"><a href="processing-many-polar-volumes.html#cb119-15" aria-hidden="true" tabindex="-1"></a><span class="co"># To process a file, we can now run</span></span>
-<span id="cb119-16"><a href="processing-many-polar-volumes.html#cb119-16" aria-hidden="true" tabindex="-1"></a><span class="fu">process_file</span>(my_pvolfiles[<span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="processing-many-polar-volumes.html#cb121-1" aria-hidden="true" tabindex="-1"></a>process_file <span class="ot">&lt;-</span> <span class="cf">function</span>(file_in){</span>
+<span id="cb121-2"><a href="processing-many-polar-volumes.html#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># construct output filename from input filename</span></span>
+<span id="cb121-3"><a href="processing-many-polar-volumes.html#cb121-3" aria-hidden="true" tabindex="-1"></a>  file_out <span class="ot">&lt;-</span> <span class="fu">paste</span>(outputdir, <span class="st">&quot;/&quot;</span>, <span class="fu">basename</span>(file_in), <span class="st">&quot;_vp.h5&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb121-4"><a href="processing-many-polar-volumes.html#cb121-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run calculate_vp()</span></span>
+<span id="cb121-5"><a href="processing-many-polar-volumes.html#cb121-5" aria-hidden="true" tabindex="-1"></a>  vp <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">calculate_vp</span>(file_in, file_out, <span class="at">mistnet =</span> <span class="cn">FALSE</span>, <span class="at">h_layer=</span><span class="dv">50</span>, <span class="at">n_layer=</span><span class="dv">60</span>), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
+<span id="cb121-6"><a href="processing-many-polar-volumes.html#cb121-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.vp</span>(vp)){</span>
+<span id="cb121-7"><a href="processing-many-polar-volumes.html#cb121-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return TRUE if we calculated a profile</span></span>
+<span id="cb121-8"><a href="processing-many-polar-volumes.html#cb121-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">TRUE</span>)</span>
+<span id="cb121-9"><a href="processing-many-polar-volumes.html#cb121-9" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span>{</span>
+<span id="cb121-10"><a href="processing-many-polar-volumes.html#cb121-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return FALSE if we did not</span></span>
+<span id="cb121-11"><a href="processing-many-polar-volumes.html#cb121-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb121-12"><a href="processing-many-polar-volumes.html#cb121-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb121-13"><a href="processing-many-polar-volumes.html#cb121-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb121-14"><a href="processing-many-polar-volumes.html#cb121-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-15"><a href="processing-many-polar-volumes.html#cb121-15" aria-hidden="true" tabindex="-1"></a><span class="co"># To process a file, we can now run</span></span>
+<span id="cb121-16"><a href="processing-many-polar-volumes.html#cb121-16" aria-hidden="true" tabindex="-1"></a><span class="fu">process_file</span>(my_pvolfiles[<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## Filename = ./data_pvol/2017/05/04/KHGX/KHGX20170504_012843_V06, callid = KHGX
 ## Removed 1 SAILS sweep.
 ## Call RSL_keep_sails() before RSL_anyformat_to_radar() to keep SAILS sweeps.
@@ -280,18 +281,18 @@ Note that we enclose the <code>calculate_vp()</code> function in <code>tryCatch(
 ## Warning: disabling single-polarization precipitation filter for S-band data, continuing in DUAL polarization mode</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <p>Next, we use <code>mclapply()</code> to do the parallel processing for all files:</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="processing-many-polar-volumes.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the parallel library</span></span>
-<span id="cb122-2"><a href="processing-many-polar-volumes.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
-<span id="cb122-3"><a href="processing-many-polar-volumes.html#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="co"># detect how many cores we can use. We will keep 2 cores for other tasks and use the rest for processing.</span></span>
-<span id="cb122-4"><a href="processing-many-polar-volumes.html#cb122-4" aria-hidden="true" tabindex="-1"></a>number_of_cores <span class="ot">=</span> <span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">2</span></span>
-<span id="cb122-5"><a href="processing-many-polar-volumes.html#cb122-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Available cores:</span></span>
-<span id="cb122-6"><a href="processing-many-polar-volumes.html#cb122-6" aria-hidden="true" tabindex="-1"></a>number_of_cores</span>
-<span id="cb122-7"><a href="processing-many-polar-volumes.html#cb122-7" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s loop over the files and generate profiles</span></span>
-<span id="cb122-8"><a href="processing-many-polar-volumes.html#cb122-8" aria-hidden="true" tabindex="-1"></a>start<span class="ot">=</span><span class="fu">Sys.time</span>()</span>
-<span id="cb122-9"><a href="processing-many-polar-volumes.html#cb122-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mclapply</span>(my_pvolfiles, process_file, <span class="at">mc.cores =</span> number_of_cores)</span>
-<span id="cb122-10"><a href="processing-many-polar-volumes.html#cb122-10" aria-hidden="true" tabindex="-1"></a>end<span class="ot">=</span><span class="fu">Sys.time</span>()</span>
-<span id="cb122-11"><a href="processing-many-polar-volumes.html#cb122-11" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the processing time that has passed:</span></span>
-<span id="cb122-12"><a href="processing-many-polar-volumes.html#cb122-12" aria-hidden="true" tabindex="-1"></a>end<span class="sc">-</span>start</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="processing-many-polar-volumes.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the parallel library</span></span>
+<span id="cb124-2"><a href="processing-many-polar-volumes.html#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
+<span id="cb124-3"><a href="processing-many-polar-volumes.html#cb124-3" aria-hidden="true" tabindex="-1"></a><span class="co"># detect how many cores we can use. We will keep 2 cores for other tasks and use the rest for processing.</span></span>
+<span id="cb124-4"><a href="processing-many-polar-volumes.html#cb124-4" aria-hidden="true" tabindex="-1"></a>number_of_cores <span class="ot">=</span> <span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb124-5"><a href="processing-many-polar-volumes.html#cb124-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Available cores:</span></span>
+<span id="cb124-6"><a href="processing-many-polar-volumes.html#cb124-6" aria-hidden="true" tabindex="-1"></a>number_of_cores</span>
+<span id="cb124-7"><a href="processing-many-polar-volumes.html#cb124-7" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s loop over the files and generate profiles</span></span>
+<span id="cb124-8"><a href="processing-many-polar-volumes.html#cb124-8" aria-hidden="true" tabindex="-1"></a>start<span class="ot">=</span><span class="fu">Sys.time</span>()</span>
+<span id="cb124-9"><a href="processing-many-polar-volumes.html#cb124-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mclapply</span>(my_pvolfiles, process_file, <span class="at">mc.cores =</span> number_of_cores)</span>
+<span id="cb124-10"><a href="processing-many-polar-volumes.html#cb124-10" aria-hidden="true" tabindex="-1"></a>end<span class="ot">=</span><span class="fu">Sys.time</span>()</span>
+<span id="cb124-11"><a href="processing-many-polar-volumes.html#cb124-11" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the processing time that has passed:</span></span>
+<span id="cb124-12"><a href="processing-many-polar-volumes.html#cb124-12" aria-hidden="true" tabindex="-1"></a>end<span class="sc">-</span>start</span></code></pre></div>
 </div>
 </div>
             </section>
