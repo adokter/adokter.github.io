@@ -141,8 +141,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="screening-out-weather.html"><a href="screening-out-weather.html"><i class="fa fa-check"></i><b>3</b> Screening out weather</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-correlation-coefficient"><i class="fa fa-check"></i><b>3.1</b> using correlation coefficient</a></li>
-<li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-depolarization-ratio"><i class="fa fa-check"></i><b>3.2</b> using depolarization ratio</a></li>
-<li class="chapter" data-level="3.3" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-mistnet"><i class="fa fa-check"></i><b>3.3</b> using MistNet</a></li>
+<li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-mistnet"><i class="fa fa-check"></i><b>3.2</b> using MistNet</a></li>
+<li class="chapter" data-level="3.3" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-depolarization-ratio"><i class="fa fa-check"></i><b>3.3</b> using depolarization ratio</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vertical-profiles.html"><a href="vertical-profiles.html"><i class="fa fa-check"></i><b>4</b> Vertical profiles</a>
 <ul>
@@ -185,36 +185,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">3</span> Screening out weather<a href="screening-out-weather.html#screening-out-weather" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="using-correlation-coefficient" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> using correlation coefficient<a href="screening-out-weather.html#using-correlation-coefficient" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Screening precipitation based on correlation coefficient is arguably the most simple and established approach for screening out weather in cases where dual-polarization data is available. It is based on removing data above a certain <span class="math inline">\(\rho_{/HV}\)</span> tresholds, most commonly 0.95.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="screening-out-weather.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Screen out the reflectivity areas with RHOHV &lt; 0.95</span></span>
 <span id="cb7-2"><a href="screening-out-weather.html#cb7-2" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DBZH =</span> <span class="fu">ifelse</span>(RHOHV <span class="sc">&gt;</span> <span class="fl">0.95</span>, <span class="cn">NA</span>, DBZH))</span>
 <span id="cb7-3"><a href="screening-out-weather.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the original and cleaned up reflectivity:</span></span>
 <span id="cb7-4"><a href="screening-out-weather.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span>
 <span id="cb7-5"><a href="screening-out-weather.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span></code></pre></div>
 </div>
-<div id="using-depolarization-ratio" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> using depolarization ratio<a href="screening-out-weather.html#using-depolarization-ratio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="using-mistnet" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> using MistNet<a href="screening-out-weather.html#using-mistnet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You can use MistNet for screening out weather when
+* the radar operates at S-band wavelengths
+* you only have single polarization data available (specifically, the three basic quantities radial velocity VRADH, reflectivity DBZH, and spectrum width WRADH).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="screening-out-weather.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># apply the MistNet model to the polar volume file and load it as a polar volume (pvol):</span></span>
+<span id="cb8-2"><a href="screening-out-weather.html#cb8-2" aria-hidden="true" tabindex="-1"></a>my_pvol <span class="ot">&lt;-</span> <span class="fu">apply_mistnet</span>(my_pvolfiles[<span class="dv">1</span>])</span>
+<span id="cb8-3"><a href="screening-out-weather.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># mistnet will add additional parameters to the</span></span>
+<span id="cb8-4"><a href="screening-out-weather.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># elevation scans at 0.5, 1.5, 2.5, 3.5 and 4.5 degrees</span></span>
+<span id="cb8-5"><a href="screening-out-weather.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s extract the scan closest to 0.5 degrees:</span></span>
+<span id="cb8-6"><a href="screening-out-weather.html#cb8-6" aria-hidden="true" tabindex="-1"></a>my_scan <span class="ot">&lt;-</span> <span class="fu">get_scan</span>(my_pvol, <span class="fl">0.5</span>)</span>
+<span id="cb8-7"><a href="screening-out-weather.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot some summary info about the scan to the console:</span></span>
+<span id="cb8-8"><a href="screening-out-weather.html#cb8-8" aria-hidden="true" tabindex="-1"></a>my_scan</span></code></pre></div>
+</div>
+<div id="using-depolarization-ratio" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> using depolarization ratio<a href="screening-out-weather.html#using-depolarization-ratio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Another quantity that has been proposed for distinguishing weather and biology is the depolarization ratio (<span class="math inline">\(D_r\)</span>), which is defined as</p>
 <p><span class="math display">\[D_r=\frac{Z_{DR}+ 1 -2 \sqrt{Z_{DR}} \ \rho_{HV}}{Z_{DR}+ 1 +2 \sqrt{Z_{DR}} \ \rho_{HV}}\]</span>
 First we add the depolarization ratio (DR) as a parameter. We’ll express DR on a dB scale by transforming:
 <span class="math display">\[DR=10\log_{10}(D_r) \]</span>
 (see <em>Kilambi et al. 2018, A Simple and Effective Method for Separating Meteorological from Nonmeteorological Targets Using Dual-Polarization Data</em> for more information)</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="screening-out-weather.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s add depolarization ratio (DR) as a parameter (following Kilambi 2018):</span></span>
-<span id="cb8-2"><a href="screening-out-weather.html#cb8-2" aria-hidden="true" tabindex="-1"></a>my_ppi <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DR =</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">log10</span>((<span class="dv">1</span><span class="sc">+</span> ZDR <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> (ZDR<span class="sc">^</span><span class="fl">0.5</span>) <span class="sc">*</span> RHOHV) <span class="sc">/</span></span>
-<span id="cb8-3"><a href="screening-out-weather.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">+</span> ZDR<span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> (ZDR<span class="sc">^</span><span class="fl">0.5</span>) <span class="sc">*</span> RHOHV)))</span></code></pre></div>
-<p>Like correlation coefficient, it has a good (potentially even better) ability to distinguish weather and biology:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="screening-out-weather.html#cb9-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot the depolarization ratio, using a viridis color palette:</span></span>
-<span id="cb9-2"><a href="screening-out-weather.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DR&quot;</span>, <span class="at">zlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">25</span>,<span class="sc">-</span><span class="dv">5</span>), <span class="at">palette =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">100</span>))</span></code></pre></div>
-</div>
-<div id="using-mistnet" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> using MistNet<a href="screening-out-weather.html#using-mistnet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="screening-out-weather.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># apply the MistNet model to the polar volume file and load it as a polar volume (pvol):</span></span>
-<span id="cb10-2"><a href="screening-out-weather.html#cb10-2" aria-hidden="true" tabindex="-1"></a>my_pvol <span class="ot">&lt;-</span> <span class="fu">apply_mistnet</span>(my_pvolfiles[<span class="dv">1</span>])</span>
-<span id="cb10-3"><a href="screening-out-weather.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># mistnet will add additional parameters to the</span></span>
-<span id="cb10-4"><a href="screening-out-weather.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># elevation scans at 0.5, 1.5, 2.5, 3.5 and 4.5 degrees</span></span>
-<span id="cb10-5"><a href="screening-out-weather.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s extract the scan closest to 0.5 degrees:</span></span>
-<span id="cb10-6"><a href="screening-out-weather.html#cb10-6" aria-hidden="true" tabindex="-1"></a>my_scan <span class="ot">&lt;-</span> <span class="fu">get_scan</span>(my_pvol, <span class="fl">0.5</span>)</span>
-<span id="cb10-7"><a href="screening-out-weather.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot some summary info about the scan to the console:</span></span>
-<span id="cb10-8"><a href="screening-out-weather.html#cb10-8" aria-hidden="true" tabindex="-1"></a>my_scan</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="screening-out-weather.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s add depolarization ratio (DR) as a parameter (following Kilambi 2018):</span></span>
+<span id="cb9-2"><a href="screening-out-weather.html#cb9-2" aria-hidden="true" tabindex="-1"></a>my_ppi <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DR =</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">log10</span>((<span class="dv">1</span><span class="sc">+</span> ZDR <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> (ZDR<span class="sc">^</span><span class="fl">0.5</span>) <span class="sc">*</span> RHOHV) <span class="sc">/</span></span>
+<span id="cb9-3"><a href="screening-out-weather.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">+</span> ZDR<span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> (ZDR<span class="sc">^</span><span class="fl">0.5</span>) <span class="sc">*</span> RHOHV)))</span></code></pre></div>
+<p>Like correlation coefficient you can apply simple thresholds to its value to screen out precipitation. It has a good (potentially even better) ability to distinguish weather and biology:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="screening-out-weather.html#cb10-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot the depolarization ratio, using a viridis color palette:</span></span>
+<span id="cb10-2"><a href="screening-out-weather.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DR&quot;</span>, <span class="at">zlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">25</span>,<span class="sc">-</span><span class="dv">5</span>), <span class="at">palette =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">100</span>))</span></code></pre></div>
 <p>MistNet adds several new parameters:
 * <code>WEATHER</code>: a probability (0-1) for the weather class
 * <code>BIOLOGY</code>: a probability (0-1) for the biology class

@@ -141,8 +141,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="screening-out-weather.html"><a href="screening-out-weather.html"><i class="fa fa-check"></i><b>3</b> Screening out weather</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-correlation-coefficient"><i class="fa fa-check"></i><b>3.1</b> using correlation coefficient</a></li>
-<li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-depolarization-ratio"><i class="fa fa-check"></i><b>3.2</b> using depolarization ratio</a></li>
-<li class="chapter" data-level="3.3" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-mistnet"><i class="fa fa-check"></i><b>3.3</b> using MistNet</a></li>
+<li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-mistnet"><i class="fa fa-check"></i><b>3.2</b> using MistNet</a></li>
+<li class="chapter" data-level="3.3" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-depolarization-ratio"><i class="fa fa-check"></i><b>3.3</b> using depolarization ratio</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vertical-profiles.html"><a href="vertical-profiles.html"><i class="fa fa-check"></i><b>4</b> Vertical profiles</a>
 <ul>
@@ -191,7 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-2"><a href="vertical-profiles.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># my_vplist &lt;- read_vpfiles(&quot;./your/directory/with/processed/profiles/goes/here&quot;)</span></span>
 <span id="cb12-3"><a href="vertical-profiles.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># my_vplist contains after running the command a list of vertical profile (vp) objects</span></span>
 <span id="cb12-4"><a href="vertical-profiles.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To save time, we load these data directly from file</span></span>
-<span id="cb12-5"><a href="vertical-profiles.html#cb12-5" aria-hidden="true" tabindex="-1"></a>my_vplist <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/KBRO20170514.rds&quot;</span>)</span>
+<span id="cb12-5"><a href="vertical-profiles.html#cb12-5" aria-hidden="true" tabindex="-1"></a>my_vplist <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data_vpts/KBRO20170514.rds&quot;</span>)</span>
 <span id="cb12-6"><a href="vertical-profiles.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print the length of the vplist object. It should contain 95 profiles</span></span>
 <span id="cb12-7"><a href="vertical-profiles.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(my_vplist)</span></code></pre></div>
 </div>
@@ -287,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Also, although automated bird quantification algorithms become more and more reliable, distinguishing precipitation from birds remains challenging for algorithms in specific cases. It is therefore important to have the skills to inspect suspicious profiles. That may help you to identify potential errors of the automated methods, and prevent your from overinterpreting the data.</p>
 <p>An easy way of doing that is plotting the vertical profile of total reflectivity (quantity DBZH), which includes everything: birds, insects and precipitation. Precipitation often has higher reflectivities than birds, and also extends to much higher altitudes.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="vertical-profiles.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load a time series for the KBGM radar in Binghamton, NY</span></span>
-<span id="cb21-2"><a href="vertical-profiles.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/KBGM20170527-20170602.RData&quot;</span>)</span>
+<span id="cb21-2"><a href="vertical-profiles.html#cb21-2" aria-hidden="true" tabindex="-1"></a>my_vpts <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data_vpts/KBGM20170527-20170602.rds&quot;</span>)</span>
 <span id="cb21-3"><a href="vertical-profiles.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print the loaded vpts time series for this radar:</span></span>
 <span id="cb21-4"><a href="vertical-profiles.html#cb21-4" aria-hidden="true" tabindex="-1"></a>my_vpts</span>
 <span id="cb21-5"><a href="vertical-profiles.html#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the bird density over time:</span></span>
