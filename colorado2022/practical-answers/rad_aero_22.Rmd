@@ -59,7 +59,7 @@ Your R session is now properly set up.
 
 ## The structure of polar volumes
 
-```{r, echo=SHOW_ANSWERS, eval=SHOW_ANSWERS, results='hide'}
+```{r, eval=SHOW_ANSWERS, results='hide'}
 # Let's first download the NEXRAD polar volume files for the KHGX radar (Houston)
 # for a 15 minute period in 2017:
 download_pvolfiles(date_min=as.POSIXct("2017-05-04 01:25:00"), date_max=as.POSIXct("2017-05-04 01:40:00"), radar="KHGX", directory="./data_pvol")
@@ -187,33 +187,6 @@ my_scan <- get_scan(my_pvol, 0.5)
 # plot some summary info about the scan to the console:
 my_scan
 ```
-
-## using depolarization ratio
-Another quantity that has been proposed for distinguishing weather and biology is the depolarization ratio ($D_r$), which is defined as
-
-$$D_r=\frac{Z_{DR}+ 1 -2 \sqrt{Z_{DR}} \ \rho_{HV}}{Z_{DR}+ 1 +2 \sqrt{Z_{DR}} \ \rho_{HV}}$$
-First we add the depolarization ratio (DR) as a parameter. We'll express DR on a dB scale by transforming:
-$$DR=10\log_{10}(D_r) $$
-(see _Kilambi et al. 2018, A Simple and Effective Method for Separating Meteorological from Nonmeteorological Targets Using Dual-Polarization Data_ for more information)
-```{r, eval=SHOW_ANSWERS}
-# let's add depolarization ratio (DR) as a parameter (following Kilambi 2018):
-my_ppi <- calculate_param(my_ppi, DR = 10 * log10((1+ ZDR - 2 * (ZDR^0.5) * RHOHV) /
-  (1 + ZDR+ 2 * (ZDR^0.5) * RHOHV)))
-```
-Like correlation coefficient you can apply simple thresholds to its value to screen out precipitation. It has a good (potentially even better) ability to distinguish weather and biology:
-```{r, eval=SHOW_ANSWERS}
-  # plot the depolarization ratio, using a viridis color palette:
-map(my_ppi, map = basemap, param = "DR", zlim=c(-25,-5), palette = viridis::viridis(100))
-```
-
-```{r, echo=SHOW_ANSWERS, eval=SHOW_ANSWERS}
-# Now let us screen out the reflectivity areas with DR < -12 dB:
-my_ppi_clean <- calculate_param(my_ppi, DBZH = ifelse(DR < -12, NA, DBZH))
-# plot the original and cleaned up reflectivity:
-map(my_ppi, map = basemap, param = "DBZH", zlim = c(-20, 40))
-map(my_ppi_clean, map = basemap, param = "DBZH", zlim = c(-20, 40))
-```
-
 MistNet adds several new parameters:
 * `WEATHER`: a probability (0-1) for the weather class
 * `BIOLOGY`: a probability (0-1) for the biology class
@@ -243,6 +216,32 @@ my_ppi_clean <- calculate_param(my_ppi, VRADH = ifelse(CELL >= 2, NA, VRADH))
 map(my_ppi_clean, map=basemap, param = 'VRADH')
 ```
 
+## using depolarization ratio
+Another quantity that has been proposed for distinguishing weather and biology is the depolarization ratio ($D_r$), which is defined as
+
+$$D_r=\frac{Z_{DR}+ 1 -2 \sqrt{Z_{DR}} \ \rho_{HV}}{Z_{DR}+ 1 +2 \sqrt{Z_{DR}} \ \rho_{HV}}$$
+First we add the depolarization ratio (DR) as a parameter. We'll express DR on a dB scale by transforming:
+$$DR=10\log_{10}(D_r) $$
+(see _Kilambi et al. 2018, A Simple and Effective Method for Separating Meteorological from Nonmeteorological Targets Using Dual-Polarization Data_ for more information)
+```{r, eval=SHOW_ANSWERS}
+# let's add depolarization ratio (DR) as a parameter (following Kilambi 2018):
+my_ppi <- calculate_param(my_ppi, DR = 10 * log10((1+ ZDR - 2 * (ZDR^0.5) * RHOHV) /
+  (1 + ZDR+ 2 * (ZDR^0.5) * RHOHV)))
+```
+Like correlation coefficient you can apply simple thresholds to its value to screen out precipitation. It has a good (potentially even better) ability to distinguish weather and biology:
+```{r, eval=SHOW_ANSWERS}
+  # plot the depolarization ratio, using a viridis color palette:
+map(my_ppi, map = basemap, param = "DR", zlim=c(-25,-5), palette = viridis::viridis(100))
+```
+
+```{r, echo=SHOW_ANSWERS, eval=SHOW_ANSWERS}
+# Now let us screen out the reflectivity areas with DR < -12 dB:
+my_ppi_clean <- calculate_param(my_ppi, DBZH = ifelse(DR < -12, NA, DBZH))
+# plot the original and cleaned up reflectivity:
+map(my_ppi, map = basemap, param = "DBZH", zlim = c(-20, 40))
+map(my_ppi_clean, map = basemap, param = "DBZH", zlim = c(-20, 40))
+```
+
 # Vertical profiles
 
 In this section you will learn to compute, interpret and analyze vertical profiles (vp). A vp consists of the (bird) density, speed and directions at different altitudes at the location of a single radar. It is typically calculated for all data within a cylinder of 35 km radius around the radar, i.e. only containing data at relatively short distances, where the radar beam is still sufficiently narrow to resolve altitude information.
@@ -257,7 +256,7 @@ Section 3 has examples that show how to process polar volume data into vertical 
 # my_vplist contains after running the command a list of vertical profile (vp) objects
 # To save time, we load these data directly from file
 my_vplist <- readRDS("data_vpts/KBRO20170514.rds")
-# print the length of the vplist object. It should contain 95 profiles
+# print the length of the vplist object, which shows the number of profiles
 length(my_vplist)
 ```
 
@@ -472,7 +471,7 @@ In the previous section we have explored vertical integration of vertical profil
 First, let's examine the beam shape of the lowest elevation scan of the radar, which is typically around 0.5 degrees.
 
 ```{r, eval=SHOW_ANSWERS}
-# define ranges from 0 to 1000000 meter (100 km), in steps of 100 m:
+# define ranges from 0 to 2500000 meter (250 km), in steps of 100 m:
 range <- seq(0, 250000, 100)
 
 # plot the beam height of the 0.5 degree elevation beam:
