@@ -59,7 +59,7 @@ Your R session is now properly set up.
 
 ## The structure of polar volumes
 
-```{r, echo=SHOW_ANSWERS, eval=SHOW_ANSWERS, results='hide'}
+```{r, eval=SHOW_ANSWERS, results='hide'}
 # Let's first download the NEXRAD polar volume files for the KHGX radar (Houston)
 # for a 15 minute period in 2017:
 download_pvolfiles(date_min=as.POSIXct("2017-05-04 01:25:00"), date_max=as.POSIXct("2017-05-04 01:40:00"), radar="KHGX", directory="./data_pvol")
@@ -472,7 +472,7 @@ In the previous section we have explored vertical integration of vertical profil
 First, let's examine the beam shape of the lowest elevation scan of the radar, which is typically around 0.5 degrees.
 
 ```{r, eval=SHOW_ANSWERS}
-# define ranges from 0 to 1000000 meter (100 km), in steps of 100 m:
+# define ranges from 0 to 2500000 meter (250 km), in steps of 100 m:
 range <- seq(0, 250000, 100)
 
 # plot the beam height of the 0.5 degree elevation beam:
