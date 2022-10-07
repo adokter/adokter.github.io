@@ -28,7 +28,8 @@ teaser: /assets/images/500x300.png
 
 # Build settings
 markdown: kramdown
-theme: minimal-mistakes-jekyll
+#theme: minimal-mistakes-jekyll
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 # remote_theme: mmistakes/minimal-mistakes
 # Outputting
 permalink: /:categories/:title/
