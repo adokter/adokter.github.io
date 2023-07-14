@@ -188,6 +188,27 @@ my_scan <- get_scan(my_pvol, 0.5)
 my_scan
 ```
 
+MistNet adds several new parameters:
+
+* `WEATHER`: a probability (0-1) for the weather class
+* `BIOLOGY`: a probability (0-1) for the biology class
+* `BACKGROUND`: a probability (0-1) for the background (empty space) class
+* `CELL`: the final segmentation, which is based on the WEATHER parameters of all five MistNet elevation scans. `CELL` also includes a border calculated by a region growing approach. `CELL` values equal 1 for the additional border, and 2 for the originally segmented precipitation area by MistNet.
+
+```{r, eval=SHOW_ANSWERS}
+# as before, project the scan as a ppi:
+my_ppi <- project_as_ppi(my_scan)
+# plot the probability for the WEATHER class
+plot(my_ppi, param = 'WEATHER')
+# plot the final segmentation result:
+# plot the probability for the WEATHER class
+plot(my_ppi, param = 'CELL')
+# let's remove the identified precipitation area (and additional border) from the ppi, and plot it:
+my_ppi_clean <- calculate_param(my_ppi, DBZH = ifelse(CELL >= 1, NA, DBZH))
+map(my_ppi_clean, map=basemap, param = 'DBZH')
+```
+
+
 ## using depolarization ratio
 Another quantity that has been proposed for distinguishing weather and biology is the depolarization ratio ($D_r$), which is defined as
 
@@ -214,30 +235,11 @@ map(my_ppi, map = basemap, param = "DBZH", zlim = c(-20, 40))
 map(my_ppi_clean, map = basemap, param = "DBZH", zlim = c(-20, 40))
 ```
 
-MistNet adds several new parameters:
-* `WEATHER`: a probability (0-1) for the weather class
-* `BIOLOGY`: a probability (0-1) for the biology class
-* `BACKGROUND`: a probability (0-1) for the background (empty space) class
-* `CELL`: the final segmentation, which is based on the WEATHER parameters of all five MistNet elevation scans. `CELL` also includes a fringe calculated by a region growing approach. `CELL` values equal 1 for the additional fringe, and 2 for the originally segmented precipitation area by MistNet.
-
-```{r, eval=SHOW_ANSWERS}
-# as before, project the scan as a ppi:
-my_ppi <- project_as_ppi(my_scan)
-# plot the probability for the WEATHER class
-plot(my_ppi, param = 'WEATHER')
-# plot the final segmentation result:
-# plot the probability for the WEATHER class
-plot(my_ppi, param = 'CELL')
-# let's remove the identified precipitation area (and additional fringe) from the ppi, and plot it:
-my_ppi_clean <- calculate_param(my_ppi, DBZH = ifelse(CELL >= 1, NA, DBZH))
-map(my_ppi_clean, map=basemap, param = 'DBZH')
-```
-
 **Exercise 4:** Calculate and plot a 'cleaned up' PPI for the radial velocity that includes only
-the segmentation by MistNet and not the additional fringe.
+the segmentation by MistNet and not the additional border.
 
 ```{r, echo=SHOW_ANSWERS, eval=SHOW_ANSWERS}
-# To remove the additional fringe around the rain segmentation by MistNet
+# To remove the additional border around the rain segmentation by MistNet
 # we want to screen out CELL values equal to 2 only.
 my_ppi_clean <- calculate_param(my_ppi, VRADH = ifelse(CELL >= 2, NA, VRADH))
 map(my_ppi_clean, map=basemap, param = 'VRADH')
