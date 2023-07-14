@@ -6,12 +6,11 @@ output:
 ---
 During the Aeroecology course we will be using the R-package **[bioRad]( https://adokter.github.io/bioRad)**, a collection of tools to analyze and visualize biological signals in weather radar data.
 
-**Please take time to install the software before the practicals**
+**Please take some time to install the software before the practicals**
 
-We strongly recommend upgrading to a recent version of R (latest version is 4.3.1, found at https://www.r-project.org/) and using [Rstudio](https://www.rstudio.com/products/rstudio/) as a graphical user interface.
+We recommend upgrading to a recent version of R (latest version is 4.3.1, found at https://www.r-project.org/) and using [Rstudio](https://www.rstudio.com/products/rstudio/) as a graphical user interface.
 
 ## Installation on Windows systems:
-
 
 ### Step 1: install bioRad
 The usual installation of bioRad is
@@ -34,11 +33,11 @@ install.packages("https://s3.amazonaws.com/mistnet/bioRad_0.7.0.9614.tar.gz", re
 ```
 
 ### Step 2: download mistnet libraries and model
-The bioRad installation of the previous step should have automatically installed the **[vol2birdR](https://adriaandokter.com/vol2birdR/)** package as well, which is an important dependency package for bioRad. Next, we need to run a few vol2birdR commands to enable Mistnet (expect a ~ 150 Mb download):
+The bioRad installation of the previous step should have installed the **[vol2birdR](https://adriaandokter.com/vol2birdR/)** package, which is an important dependency package for bioRad. Next, we need to run a few vol2birdR commands to enable MistNet (expect a ~ 150 Mb download):
 ```{r, eval=FALSE}
 vol2birdR::install_mistnet()
 ```
-Next, we download the mistnet model into vol2birdR (expect >500 Mb download, this step can take a while when you have a slow internet connection)
+Next, we download the MistNet model into vol2birdR (expect >500 Mb download, this step can take a while when you have a slow internet connection)
 ```{r, eval=FALSE}
 vol2birdR::install_mistnet_model()
 ```
@@ -57,7 +56,12 @@ library(bioRad)
 ## Installation on Mac OSX systems:
 
 ### Step 1: install bioRad
-You can now open R using Rstudio and install bioRad as follows:
+The usual installation of bioRad is
+```{r, eval=FALSE}
+install.packages("bioRad")
+```
+We will be using the latest development version that is still in review with CRAN, requiring a few more manual steps (for the purpose of this practical only):
+
 ```{r, eval=FALSE}
 # Step 1a: install package devtools (if you don't have it already)
 install.packages("devtools")
@@ -68,11 +72,11 @@ devtools::install_github("adokter/bioRad")
 ```
 
 ### Step 2: download mistnet libraries and model
-The bioRad installation of the previous step should have automatically installed the **[vol2birdR](https://adriaandokter.com/vol2birdR/)** package as well, which is an important dependency package for bioRad. Next, we need to run a few vol2birdR commands to enable Mistnet (expect a ~ 150 Mb download)
+The bioRad installation of the previous step should have installed the **[vol2birdR](https://adriaandokter.com/vol2birdR/)**, which is an important dependency package for bioRad. Next, we need to run a few vol2birdR commands to install MistNet libraries (expect a ~ 150 Mb download)
 ```{r, eval=FALSE}
 vol2birdR::install_mistnet()
 ```
-Next, we download the mistnet model into vol2birdR (expect >500 Mb download, this step can take a while when you have a slow internet connection)
+Next, we download the MistNet model into vol2birdR (expect >500 Mb download, this step can take a while when you have a slow internet connection)
 ```{r, eval=FALSE}
 vol2birdR::install_mistnet_model()
 ```
@@ -119,7 +123,7 @@ devtools::install_github("adokter/bioRad")
 ```
 
 ### Step 3: download mistnet libraries and model
-The bioRad installation of the previous step should have automatically installed the **[vol2birdR](https://adriaandokter.com/vol2birdR/)** package as well, which is an important dependency package for bioRad. Next, we need to run a few vol2birdR commands to enable Mistnet (expect a ~ 150 Mb download)
+The bioRad installation of the previous step should have automatically installed the **[vol2birdR](https://adriaandokter.com/vol2birdR/)** package as well, which is an important dependency package for bioRad. Next, we need to run a few vol2birdR commands to install MistNet libraries (expect a ~ 150 Mb download)
 ```{r, eval=FALSE}
 vol2birdR::install_mistnet()
 ```
