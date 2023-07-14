@@ -30,7 +30,7 @@ install.packages(c("assertthat", "curl", "fields", "frictionless",
                    "jsonlite", "aws.s3", "ggmap", "knitr", "tidyselect",
                    "rmarkdown", "testthat", "sf", "vol2birdR"))
 # Step 1c: install bioRad's latest development version:
-install.packages("https://s3.amazonaws.com/mistnet/windows/bioRad_0.7.0.9614.tar.gz", repos=NULL)
+install.packages("https://s3.amazonaws.com/mistnet/bioRad_0.7.0.9614.tar.gz", repos=NULL)
 ```
 
 ### Step 2: download mistnet libraries and model
