@@ -13,11 +13,7 @@ We recommend upgrading to a recent version of R (latest version is 4.3.1, found 
 ## Installation on Windows systems:
 
 ### Step 1: install bioRad
-The usual installation of bioRad is
-```{r, eval=FALSE}
-install.packages("bioRad")
-```
-We will be using the latest development version that is still in review with CRAN, requiring a few more manual steps (for the purpose of this practical only):
+We will be using the latest development version that is still in review with CRAN, requiring a few more manual steps than usual (for the purpose of this practical only):
 ```{r, eval=FALSE}
 # Step 1a: enable both the CRAN and bioconductor repositories:
 setRepositories(ind=1:2)
@@ -56,10 +52,6 @@ library(bioRad)
 ## Installation on Mac OSX systems:
 
 ### Step 1: install bioRad
-The usual installation of bioRad is
-```{r, eval=FALSE}
-install.packages("bioRad")
-```
 We will be using the latest development version that is still in review with CRAN, requiring a few more manual steps (for the purpose of this practical only):
 
 ```{r, eval=FALSE}
