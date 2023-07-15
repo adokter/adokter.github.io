@@ -29,7 +29,7 @@ install.packages(c("assertthat", "curl", "fields", "frictionless",
                    "jsonlite", "aws.s3", "ggmap", "knitr", "tidyselect",
                    "rmarkdown", "testthat", "sf", "vol2birdR"))
 # Step 1c: install bioRad's latest development version:
-install.packages("https://s3.amazonaws.com/mistnet/bioRad_0.7.0.9614.tar.gz", repos=NULL)
+install.packages("https://s3.amazonaws.com/mistnet/bioRad_0.7.0.9617.tar.gz", repos=NULL)
 ```
 
 ### Step 2: download mistnet libraries and model
@@ -43,13 +43,13 @@ vol2birdR::install_mistnet_model()
 ```
 
 ### Step 3: load bioRad
-You should now be able to load bioRad. The welcome message should mention version 0.7.0.9614, and MistNet installed.
+You should now be able to load bioRad. The welcome message should mention version 0.7.0.9617, and MistNet installed.
 ```{r, eval=FALSE}
 # load bioRad:
 library(bioRad)
 
 # expected message:
-#> Welcome to bioRad version 0.7.0.9614
+#> Welcome to bioRad version 0.7.0.9617
 #> using vol2birdR version 1.0.1 (MistNet installed)
 ```
 
@@ -82,13 +82,13 @@ vol2birdR::install_mistnet_model()
 ```
 
 ### Step 3: load bioRad
-You should now be able to load bioRad. The welcome message should mention version 0.7.0.9614, and MistNet installed.
+You should now be able to load bioRad. The welcome message should mention version 0.7.0.9617, and MistNet installed.
 ```{r, eval=FALSE}
 # load bioRad:
 library(bioRad)
 
 # expected message:
-#> Welcome to bioRad version 0.7.0.9614
+#> Welcome to bioRad version 0.7.0.9617
 #> using vol2birdR version 1.0.1 (MistNet installed)
 ```
 
@@ -133,12 +133,12 @@ vol2birdR::install_mistnet_model()
 ```
 
 ### Step 4: load bioRad
-You should now be able to load bioRad. The welcome message should mention version 0.7.0.9614, and MistNet installed.
+You should now be able to load bioRad. The welcome message should mention version 0.7.0.9617, and MistNet installed.
 ```{r, eval=FALSE}
 # load bioRad:
 library(bioRad)
 
 # expected message:
-#> Welcome to bioRad version 0.7.0.9614
+#> Welcome to bioRad version 0.7.0.9617
 #> using vol2birdR version 1.0.1 (MistNet installed)
 ```
