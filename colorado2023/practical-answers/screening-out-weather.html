@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Screening out weather | Introductory exercises with bioRad</title>
   <meta name="description" content="3 Screening out weather | Introductory exercises with bioRad" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Screening out weather | Introductory exercises with bioRad" />
   <meta property="og:type" content="book" />
@@ -91,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 </head>
 
@@ -150,7 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-single-vertical-profiles"><i class="fa fa-check"></i><b>4.2</b> Inspecting single vertical profiles</a></li>
 <li class="chapter" data-level="4.3" data-path="vertical-profiles.html"><a href="vertical-profiles.html#plotting-vertical-profile-time-series"><i class="fa fa-check"></i><b>4.3</b> Plotting vertical profile time series</a></li>
 <li class="chapter" data-level="4.4" data-path="vertical-profiles.html"><a href="vertical-profiles.html#vertical-and-time-integration-of-profiles"><i class="fa fa-check"></i><b>4.4</b> Vertical and time integration of profiles</a></li>
-<li class="chapter" data-level="4.5" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles"><i class="fa fa-check"></i><b>4.5</b> Inspecting precipitation signals in profiles</a></li>
+<li class="chapter" data-level="4.5" data-path="vertical-profiles.html"><a href="vertical-profiles.html#manipulating-vertical-profile-time-series-data"><i class="fa fa-check"></i><b>4.5</b> Manipulating vertical profile time series data</a></li>
+<li class="chapter" data-level="4.6" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles"><i class="fa fa-check"></i><b>4.6</b> Inspecting precipitation signals in profiles</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="range-bias-correction.html"><a href="range-bias-correction.html"><i class="fa fa-check"></i><b>5</b> Range bias correction</a>
 <ul>
@@ -164,6 +169,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3" data-path="processing-many-polar-volumes.html"><a href="processing-many-polar-volumes.html#parallel-processing"><i class="fa fa-check"></i><b>6.3</b> Parallel processing</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="further-analysis-outside-biorad.html"><a href="further-analysis-outside-biorad.html"><i class="fa fa-check"></i><b>7</b> Further analysis outside bioRad</a></li>
+<li class="chapter" data-level="8" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>8</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="troubleshooting.html"><a href="troubleshooting.html#cannot-find-proj.db"><i class="fa fa-check"></i><b>8.1</b> Cannot find proj.db</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -186,21 +195,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="using-correlation-coefficient" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> using correlation coefficient<a href="screening-out-weather.html#using-correlation-coefficient" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Screening precipitation based on correlation coefficient is arguably the most simple and established approach for screening out weather in cases where dual-polarization data is available. It is based on removing data above a certain <span class="math inline">\(\rho_{/HV}\)</span> tresholds, most commonly 0.95.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="screening-out-weather.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Screen out the reflectivity areas with RHOHV &lt; 0.95</span></span>
-<span id="cb28-2"><a href="screening-out-weather.html#cb28-2" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DBZH =</span> <span class="fu">ifelse</span>(RHOHV <span class="sc">&gt;</span> <span class="fl">0.95</span>, <span class="cn">NA</span>, DBZH))</span>
-<span id="cb28-3"><a href="screening-out-weather.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the original and cleaned up reflectivity:</span></span>
-<span id="cb28-4"><a href="screening-out-weather.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span></code></pre></div>
-<pre><code>## Warning in proj4string(mybbox): CRS object has comment, which is lost in output; in tests, see
-## https://cran.r-project.org/web/packages/sp/vignettes/CRS_warnings.html</code></pre>
-<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="screening-out-weather.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span></code></pre></div>
-<pre><code>## Warning in proj4string(mybbox): CRS object has comment, which is lost in output; in tests, see
-## https://cran.r-project.org/web/packages/sp/vignettes/CRS_warnings.html</code></pre>
-<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="screening-out-weather.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We will screen out the reflectivity areas with for which the</span></span>
+<span id="cb30-2"><a href="screening-out-weather.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># correlation coefficient is &gt; 0.95 (indicating precipitation)</span></span>
+<span id="cb30-3"><a href="screening-out-weather.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We do so by redefining parameter DBZH, replacing pixels with NA values</span></span>
+<span id="cb30-4"><a href="screening-out-weather.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># whenever RHOHV &gt; 0.95</span></span>
+<span id="cb30-5"><a href="screening-out-weather.html#cb30-5" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DBZH =</span> <span class="fu">ifelse</span>(RHOHV <span class="sc">&gt;</span> <span class="fl">0.95</span>, <span class="cn">NA</span>, DBZH))</span>
+<span id="cb30-6"><a href="screening-out-weather.html#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the original and cleaned up reflectivity:</span></span>
+<span id="cb30-7"><a href="screening-out-weather.html#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span></code></pre></div>
+<p><img src="rad_aero_23_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="screening-out-weather.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span></code></pre></div>
+<p><img src="rad_aero_23_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
 </div>
 <div id="using-mistnet" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> using MistNet<a href="screening-out-weather.html#using-mistnet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You can use MistNet for screening out weather when
+<p>You can also use MistNet for screening out weather when
 * the radar operates at S-band wavelengths
 * you only have single polarization data available (specifically, the three basic quantities radial velocity VRADH, reflectivity DBZH, and spectrum width WRADH).</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="screening-out-weather.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># apply the MistNet model to the polar volume file and load it as a polar volume (pvol):</span></span>
@@ -226,40 +234,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb34-6"><a href="screening-out-weather.html#cb34-6" aria-hidden="true" tabindex="-1"></a>my_scan</span></code></pre></div>
 <pre><code>##                   Polar scan (class scan)
 ## 
-##      parameters:  DBZH VRADH RHOHV WEATHER BACKGROUND CELL PHIDP BIOLOGY ZDR 
+##      parameters:  DBZH VRADH RHOHV WRADH WEATHER BACKGROUND CELL PHIDP BIOLOGY ZDR 
 ## elevation angle:  0.483395 deg
 ##            dims:  1201 bins x 720 rays</code></pre>
-<p>MistNet adds several new parameters:
-* <code>WEATHER</code>: a probability (0-1) for the weather class
-* <code>BIOLOGY</code>: a probability (0-1) for the biology class
-* <code>BACKGROUND</code>: a probability (0-1) for the background (empty space) class
-* <code>CELL</code>: the final segmentation, which is based on the WEATHER parameters of all five MistNet elevation scans. <code>CELL</code> also includes a fringe calculated by a region growing approach. <code>CELL</code> values equal 1 for the additional fringe, and 2 for the originally segmented precipitation area by MistNet.</p>
+<p>MistNet adds several new parameters:</p>
+<ul>
+<li><code>WEATHER</code>: a probability (0-1) for the weather class</li>
+<li><code>BIOLOGY</code>: a probability (0-1) for the biology class</li>
+<li><code>BACKGROUND</code>: a probability (0-1) for the background (empty space) class</li>
+<li><code>CELL</code>: the final segmentation, which is based on the WEATHER parameters of all five MistNet elevation scans. <code>CELL</code> also includes a border calculated by a region growing approach. <code>CELL</code> values equal 1 for the additional border, and 2 for the originally segmented precipitation area by MistNet.</li>
+</ul>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="screening-out-weather.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># as before, project the scan as a ppi:</span></span>
-<span id="cb36-2"><a href="screening-out-weather.html#cb36-2" aria-hidden="true" tabindex="-1"></a>my_ppi <span class="ot">&lt;-</span> <span class="fu">project_as_ppi</span>(my_scan)</span></code></pre></div>
-<pre><code>## Warning in proj4string(obj): CRS object has comment, which is lost in output; in tests, see
-## https://cran.r-project.org/web/packages/sp/vignettes/CRS_warnings.html</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="screening-out-weather.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the probability for the WEATHER class</span></span>
-<span id="cb38-2"><a href="screening-out-weather.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_ppi, <span class="at">param =</span> <span class="st">&#39;WEATHER&#39;</span>)</span></code></pre></div>
-<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="screening-out-weather.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the final segmentation result:</span></span>
-<span id="cb39-2"><a href="screening-out-weather.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the probability for the WEATHER class</span></span>
-<span id="cb39-3"><a href="screening-out-weather.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_ppi, <span class="at">param =</span> <span class="st">&#39;CELL&#39;</span>)</span></code></pre></div>
-<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="screening-out-weather.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s remove the identified precipitation area (and additional fringe) from the ppi, and plot it:</span></span>
-<span id="cb40-2"><a href="screening-out-weather.html#cb40-2" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DBZH =</span> <span class="fu">ifelse</span>(CELL <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="cn">NA</span>, DBZH))</span>
-<span id="cb40-3"><a href="screening-out-weather.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">map=</span>basemap, <span class="at">param =</span> <span class="st">&#39;DBZH&#39;</span>)</span></code></pre></div>
-<pre><code>## Warning in proj4string(mybbox): CRS object has comment, which is lost in output; in tests, see
-## https://cran.r-project.org/web/packages/sp/vignettes/CRS_warnings.html</code></pre>
-<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-16-3.png" width="672" /></p>
-<p><strong>Exercise 4:</strong> Calculate and plot a ‘cleaned up’ PPI for the radial velocity that includes only
-the segmentation by MistNet and not the additional fringe.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="screening-out-weather.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To remove the additional fringe around the rain segmentation by MistNet</span></span>
-<span id="cb42-2"><a href="screening-out-weather.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we want to screen out CELL values equal to 2 only.</span></span>
-<span id="cb42-3"><a href="screening-out-weather.html#cb42-3" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">VRADH =</span> <span class="fu">ifelse</span>(CELL <span class="sc">&gt;=</span> <span class="dv">2</span>, <span class="cn">NA</span>, VRADH))</span>
-<span id="cb42-4"><a href="screening-out-weather.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">map=</span>basemap, <span class="at">param =</span> <span class="st">&#39;VRADH&#39;</span>)</span></code></pre></div>
-<pre><code>## Warning in proj4string(mybbox): CRS object has comment, which is lost in output; in tests, see
-## https://cran.r-project.org/web/packages/sp/vignettes/CRS_warnings.html</code></pre>
-<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<span id="cb36-2"><a href="screening-out-weather.html#cb36-2" aria-hidden="true" tabindex="-1"></a>my_ppi <span class="ot">&lt;-</span> <span class="fu">project_as_ppi</span>(my_scan)</span>
+<span id="cb36-3"><a href="screening-out-weather.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the probability for the WEATHER class</span></span>
+<span id="cb36-4"><a href="screening-out-weather.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_ppi, <span class="at">param =</span> <span class="st">&#39;WEATHER&#39;</span>)</span></code></pre></div>
+<p><img src="rad_aero_23_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="screening-out-weather.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the final segmentation result:</span></span>
+<span id="cb37-2"><a href="screening-out-weather.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the probability for the WEATHER class</span></span>
+<span id="cb37-3"><a href="screening-out-weather.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_ppi, <span class="at">param =</span> <span class="st">&#39;CELL&#39;</span>)</span></code></pre></div>
+<p><img src="rad_aero_23_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="screening-out-weather.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s remove the identified precipitation area (and additional border) from the ppi, and plot it:</span></span>
+<span id="cb38-2"><a href="screening-out-weather.html#cb38-2" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DBZH =</span> <span class="fu">ifelse</span>(CELL <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="cn">NA</span>, DBZH))</span>
+<span id="cb38-3"><a href="screening-out-weather.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">map=</span>basemap, <span class="at">param =</span> <span class="st">&#39;DBZH&#39;</span>)</span></code></pre></div>
+<p><img src="rad_aero_23_files/figure-html/unnamed-chunk-17-3.png" width="672" /></p>
 </div>
 <div id="using-depolarization-ratio" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> using depolarization ratio<a href="screening-out-weather.html#using-depolarization-ratio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -268,27 +265,29 @@ the segmentation by MistNet and not the additional fringe.</p>
 First we add the depolarization ratio (DR) as a parameter. We’ll express DR on a dB scale by transforming:
 <span class="math display">\[DR=10\log_{10}(D_r) \]</span>
 (see <em>Kilambi et al. 2018, A Simple and Effective Method for Separating Meteorological from Nonmeteorological Targets Using Dual-Polarization Data</em> for more information)</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="screening-out-weather.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s add depolarization ratio (DR) as a parameter (following Kilambi 2018):</span></span>
-<span id="cb44-2"><a href="screening-out-weather.html#cb44-2" aria-hidden="true" tabindex="-1"></a>my_ppi <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DR =</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">log10</span>((<span class="dv">1</span><span class="sc">+</span> ZDR <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> (ZDR<span class="sc">^</span><span class="fl">0.5</span>) <span class="sc">*</span> RHOHV) <span class="sc">/</span></span>
-<span id="cb44-3"><a href="screening-out-weather.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">+</span> ZDR<span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> (ZDR<span class="sc">^</span><span class="fl">0.5</span>) <span class="sc">*</span> RHOHV)))</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="screening-out-weather.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s add depolarization ratio (DR) as a parameter (following Kilambi 2018):</span></span>
+<span id="cb39-2"><a href="screening-out-weather.html#cb39-2" aria-hidden="true" tabindex="-1"></a>my_ppi <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DR =</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">log10</span>((<span class="dv">1</span><span class="sc">+</span> ZDR <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> (ZDR<span class="sc">^</span><span class="fl">0.5</span>) <span class="sc">*</span> RHOHV) <span class="sc">/</span></span>
+<span id="cb39-3"><a href="screening-out-weather.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">+</span> ZDR<span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> (ZDR<span class="sc">^</span><span class="fl">0.5</span>) <span class="sc">*</span> RHOHV)))</span></code></pre></div>
 <pre><code>## Warning in eval(nn &lt;- (calc[[i]]), x$data@data): NaNs produced</code></pre>
 <p>Like correlation coefficient you can apply simple thresholds to its value to screen out precipitation. It has a good (potentially even better) ability to distinguish weather and biology:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="screening-out-weather.html#cb46-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot the depolarization ratio, using a viridis color palette:</span></span>
-<span id="cb46-2"><a href="screening-out-weather.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DR&quot;</span>, <span class="at">zlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">25</span>,<span class="sc">-</span><span class="dv">5</span>), <span class="at">palette =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">100</span>))</span></code></pre></div>
-<pre><code>## Warning in proj4string(mybbox): CRS object has comment, which is lost in output; in tests, see
-## https://cran.r-project.org/web/packages/sp/vignettes/CRS_warnings.html</code></pre>
-<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="screening-out-weather.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let us screen out the reflectivity areas with DR &lt; -12 dB:</span></span>
-<span id="cb48-2"><a href="screening-out-weather.html#cb48-2" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DBZH =</span> <span class="fu">ifelse</span>(DR <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">12</span>, <span class="cn">NA</span>, DBZH))</span>
-<span id="cb48-3"><a href="screening-out-weather.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the original and cleaned up reflectivity:</span></span>
-<span id="cb48-4"><a href="screening-out-weather.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span></code></pre></div>
-<pre><code>## Warning in proj4string(mybbox): CRS object has comment, which is lost in output; in tests, see
-## https://cran.r-project.org/web/packages/sp/vignettes/CRS_warnings.html</code></pre>
-<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="screening-out-weather.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span></code></pre></div>
-<pre><code>## Warning in proj4string(mybbox): CRS object has comment, which is lost in output; in tests, see
-## https://cran.r-project.org/web/packages/sp/vignettes/CRS_warnings.html</code></pre>
-<p><img src="rad_aero_22_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="screening-out-weather.html#cb41-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot the depolarization ratio, using a viridis color palette:</span></span>
+<span id="cb41-2"><a href="screening-out-weather.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DR&quot;</span>, <span class="at">zlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">25</span>,<span class="sc">-</span><span class="dv">5</span>), <span class="at">palette =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">100</span>))</span></code></pre></div>
+<p><img src="rad_aero_23_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="screening-out-weather.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let us screen out the reflectivity areas with DR &lt; -12 dB:</span></span>
+<span id="cb42-2"><a href="screening-out-weather.html#cb42-2" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DBZH =</span> <span class="fu">ifelse</span>(DR <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">12</span>, <span class="cn">NA</span>, DBZH))</span>
+<span id="cb42-3"><a href="screening-out-weather.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the original and cleaned up reflectivity:</span></span>
+<span id="cb42-4"><a href="screening-out-weather.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span></code></pre></div>
+<p><img src="rad_aero_23_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="screening-out-weather.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span></code></pre></div>
+<p><img src="rad_aero_23_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
+<p><strong>Exercise 4:</strong> Calculate and plot a ‘cleaned up’ PPI for the radial velocity that includes only
+the segmentation by MistNet and not the additional border. Remember that the segmentation
+by Mistnet has a CELL value 2, and the border has a CELL value 1.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="screening-out-weather.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To remove the additional border around the rain segmentation by MistNet</span></span>
+<span id="cb44-2"><a href="screening-out-weather.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we want to screen out CELL values equal to 2 only.</span></span>
+<span id="cb44-3"><a href="screening-out-weather.html#cb44-3" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">VRADH =</span> <span class="fu">ifelse</span>(CELL <span class="sc">==</span> <span class="dv">2</span>, <span class="cn">NA</span>, VRADH))</span>
+<span id="cb44-4"><a href="screening-out-weather.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">map=</span>basemap, <span class="at">param =</span> <span class="st">&#39;VRADH&#39;</span>)</span></code></pre></div>
+<p><img src="rad_aero_23_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
 </div>
             </section>
@@ -354,7 +353,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

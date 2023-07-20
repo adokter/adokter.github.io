@@ -154,7 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-single-vertical-profiles"><i class="fa fa-check"></i><b>4.2</b> Inspecting single vertical profiles</a></li>
 <li class="chapter" data-level="4.3" data-path="vertical-profiles.html"><a href="vertical-profiles.html#plotting-vertical-profile-time-series"><i class="fa fa-check"></i><b>4.3</b> Plotting vertical profile time series</a></li>
 <li class="chapter" data-level="4.4" data-path="vertical-profiles.html"><a href="vertical-profiles.html#vertical-and-time-integration-of-profiles"><i class="fa fa-check"></i><b>4.4</b> Vertical and time integration of profiles</a></li>
-<li class="chapter" data-level="4.5" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles"><i class="fa fa-check"></i><b>4.5</b> Inspecting precipitation signals in profiles</a></li>
+<li class="chapter" data-level="4.5" data-path="vertical-profiles.html"><a href="vertical-profiles.html#manipulating-vertical-profile-time-series-data"><i class="fa fa-check"></i><b>4.5</b> Manipulating vertical profile time series data</a></li>
+<li class="chapter" data-level="4.6" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles"><i class="fa fa-check"></i><b>4.6</b> Inspecting precipitation signals in profiles</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="range-bias-correction.html"><a href="range-bias-correction.html"><i class="fa fa-check"></i><b>5</b> Range bias correction</a>
 <ul>
@@ -168,6 +169,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3" data-path="processing-many-polar-volumes.html"><a href="processing-many-polar-volumes.html#parallel-processing"><i class="fa fa-check"></i><b>6.3</b> Parallel processing</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="further-analysis-outside-biorad.html"><a href="further-analysis-outside-biorad.html"><i class="fa fa-check"></i><b>7</b> Further analysis outside bioRad</a></li>
+<li class="chapter" data-level="8" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>8</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="troubleshooting.html"><a href="troubleshooting.html#cannot-find-proj.db"><i class="fa fa-check"></i><b>8.1</b> Cannot find proj.db</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -187,8 +192,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="vertical-profiles" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">4</span> Vertical profiles<a href="vertical-profiles.html#vertical-profiles" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In this section you will learn to compute, interpret and analyze vertical profiles (vp). A vp consists of the (bird) density, speed and directions at different altitudes at the location of a single radar. It is typically calculated for all data within a cylinder of 35 km radius around the radar, i.e. only containing data at relatively short distances, where the radar beam is still sufficiently narrow to resolve altitude information.</p>
-<p>Section 3 has examples that show how to process polar volume data into vertical profiles. To save time, we will start below with a list of pre-processed vertical profiles for the Brownsville radar in Texas (KBRO).</p>
+<p>In this section you will learn to compute, interpret and analyze vertical profiles (vp’s). A vp consists of the (bird) density, speed and directions at different altitudes at the location of a single radar. It is typically calculated for all data within a cylinder of 35 km radius around the radar, i.e. only containing data at relatively short distances, where the radar beam is still sufficiently narrow to resolve altitude information.</p>
+<p>Section 6 has examples that show how to process polar volume data into vertical profiles. To save time, we will start below with a list of pre-processed vertical profiles for the Brownsville radar in Texas (KBRO).</p>
 <div id="loading-processed-vertical-profiles" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Loading processed vertical profiles<a href="vertical-profiles.html#loading-processed-vertical-profiles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="vertical-profiles.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usually we would load processed vertical profiles (vp files) by:</span></span>
@@ -248,15 +253,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb19-3"><a href="vertical-profiles.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot this smaller time series:</span></span>
 <span id="cb19-4"><a href="vertical-profiles.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_vpts_night)</span></code></pre></div>
 <p><strong>Exercise 7:</strong> Interpret the wind barbs in the profile time series figure: what is the approximate speed and direction at 1500 meter at 6 UTC? In the speed barbs, each half flag represents 2.5 m/s, each full flag 5 m/s, [each pennant (triangle) 25 m/s, not occurring in this case].</p>
-<p><strong>Exercise 8:</strong> Extract the vertical profile at 6 UTC from the time series and plot the vertical profile of ground speed (quantity <code>ff</code>). Hint: use function <code>filter_vpts()</code> to extract the 6 UTC profile. Check whether your answer to the previous question was approximately correct.</p>
+<p><strong>Exercise 8:</strong> Extract the vertical profile at 6 UTC from the time series and plot the vertical profile of ground speed (quantity <code>ff</code>). Hint: use the <code>nearest</code> argument of function <code>filter_vpts()</code> to extract the 6 UTC profile. Check whether your answer to the previous question was approximately correct.</p>
 </div>
 <div id="vertical-and-time-integration-of-profiles" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Vertical and time integration of profiles<a href="vertical-profiles.html#vertical-and-time-integration-of-profiles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Often you will want to sum together all the migrants in the vertical dimension, for example if you want a single index of how many birds are migrating at a certain instant. There are at least two ways in which you can do that:</p>
+<p>Often you will want to sum all the migrants across altitude, for example if you are interested in a single index of how many birds are migrating at a certain instant. There are at least two ways in which you can do that:</p>
 <ul>
 <li>by calculating the vertically integrated bird density (VID), which is <em>surface</em> density as opposed to a <em>volume</em> densities you have been plotting in the previous exercises: this number gives you how many migrants are aloft per square kilometer earth’s surface (unit individuals/km<span class="math inline">\(^{2}\)</span>), obtained by a vertical integration of the volume densities (unit individuals/km<span class="math inline">\(^{3}\)</span>).</li>
+</ul>
+<p><span class="math display">\[\textrm{VID}=\sum_{\textrm{height layers } i}{(\textrm{bird volume density})_i \times (\textrm{height layer thickness})_i}\]</span></p>
+<ul>
 <li>Note that the VID quantity doesn’t depend on the speed of the migrants. A common measure that reflects both the density and speed of the migration is migration traffic rate (MTR). This is flux measure that gives you how many migrants are passing the radar station per unit of time and per unit of distance perpendicular to the migratory direction (unit individuals/km/hour).</li>
 </ul>
+<p><span class="math display">\[\textrm{MTR}=\sum_{\textrm{height layers } i}{(\textrm{bird volume density})_i \times (\textrm{bird speed})_i \times (\textrm{height layer thickness})_i}\]</span></p>
 <p>We will be using bioRad’s <code>integrate_profile()</code> function to calculate these quantities:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="vertical-profiles.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let&#39;s continue with the vpts object created in the previous example.</span></span>
 <span id="cb20-2"><a href="vertical-profiles.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The vertically integrated quantities are calculated as follows:</span></span>
@@ -272,10 +281,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb20-12"><a href="vertical-profiles.html#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_vpi, <span class="at">quantity =</span> <span class="st">&quot;mt&quot;</span>)</span>
 <span id="cb20-13"><a href="vertical-profiles.html#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># execute `?plot.vpi` to open the help page listing all the options.</span></span>
 <span id="cb20-14"><a href="vertical-profiles.html#cb20-14" aria-hidden="true" tabindex="-1"></a>?plot.vpi</span></code></pre></div>
-<p>The following questions only require pen and paper. Assume a night migration event in which the volume density of birds from 0-1 km above ground is 200 birds per cubic kilometer, and from 1-1.5 km 100 birds per cubic kilometer. Above 1500 meter there are no birds.</p>
-<p><strong>Exercise 9:</strong> What is in this case the bird’s vertically integrated density (VID)? Give your answer in units birds/km<span class="math inline">\(^2\)</span>.</p>
-<p><strong>Exercise 10:</strong> Let’s assume that in the lower layer birds fly at 50 km/hour, and in the upper layer at 100 km/hour. What is in this case the migration traffic rate across a transect perpendicular to the direction of movement? Give your answer in units birds/km/hour.</p>
-<p><strong>Exercise 11:</strong>Let’s assume migration continued for exactly three hours after sunset, and then halted abruptly. How many birds have passed a 10 km transect perpendicular to the direction of movement in this night? Give your answer in terms of migration traffic (mt) in units birds/km.</p>
+<p>The following three questions only require pen and paper. Assume a migration event in which the volume density of birds is as follows:</p>
+<ul>
+<li>Density from 0-1 km above ground is 200 birds per cubic kilometer</li>
+<li>Density from 1-1.5 km is 100 birds per cubic kilometer.</li>
+<li>Above 1.5 km meter there are no birds.</li>
+</ul>
+<p><strong>Exercise 9:</strong> What is in this case the vertically integrated density (VID) of birds? Give your answer in units birds/km<span class="math inline">\(^2\)</span>.</p>
+<p><strong>Exercise 10:</strong> Let’s assume that (for the same migration event) birds in the lower layer fly 50 km/hour, and in the upper layer 100 km/hour. How many birds pass a 1 km transect perpendicular to the birds’ direction of movement per hour? Give your answer as a migration traffic rate in units birds/km/hour.</p>
+<p><strong>Exercise 11:</strong> Let’s assume migration continued for exactly three hours after sunset, and then halted abruptly. How many birds have passed a 10 km transect perpendicular to the direction of movement in this night? Give your answer in terms of migration traffic (mt) in units birds/km.</p>
 <p>Both MTR, VID and MT depend on the assumed radar cross section (RCS) per bird. If you are unwilling/unable to specify RCS, alternatively you can use two closely related quantities that make no assumptions RCS:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="vertical-profiles.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># instead of vertically integrated density (VID), you can use vertically integrated reflectivity (VIR):</span></span>
 <span id="cb21-2"><a href="vertical-profiles.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_vpi, <span class="at">quantity =</span> <span class="st">&quot;vir&quot;</span>)</span>
@@ -285,17 +299,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-6"><a href="vertical-profiles.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_vpi, <span class="at">quantity =</span> <span class="st">&quot;rt&quot;</span>)</span></code></pre></div>
 <p>VIR gives you the total cross-sectional area of air-borne targets per square kilometer of ground surface, whereas RTR gives you the total cross-sectional area of targets flying across a one kilometer line perpendicular to the migratory flow per hour.</p>
 </div>
-<div id="inspecting-precipitation-signals-in-profiles" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Inspecting precipitation signals in profiles<a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="manipulating-vertical-profile-time-series-data" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Manipulating vertical profile time series data<a href="vertical-profiles.html#manipulating-vertical-profile-time-series-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You may sometimes want to manipulate <code>vpts</code> data using other well-known data manipulations tools, like the R package dplyr.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="vertical-profiles.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb22-2"><a href="vertical-profiles.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># convert vpts object to a data.frame:</span></span>
+<span id="cb22-3"><a href="vertical-profiles.html#cb22-3" aria-hidden="true" tabindex="-1"></a>example_vpts <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="vertical-profiles.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="ot">-&gt;</span> my_df</span>
+<span id="cb22-5"><a href="vertical-profiles.html#cb22-5" aria-hidden="true" tabindex="-1"></a>my_df</span>
+<span id="cb22-6"><a href="vertical-profiles.html#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="vertical-profiles.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># convert data.frame back to vpts object:</span></span>
+<span id="cb22-8"><a href="vertical-profiles.html#cb22-8" aria-hidden="true" tabindex="-1"></a>my_df <span class="sc">%&gt;%</span> <span class="fu">as.vpts</span>()</span>
+<span id="cb22-9"><a href="vertical-profiles.html#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="vertical-profiles.html#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># as.vpts and as.data.frame (or as_tibble) work as each others inverse:</span></span>
+<span id="cb22-11"><a href="vertical-profiles.html#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">as.vpts</span>(<span class="fu">as.data.frame</span>(example_vpts))</span></code></pre></div>
+<p>This allows for tidyverse style data manipulations. For example, let’s filter out data by height and date using package dplyr and plot it, using a single command:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="vertical-profiles.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb23-2"><a href="vertical-profiles.html#cb23-2" aria-hidden="true" tabindex="-1"></a>example_vpts <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="vertical-profiles.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to data.frame</span></span>
+<span id="cb23-4"><a href="vertical-profiles.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="vertical-profiles.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter out heights layers above 1500 meter</span></span>
+<span id="cb23-6"><a href="vertical-profiles.html#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(height <span class="sc">&lt;=</span> <span class="dv">1500</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-7"><a href="vertical-profiles.html#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter out data from Sep 4 - Sep 9</span></span>
+<span id="cb23-8"><a href="vertical-profiles.html#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(datetime <span class="sc">&lt;</span> <span class="fu">as.POSIXct</span>(<span class="st">&quot;2016-09-04&quot;</span>,<span class="at">tz=</span><span class="st">&quot;UTC&quot;</span>) <span class="sc">|</span></span>
+<span id="cb23-9"><a href="vertical-profiles.html#cb23-9" aria-hidden="true" tabindex="-1"></a>         datetime <span class="sc">&gt;</span> <span class="fu">as.POSIXct</span>(<span class="st">&quot;2016-09-07&quot;</span>,<span class="at">tz=</span><span class="st">&quot;UTC&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-10"><a href="vertical-profiles.html#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert back to vpts object</span></span>
+<span id="cb23-11"><a href="vertical-profiles.html#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.vpts</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-12"><a href="vertical-profiles.html#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># regularize data on a regular time grid</span></span>
+<span id="cb23-13"><a href="vertical-profiles.html#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (so we can visualize the data gap we created):</span></span>
+<span id="cb23-14"><a href="vertical-profiles.html#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">regularize_vpts</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-15"><a href="vertical-profiles.html#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot the vertical profile time series</span></span>
+<span id="cb23-16"><a href="vertical-profiles.html#cb23-16" aria-hidden="true" tabindex="-1"></a>  plot</span></code></pre></div>
+<p>Or let us add a data column <code>high_speed</code> that indicates scatterers moving faster than 15 m/s, and plot that new data column in a profile plot:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="vertical-profiles.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-2"><a href="vertical-profiles.html#cb24-2" aria-hidden="true" tabindex="-1"></a>example_vpts <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href="vertical-profiles.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert vpts object to a data.frame:</span></span>
+<span id="cb24-4"><a href="vertical-profiles.html#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="vertical-profiles.html#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add a data column that is TRUE (1) when the ground speed ff &gt; 15 m/s,</span></span>
+<span id="cb24-6"><a href="vertical-profiles.html#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># and FALSE (0) if it is slower or equal to 15 m/s:</span></span>
+<span id="cb24-7"><a href="vertical-profiles.html#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">high_speed =</span> ff <span class="sc">&gt;</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-8"><a href="vertical-profiles.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert back to vpts object:</span></span>
+<span id="cb24-9"><a href="vertical-profiles.html#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.vpts</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb24-10"><a href="vertical-profiles.html#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot the new quantity:</span></span>
+<span id="cb24-11"><a href="vertical-profiles.html#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">quantity=</span><span class="st">&quot;high_speed&quot;</span>)</span></code></pre></div>
+<p>Note that compatibility with the tidyverse remains under development, and critical data columns of vpts objects (like height) should not be removed.</p>
+</div>
+<div id="inspecting-precipitation-signals-in-profiles" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Inspecting precipitation signals in profiles<a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Precipitation is known to have a major influence on the timing and intensity of migration, therefore it is a useful skill to be able to inspect profiles for presence of precipitation.</p>
 <p>Also, although automated bird quantification algorithms become more and more reliable, distinguishing precipitation from birds remains challenging for algorithms in specific cases. It is therefore important to have the skills to inspect suspicious profiles. That may help you to identify potential errors of the automated methods, and prevent your from overinterpreting the data.</p>
 <p>An easy way of doing that is plotting the vertical profile of total reflectivity (quantity DBZH), which includes everything: birds, insects and precipitation. Precipitation often has higher reflectivities than birds, and also extends to much higher altitudes.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="vertical-profiles.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load a time series for the KBGM radar in Binghamton, NY</span></span>
-<span id="cb22-2"><a href="vertical-profiles.html#cb22-2" aria-hidden="true" tabindex="-1"></a>my_vpts <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data_vpts/KBGM20170527-20170602.rds&quot;</span>)</span>
-<span id="cb22-3"><a href="vertical-profiles.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print the loaded vpts time series for this radar:</span></span>
-<span id="cb22-4"><a href="vertical-profiles.html#cb22-4" aria-hidden="true" tabindex="-1"></a>my_vpts</span>
-<span id="cb22-5"><a href="vertical-profiles.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the bird density over time:</span></span>
-<span id="cb22-6"><a href="vertical-profiles.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_vpts, <span class="at">quantity =</span> <span class="st">&quot;dens&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="vertical-profiles.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load a time series for the KBGM radar in Binghamton, NY</span></span>
+<span id="cb25-2"><a href="vertical-profiles.html#cb25-2" aria-hidden="true" tabindex="-1"></a>my_vpts <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data_vpts/KBGM20170527-20170602.rds&quot;</span>)</span>
+<span id="cb25-3"><a href="vertical-profiles.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print the loaded vpts time series for this radar:</span></span>
+<span id="cb25-4"><a href="vertical-profiles.html#cb25-4" aria-hidden="true" tabindex="-1"></a>my_vpts</span>
+<span id="cb25-5"><a href="vertical-profiles.html#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the bird density over time:</span></span>
+<span id="cb25-6"><a href="vertical-profiles.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_vpts, <span class="at">quantity =</span> <span class="st">&quot;dens&quot;</span>)</span></code></pre></div>
 <p><strong>Exercise 12:</strong> Compare the above plot for bird density (quantity <code>dens</code>) with a profile plot for total reflectivity (quantity <code>DBZH</code>, showing birds and precipitation combined). Compare the two plots to visually identify periods and altitude layers with precipitation.</p>
 </div>
 </div>

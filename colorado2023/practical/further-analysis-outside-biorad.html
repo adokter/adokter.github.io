@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="processing-many-polar-volumes.html"/>
-
+<link rel="next" href="troubleshooting.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -154,7 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-single-vertical-profiles"><i class="fa fa-check"></i><b>4.2</b> Inspecting single vertical profiles</a></li>
 <li class="chapter" data-level="4.3" data-path="vertical-profiles.html"><a href="vertical-profiles.html#plotting-vertical-profile-time-series"><i class="fa fa-check"></i><b>4.3</b> Plotting vertical profile time series</a></li>
 <li class="chapter" data-level="4.4" data-path="vertical-profiles.html"><a href="vertical-profiles.html#vertical-and-time-integration-of-profiles"><i class="fa fa-check"></i><b>4.4</b> Vertical and time integration of profiles</a></li>
-<li class="chapter" data-level="4.5" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles"><i class="fa fa-check"></i><b>4.5</b> Inspecting precipitation signals in profiles</a></li>
+<li class="chapter" data-level="4.5" data-path="vertical-profiles.html"><a href="vertical-profiles.html#manipulating-vertical-profile-time-series-data"><i class="fa fa-check"></i><b>4.5</b> Manipulating vertical profile time series data</a></li>
+<li class="chapter" data-level="4.6" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles"><i class="fa fa-check"></i><b>4.6</b> Inspecting precipitation signals in profiles</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="range-bias-correction.html"><a href="range-bias-correction.html"><i class="fa fa-check"></i><b>5</b> Range bias correction</a>
 <ul>
@@ -168,6 +169,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3" data-path="processing-many-polar-volumes.html"><a href="processing-many-polar-volumes.html#parallel-processing"><i class="fa fa-check"></i><b>6.3</b> Parallel processing</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="further-analysis-outside-biorad.html"><a href="further-analysis-outside-biorad.html"><i class="fa fa-check"></i><b>7</b> Further analysis outside bioRad</a></li>
+<li class="chapter" data-level="8" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>8</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="troubleshooting.html"><a href="troubleshooting.html#cannot-find-proj.db"><i class="fa fa-check"></i><b>8.1</b> Cannot find proj.db</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -191,6 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>vertical profile (<code>vp</code>): as.data.frame(<code>your_vp_object</code>)</li>
 <li>vertical profile time series (<code>vpts</code>): as.data.frame(<code>your_vpts_object</code>)</li>
+<li>use function <code>as.vpts()</code> to convert a vpts data.frame back to a vpts object.</li>
 <li>integrated vertical profile time series (<code>vpi</code>): is already a <code>data.frame</code></li>
 </ul>
 <p>Converting polar scans (<code>scan</code> objects) to common spatial formats:</p>
@@ -206,8 +212,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="processing-many-polar-volumes.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="processing-many-polar-volumes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="troubleshooting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -154,7 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-single-vertical-profiles"><i class="fa fa-check"></i><b>4.2</b> Inspecting single vertical profiles</a></li>
 <li class="chapter" data-level="4.3" data-path="vertical-profiles.html"><a href="vertical-profiles.html#plotting-vertical-profile-time-series"><i class="fa fa-check"></i><b>4.3</b> Plotting vertical profile time series</a></li>
 <li class="chapter" data-level="4.4" data-path="vertical-profiles.html"><a href="vertical-profiles.html#vertical-and-time-integration-of-profiles"><i class="fa fa-check"></i><b>4.4</b> Vertical and time integration of profiles</a></li>
-<li class="chapter" data-level="4.5" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles"><i class="fa fa-check"></i><b>4.5</b> Inspecting precipitation signals in profiles</a></li>
+<li class="chapter" data-level="4.5" data-path="vertical-profiles.html"><a href="vertical-profiles.html#manipulating-vertical-profile-time-series-data"><i class="fa fa-check"></i><b>4.5</b> Manipulating vertical profile time series data</a></li>
+<li class="chapter" data-level="4.6" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles"><i class="fa fa-check"></i><b>4.6</b> Inspecting precipitation signals in profiles</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="range-bias-correction.html"><a href="range-bias-correction.html"><i class="fa fa-check"></i><b>5</b> Range bias correction</a>
 <ul>
@@ -168,6 +169,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3" data-path="processing-many-polar-volumes.html"><a href="processing-many-polar-volumes.html#parallel-processing"><i class="fa fa-check"></i><b>6.3</b> Parallel processing</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="further-analysis-outside-biorad.html"><a href="further-analysis-outside-biorad.html"><i class="fa fa-check"></i><b>7</b> Further analysis outside bioRad</a></li>
+<li class="chapter" data-level="8" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>8</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="troubleshooting.html"><a href="troubleshooting.html#cannot-find-proj.db"><i class="fa fa-check"></i><b>8.1</b> Cannot find proj.db</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -198,7 +203,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-7"><a href="basic-visualization-of-radar-scans.html#cb4-7" aria-hidden="true" tabindex="-1"></a>my_pvolfiles</span>
 <span id="cb4-8"><a href="basic-visualization-of-radar-scans.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s load the first of our downloaded files:</span></span>
 <span id="cb4-9"><a href="basic-visualization-of-radar-scans.html#cb4-9" aria-hidden="true" tabindex="-1"></a>my_pvol <span class="ot">&lt;-</span> <span class="fu">read_pvolfile</span>(my_pvolfiles[<span class="dv">1</span>])</span></code></pre></div>
-<p><strong>Exercise 1:</strong> What is the minimum and maximum scan elevation contained in the volume? And which scan parameters are available? (See manual page of the <code>read_pvolfile()</code> function for the nomenclature of various available quantities).</p>
 </div>
 <div id="plotting-radar-scans" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Plotting radar scans<a href="basic-visualization-of-radar-scans.html#plotting-radar-scans" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -208,6 +212,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-4"><a href="basic-visualization-of-radar-scans.html#cb5-4" aria-hidden="true" tabindex="-1"></a>my_scan</span>
 <span id="cb5-5"><a href="basic-visualization-of-radar-scans.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s plot the reflectivity factor parameter of the scan in a range - azimuth coordinate system:</span></span>
 <span id="cb5-6"><a href="basic-visualization-of-radar-scans.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_scan, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>)</span></code></pre></div>
+<p><strong>Exercise 1:</strong> Plot the radial velocity parameters of the 1.5 degree elevation scan in a range - azimuth coordinate system. (See manual page of the <code>read_pvolfile()</code> function for the nomenclature of various available quantities).</p>
 <p>Usually it is easier to visually explore radar scans as a PPI (plan position indicator), which is a projection of the scan on a Cartesian (X,Y) or (lat,lon) grid:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="basic-visualization-of-radar-scans.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># before we can plot the scan, we need to project it on a Cartesian grid,</span></span>
 <span id="cb6-2"><a href="basic-visualization-of-radar-scans.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># i.e. we need to make a Plan Position Indicator (PPI)</span></span>
@@ -221,8 +226,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-10"><a href="basic-visualization-of-radar-scans.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb6-11"><a href="basic-visualization-of-radar-scans.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we are ready to plot the ppi, for example let&#39;s plot reflectivity factor DBZH:</span></span>
 <span id="cb6-12"><a href="basic-visualization-of-radar-scans.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_ppi, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>)</span></code></pre></div>
-<p><strong>Exercise 2:</strong> This case shows an incoming precipitation front, characterized by localized but intense thunderstorms, as well as biological scattering. Make also a ppi plot of the correlation coefficient (RHOHV) and radial velocity (VRADH). Verify which regions are precipitation, and the approximate direction of movement
-of biology and precipitation.</p>
+<p><strong>Exercise 2:</strong> This case shows an incoming precipitation front, characterized by localized but intense thunderstorms, as well as biological scattering. Make also a ppi plot of the correlation coefficient (RHOHV) and radial velocity (VRADH). Verify which regions are precipitation, and infer from those patterns the (approximate) direction of movement of biology and precipitation.</p>
 <p><strong>Exercise 3:</strong> Based on the radial velocity image, are the biological scatterers birds or insects? Why?</p>
 </div>
 <div id="overlaying-radar-scans-on-maps" class="section level2 hasAnchor" number="2.3">

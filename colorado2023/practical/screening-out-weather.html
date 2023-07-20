@@ -154,7 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-single-vertical-profiles"><i class="fa fa-check"></i><b>4.2</b> Inspecting single vertical profiles</a></li>
 <li class="chapter" data-level="4.3" data-path="vertical-profiles.html"><a href="vertical-profiles.html#plotting-vertical-profile-time-series"><i class="fa fa-check"></i><b>4.3</b> Plotting vertical profile time series</a></li>
 <li class="chapter" data-level="4.4" data-path="vertical-profiles.html"><a href="vertical-profiles.html#vertical-and-time-integration-of-profiles"><i class="fa fa-check"></i><b>4.4</b> Vertical and time integration of profiles</a></li>
-<li class="chapter" data-level="4.5" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles"><i class="fa fa-check"></i><b>4.5</b> Inspecting precipitation signals in profiles</a></li>
+<li class="chapter" data-level="4.5" data-path="vertical-profiles.html"><a href="vertical-profiles.html#manipulating-vertical-profile-time-series-data"><i class="fa fa-check"></i><b>4.5</b> Manipulating vertical profile time series data</a></li>
+<li class="chapter" data-level="4.6" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles"><i class="fa fa-check"></i><b>4.6</b> Inspecting precipitation signals in profiles</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="range-bias-correction.html"><a href="range-bias-correction.html"><i class="fa fa-check"></i><b>5</b> Range bias correction</a>
 <ul>
@@ -168,6 +169,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3" data-path="processing-many-polar-volumes.html"><a href="processing-many-polar-volumes.html#parallel-processing"><i class="fa fa-check"></i><b>6.3</b> Parallel processing</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="further-analysis-outside-biorad.html"><a href="further-analysis-outside-biorad.html"><i class="fa fa-check"></i><b>7</b> Further analysis outside bioRad</a></li>
+<li class="chapter" data-level="8" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>8</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="troubleshooting.html"><a href="troubleshooting.html#cannot-find-proj.db"><i class="fa fa-check"></i><b>8.1</b> Cannot find proj.db</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -190,15 +195,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="using-correlation-coefficient" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> using correlation coefficient<a href="screening-out-weather.html#using-correlation-coefficient" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Screening precipitation based on correlation coefficient is arguably the most simple and established approach for screening out weather in cases where dual-polarization data is available. It is based on removing data above a certain <span class="math inline">\(\rho_{/HV}\)</span> tresholds, most commonly 0.95.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="screening-out-weather.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Screen out the reflectivity areas with RHOHV &lt; 0.95</span></span>
-<span id="cb8-2"><a href="screening-out-weather.html#cb8-2" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DBZH =</span> <span class="fu">ifelse</span>(RHOHV <span class="sc">&gt;</span> <span class="fl">0.95</span>, <span class="cn">NA</span>, DBZH))</span>
-<span id="cb8-3"><a href="screening-out-weather.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the original and cleaned up reflectivity:</span></span>
-<span id="cb8-4"><a href="screening-out-weather.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span>
-<span id="cb8-5"><a href="screening-out-weather.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="screening-out-weather.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We will screen out the reflectivity areas with for which the</span></span>
+<span id="cb8-2"><a href="screening-out-weather.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># correlation coefficient is &gt; 0.95 (indicating precipitation)</span></span>
+<span id="cb8-3"><a href="screening-out-weather.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We do so by redefining parameter DBZH, replacing pixels with NA values</span></span>
+<span id="cb8-4"><a href="screening-out-weather.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># whenever RHOHV &gt; 0.95</span></span>
+<span id="cb8-5"><a href="screening-out-weather.html#cb8-5" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DBZH =</span> <span class="fu">ifelse</span>(RHOHV <span class="sc">&gt;</span> <span class="fl">0.95</span>, <span class="cn">NA</span>, DBZH))</span>
+<span id="cb8-6"><a href="screening-out-weather.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the original and cleaned up reflectivity:</span></span>
+<span id="cb8-7"><a href="screening-out-weather.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span>
+<span id="cb8-8"><a href="screening-out-weather.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span></code></pre></div>
 </div>
 <div id="using-mistnet" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> using MistNet<a href="screening-out-weather.html#using-mistnet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You can use MistNet for screening out weather when
+<p>You can also use MistNet for screening out weather when
 * the radar operates at S-band wavelengths
 * you only have single polarization data available (specifically, the three basic quantities radial velocity VRADH, reflectivity DBZH, and spectrum width WRADH).</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="screening-out-weather.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># apply the MistNet model to the polar volume file and load it as a polar volume (pvol):</span></span>
@@ -241,7 +249,8 @@ First we add the depolarization ratio (DR) as a parameter. We’ll express DR on
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="screening-out-weather.html#cb12-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot the depolarization ratio, using a viridis color palette:</span></span>
 <span id="cb12-2"><a href="screening-out-weather.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi, <span class="at">map =</span> basemap, <span class="at">param =</span> <span class="st">&quot;DR&quot;</span>, <span class="at">zlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">25</span>,<span class="sc">-</span><span class="dv">5</span>), <span class="at">palette =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">100</span>))</span></code></pre></div>
 <p><strong>Exercise 4:</strong> Calculate and plot a ‘cleaned up’ PPI for the radial velocity that includes only
-the segmentation by MistNet and not the additional border.</p>
+the segmentation by MistNet and not the additional border. Remember that the segmentation
+by Mistnet has a CELL value 2, and the border has a CELL value 1.</p>
 </div>
 </div>
             </section>
