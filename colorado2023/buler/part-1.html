@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Radar Aeroecology Workshop Working with low tilt data for mapping animals near the ground | AW_2023_Working_with_low_tilt_data.knit</title>
+  <meta name="description" content="Radar Aeroecology Workshop<br />
+Working with low tilt data for mapping animals near the ground</div>" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Radar Aeroecology Workshop Working with low tilt data for mapping animals near the ground | AW_2023_Working_with_low_tilt_data.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Radar Aeroecology Workshop Working with low tilt data for mapping animals near the ground | AW_2023_Working_with_low_tilt_data.knit" />
+  
+  
+  
+
+<meta name="author" content="Includes R code written by Jeffrey Buler, Jaci Smolinsky, and Matt Boone, Department of Entomology and Wildlife Ecology, University of Delaware, Newark, DE, USA" />
+
+
+<meta name="date" content="2023-07-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="part-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="part-1.html"><a href="part-1.html"><i class="fa fa-check"></i><b>1</b> Part 1</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="part-1.html"><a href="part-1.html#setup"><i class="fa fa-check"></i><b>1.1</b> Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="part-2.html"><a href="part-2.html"><i class="fa fa-check"></i><b>2</b> Part 2</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="part-2.html"><a href="part-2.html#create-a-polygon-shapefile-basegrid-of-radar-sample-volumes"><i class="fa fa-check"></i><b>2.1</b> Create a polygon shapefile basegrid of radar sample volumes</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="part-3.html"><a href="part-3.html"><i class="fa fa-check"></i><b>3</b> Part 3</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="part-3.html"><a href="part-3.html#determine-ground-heights-underneath-sample-volumes"><i class="fa fa-check"></i><b>3.1</b> Determine ground heights underneath sample volumes</a></li>
+<li class="chapter" data-level="3.2" data-path="part-3.html"><a href="part-3.html#load-basgrid-polygon-into-qgis---easy-way"><i class="fa fa-check"></i><b>3.2</b> Load basgrid polygon into QGIS - easy way</a></li>
+<li class="chapter" data-level="3.3" data-path="part-3.html"><a href="part-3.html#changing-the-layer-properties-to-display-data"><i class="fa fa-check"></i><b>3.3</b> Changing the layer properties to display data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="part-4.html"><a href="part-4.html"><i class="fa fa-check"></i><b>4</b> Part 4</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="part-4.html"><a href="part-4.html#compute-topographic-beam-blockage"><i class="fa fa-check"></i><b>4.1</b> Compute topographic beam blockage</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="part-5.html"><a href="part-5.html"><i class="fa fa-check"></i><b>5</b> Part 5</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="part-5.html"><a href="part-5.html#examine-data-for-making-a-clutter-mask-for-the-basegrid"><i class="fa fa-check"></i><b>5.1</b> Examine data for making a clutter mask for the basegrid</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="part-5.html"><a href="part-5.html#join-table-to-layer-in-qgis"><i class="fa fa-check"></i><b>5.1.1</b> Join table to layer in QGIS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="part-6.html"><a href="part-6.html"><i class="fa fa-check"></i><b>6</b> Part 6</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="part-6.html"><a href="part-6.html#estimating-beam-propagation-using-radiosonde-data"><i class="fa fa-check"></i><b>6.1</b> Estimating beam propagation using radiosonde data</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="part-7-on-your-own.html"><a href="part-7-on-your-own.html"><i class="fa fa-check"></i><b>7</b> Part 7 (On your own)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="part-7-on-your-own.html"><a href="part-7-on-your-own.html#modeling-bird-stopover-distributions"><i class="fa fa-check"></i><b>7.1</b> Modeling bird stopover distributions</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">Radar Aeroecology Workshop<br />
+Working with low tilt data for mapping animals near the ground</div></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title"><div class="line-block">Radar Aeroecology Workshop<br />
+Working with low tilt data for mapping animals near the ground</div></h1>
+<p class="author"><em>Includes R code written by Jeffrey Buler, Jaci Smolinsky, and Matt Boone, Department of Entomology and Wildlife Ecology, University of Delaware, Newark, DE, USA</em></p>
+<p class="date"><em>July 20, 2023</em></p>
+</div>
+<div id="part-1" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Part 1<a href="part-1.html#part-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="setup" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Setup<a href="part-1.html#setup" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following are libraries needed to run the code for this practical. They will be installed if necessary:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="part-1.html#cb1-1" tabindex="-1"></a>reqPackages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;geosphere&#39;</span>,<span class="st">&#39;dplyr&#39;</span>,<span class="st">&#39;elevatr&#39;</span>,<span class="st">&#39;sf&#39;</span>,<span class="st">&#39;fields&#39;</span>,<span class="st">&#39;rgdal&#39;</span>,<span class="st">&#39;foreign&#39;</span>,<span class="st">&#39;terra&#39;</span>,<span class="st">&#39;imputeTS&#39;</span>,<span class="st">&#39;tzdb&#39;</span>)</span>
+<span id="cb1-2"><a href="part-1.html#cb1-2" tabindex="-1"></a>get.packages <span class="ot">&lt;-</span> reqPackages[<span class="sc">!</span>(reqPackages <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="st">&quot;Package&quot;</span>])]</span>
+<span id="cb1-3"><a href="part-1.html#cb1-3" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">length</span>(get.packages)<span class="sc">&gt;</span><span class="dv">0</span>) <span class="fu">install.packages</span>(get.packages,<span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="part-1.html#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="part-1.html#cb1-5" tabindex="-1"></a><span class="fu">library</span>(geosphere)</span>
+<span id="cb1-6"><a href="part-1.html#cb1-6" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-7"><a href="part-1.html#cb1-7" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-8"><a href="part-1.html#cb1-8" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span>
+<span id="cb1-9"><a href="part-1.html#cb1-9" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb1-10"><a href="part-1.html#cb1-10" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-11"><a href="part-1.html#cb1-11" tabindex="-1"></a><span class="fu">library</span>(imputeTS)</span>
+<span id="cb1-12"><a href="part-1.html#cb1-12" tabindex="-1"></a><span class="fu">library</span>(elevatr)</span>
+<span id="cb1-13"><a href="part-1.html#cb1-13" tabindex="-1"></a><span class="fu">library</span>(fields)</span></code></pre></div>
+<p>These are user defined variables of radar characteristics, file paths, and other constants. Please modify them as needed. The example radar is the KLWX NEXRAD station near Washington, DC USA. I have set the pulse volume dimensions to Super Resolution (0.5 degree by 250 m).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="part-1.html#cb2-1" tabindex="-1"></a><span class="do">##User defined radar characteristics</span></span>
+<span id="cb2-2"><a href="part-1.html#cb2-2" tabindex="-1"></a>site<span class="ot">&lt;-</span><span class="st">&quot;KLWX&quot;</span></span>
+<span id="cb2-3"><a href="part-1.html#cb2-3" tabindex="-1"></a>X_origin <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">77.477778</span>   <span class="co">#longitude of radar location</span></span>
+<span id="cb2-4"><a href="part-1.html#cb2-4" tabindex="-1"></a>Y_origin <span class="ot">&lt;-</span> <span class="fl">38.975278</span>   <span class="co">#latitiude of radar location</span></span>
+<span id="cb2-5"><a href="part-1.html#cb2-5" tabindex="-1"></a>zone <span class="ot">&lt;-</span> <span class="dv">18</span> <span class="co">#UTM zone of radar</span></span>
+<span id="cb2-6"><a href="part-1.html#cb2-6" tabindex="-1"></a>antht <span class="ot">&lt;-</span> <span class="fl">118.54</span> <span class="co">#height of radar antenna above sea level in meters  = base ht (ASL) + tower ht</span></span>
+<span id="cb2-7"><a href="part-1.html#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="part-1.html#cb2-8" tabindex="-1"></a><span class="do">##define file paths</span></span>
+<span id="cb2-9"><a href="part-1.html#cb2-9" tabindex="-1"></a>OUT <span class="ot">&lt;-</span> <span class="st">&quot;C:/Users/jbule/Dropbox/RAW_2022&quot;</span> <span class="co">#directory of files</span></span>
+<span id="cb2-10"><a href="part-1.html#cb2-10" tabindex="-1"></a>DEM <span class="ot">&lt;-</span> <span class="st">&quot;lwxdem1.tif&quot;</span> <span class="co">#name of DEM raster file</span></span>
+<span id="cb2-11"><a href="part-1.html#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="part-1.html#cb2-12" tabindex="-1"></a><span class="fu">setwd</span> (OUT)</span>
+<span id="cb2-13"><a href="part-1.html#cb2-13" tabindex="-1"></a><span class="do">##User defined constants</span></span>
+<span id="cb2-14"><a href="part-1.html#cb2-14" tabindex="-1"></a>degrees <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#initial degree for creating sample volumes</span></span>
+<span id="cb2-15"><a href="part-1.html#cb2-15" tabindex="-1"></a>step <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co">#azimuth increment in degress (i.e., beamwidth)</span></span>
+<span id="cb2-16"><a href="part-1.html#cb2-16" tabindex="-1"></a>depth <span class="ot">&lt;-</span> <span class="dv">250</span> <span class="co">#depth of range gates (i.e., gatewidth)</span></span>
+<span id="cb2-17"><a href="part-1.html#cb2-17" tabindex="-1"></a>minrange <span class="ot">&lt;-</span> <span class="dv">2000</span> <span class="co">#min start range (m) for creating sample volumes</span></span>
+<span id="cb2-18"><a href="part-1.html#cb2-18" tabindex="-1"></a>maxrange <span class="ot">&lt;-</span> <span class="dv">5000</span> <span class="co">#max end range (m) for creating sample volumes</span></span>
+<span id="cb2-19"><a href="part-1.html#cb2-19" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co">#elevation angle of beam in degrees</span></span>
+<span id="cb2-20"><a href="part-1.html#cb2-20" tabindex="-1"></a>halfbeam <span class="ot">&lt;-</span> <span class="fl">0.008464847</span> <span class="co">#half power radar beam width in radians (e.g., 0.485 degree for NEXRAD)</span></span></code></pre></div>
+<p>The following are global constants that should not need to be modified.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="part-1.html#cb3-1" tabindex="-1"></a><span class="do">##Constants</span></span>
+<span id="cb3-2"><a href="part-1.html#cb3-2" tabindex="-1"></a>DEG2RAD <span class="ot">&lt;-</span> <span class="fl">0.017453293</span> <span class="co">#convert degrees to radians</span></span>
+<span id="cb3-3"><a href="part-1.html#cb3-3" tabindex="-1"></a>rad2deg <span class="ot">&lt;-</span> <span class="fl">57.295779513</span> <span class="co">#convert radians to degrees</span></span>
+<span id="cb3-4"><a href="part-1.html#cb3-4" tabindex="-1"></a>earthe  <span class="ot">&lt;-</span> <span class="dv">6378137</span>  <span class="co">#earth equatorial radius in meters</span></span>
+<span id="cb3-5"><a href="part-1.html#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="part-1.html#cb3-6" tabindex="-1"></a><span class="do">##compute equivalent earth radius at the height of the radar antenna</span></span>
+<span id="cb3-7"><a href="part-1.html#cb3-7" tabindex="-1"></a>earth <span class="ot">&lt;-</span> (earthe<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.0033493</span><span class="sc">*</span>(<span class="fu">sin</span>(Y_origin<span class="sc">*</span>DEG2RAD))<span class="sc">**</span><span class="dv">2</span>))) <span class="co">#earth radius to sea level at radar latititude</span></span>
+<span id="cb3-8"><a href="part-1.html#cb3-8" tabindex="-1"></a>eartha <span class="ot">&lt;-</span> (earth<span class="sc">+</span>antht) <span class="co">#Earth radius at antenna height</span></span>
+<span id="cb3-9"><a href="part-1.html#cb3-9" tabindex="-1"></a>earthr <span class="ot">&lt;-</span> <span class="dv">4</span><span class="sc">*</span>eartha<span class="sc">/</span><span class="dv">3</span> <span class="co">#Equivalent earth radius in a standard atmosphere</span></span>
+<span id="cb3-10"><a href="part-1.html#cb3-10" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="part-1.html#cb3-11" tabindex="-1"></a><span class="do">##prepare sequences for drawing spatial boundaries of sample volumes</span></span>
+<span id="cb3-12"><a href="part-1.html#cb3-12" tabindex="-1"></a>azimuths<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">359.5</span>, <span class="at">by=</span>step)</span>
+<span id="cb3-13"><a href="part-1.html#cb3-13" tabindex="-1"></a>ids<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>(((maxrange<span class="sc">-</span>minrange)<span class="sc">+</span>depth)<span class="sc">/</span>depth<span class="sc">*</span><span class="dv">360</span><span class="sc">/</span>step), <span class="at">each=</span><span class="dv">5</span>)</span>
+<span id="cb3-14"><a href="part-1.html#cb3-14" tabindex="-1"></a>ranges<span class="ot">&lt;-</span>((<span class="fu">seq</span>(minrange,maxrange,<span class="at">by =</span> depth))<span class="sc">*</span><span class="fu">cos</span>(theta<span class="sc">*</span>DEG2RAD))</span>
+<span id="cb3-15"><a href="part-1.html#cb3-15" tabindex="-1"></a>range<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="fu">seq</span>(minrange,maxrange,<span class="at">by =</span> depth), <span class="at">each=</span><span class="dv">720</span>) </span></code></pre></div>
+<p>Here are some functions that will be used later:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="part-1.html#cb4-1" tabindex="-1"></a><span class="co">#&#39; Rounds to any decimal or whole value</span></span>
+<span id="cb4-2"><a href="part-1.html#cb4-2" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb4-3"><a href="part-1.html#cb4-3" tabindex="-1"></a><span class="co">#&#39; @param x  vector of values</span></span>
+<span id="cb4-4"><a href="part-1.html#cb4-4" tabindex="-1"></a><span class="co">#&#39; @param dec the number/decimal you want to convert to. </span></span>
+<span id="cb4-5"><a href="part-1.html#cb4-5" tabindex="-1"></a>mround <span class="ot">&lt;-</span> <span class="cf">function</span>(x,dec){ dec<span class="sc">*</span><span class="fu">round</span>(x<span class="sc">/</span>dec) }</span>
+<span id="cb4-6"><a href="part-1.html#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="part-1.html#cb4-7" tabindex="-1"></a><span class="co">#&#39; Calculates the percentage of beam blockage across a radar range</span></span>
+<span id="cb4-8"><a href="part-1.html#cb4-8" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb4-9"><a href="part-1.html#cb4-9" tabindex="-1"></a><span class="co">#&#39; This function requires input of a dataframe with three columns &#39;range&#39;,&#39;azimuth&#39;, and &#39;groundht&#39;</span></span>
+<span id="cb4-10"><a href="part-1.html#cb4-10" tabindex="-1"></a><span class="co">#&#39; @param data  data.frame with numberic columns for range, azimuth, and ground height (groundht)</span></span>
+<span id="cb4-11"><a href="part-1.html#cb4-11" tabindex="-1"></a><span class="co">#&#39; @param anht the height of the radar antenna above sea level in m</span></span>
+<span id="cb4-12"><a href="part-1.html#cb4-12" tabindex="-1"></a><span class="co">#&#39; @param theta  the tilt angle of the beam in degrees</span></span>
+<span id="cb4-13"><a href="part-1.html#cb4-13" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="part-1.html#cb4-14" tabindex="-1"></a>beam_block<span class="ot">&lt;-</span><span class="cf">function</span>(data, theta, anht){</span>
+<span id="cb4-15"><a href="part-1.html#cb4-15" tabindex="-1"></a>  </span>
+<span id="cb4-16"><a href="part-1.html#cb4-16" tabindex="-1"></a>  data <span class="ot">&lt;-</span> basegrid</span>
+<span id="cb4-17"><a href="part-1.html#cb4-17" tabindex="-1"></a>  </span>
+<span id="cb4-18"><a href="part-1.html#cb4-18" tabindex="-1"></a>  beam<span class="ot">&lt;-</span><span class="fu">beamht_std</span>(data<span class="sc">$</span>range, <span class="at">antht=</span>antht, <span class="at">theta=</span>theta, <span class="at">earthr=</span>earthr)</span>
+<span id="cb4-19"><a href="part-1.html#cb4-19" tabindex="-1"></a>  beam[,<span class="fu">c</span>(<span class="st">&#39;bbeam&#39;</span>,<span class="st">&#39;mbeam&#39;</span>,<span class="st">&#39;tbeam&#39;</span>)] <span class="ot">&lt;-</span> beam[,<span class="fu">c</span>(<span class="st">&#39;bbeam&#39;</span>,<span class="st">&#39;mbeam&#39;</span>,<span class="st">&#39;tbeam&#39;</span>)] <span class="sc">-</span> data<span class="sc">$</span>groundht</span>
+<span id="cb4-20"><a href="part-1.html#cb4-20" tabindex="-1"></a>  beam<span class="sc">$</span>block<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb4-21"><a href="part-1.html#cb4-21" tabindex="-1"></a>  beam<span class="sc">$</span>block[beam<span class="sc">$</span>tbeam<span class="sc">&lt;=</span><span class="dv">0</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb4-22"><a href="part-1.html#cb4-22" tabindex="-1"></a>  beam<span class="sc">$</span>block[beam<span class="sc">$</span>bbeam<span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span> beam<span class="sc">$</span>mbeam <span class="sc">&gt;=</span><span class="dv">0</span> ] <span class="ot">&lt;-</span><span class="fu">mround</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>beam<span class="sc">$</span>bbeam[beam<span class="sc">$</span>bbeam<span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span> beam<span class="sc">$</span>mbeam <span class="sc">&gt;=</span><span class="dv">0</span> ]<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>beam<span class="sc">$</span>range[beam<span class="sc">$</span>bbeam<span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span> beam<span class="sc">$</span>mbeam <span class="sc">&gt;=</span><span class="dv">0</span> ]<span class="sc">*</span>halfbeam<span class="sc">*</span><span class="fu">cos</span>(DEG2RAD<span class="sc">*</span>theta)), <span class="fl">0.05</span>)</span>
+<span id="cb4-23"><a href="part-1.html#cb4-23" tabindex="-1"></a>  beam<span class="sc">$</span>block[beam<span class="sc">$</span>bbeam <span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span> beam<span class="sc">$</span>mbeam <span class="sc">&lt;</span><span class="dv">0</span> ] <span class="ot">&lt;-</span> <span class="fu">mround</span>(<span class="dv">1</span><span class="sc">-</span>(beam<span class="sc">$</span>tbeam[beam<span class="sc">$</span>bbeam <span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span> beam<span class="sc">$</span>mbeam <span class="sc">&lt;</span><span class="dv">0</span> ]<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>beam<span class="sc">$</span>range[ beam<span class="sc">$</span>bbeam <span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span> beam<span class="sc">$</span>mbeam <span class="sc">&lt;</span><span class="dv">0</span> ]<span class="sc">*</span>halfbeam<span class="sc">*</span><span class="fu">cos</span>(DEG2RAD<span class="sc">*</span>theta))), <span class="fl">0.05</span>)</span>
+<span id="cb4-24"><a href="part-1.html#cb4-24" tabindex="-1"></a>  beam<span class="sc">$</span>azimuth <span class="ot">&lt;-</span> data<span class="sc">$</span>azimuth</span>
+<span id="cb4-25"><a href="part-1.html#cb4-25" tabindex="-1"></a>  beam <span class="ot">&lt;-</span> beam[<span class="fu">order</span>(beam<span class="sc">$</span>azimuth, beam<span class="sc">$</span>range),]</span>
+<span id="cb4-26"><a href="part-1.html#cb4-26" tabindex="-1"></a>  list1<span class="ot">&lt;-</span><span class="fu">tapply</span>(beam<span class="sc">$</span>block, beam<span class="sc">$</span>azimuth, list)</span>
+<span id="cb4-27"><a href="part-1.html#cb4-27" tabindex="-1"></a>  </span>
+<span id="cb4-28"><a href="part-1.html#cb4-28" tabindex="-1"></a>  here<span class="ot">&lt;-</span><span class="fu">lapply</span>(list1,  <span class="cf">function</span>(x) {</span>
+<span id="cb4-29"><a href="part-1.html#cb4-29" tabindex="-1"></a>    listblock<span class="ot">&lt;-</span><span class="fu">list</span>()</span>
+<span id="cb4-30"><a href="part-1.html#cb4-30" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(x)){</span>
+<span id="cb4-31"><a href="part-1.html#cb4-31" tabindex="-1"></a>      <span class="cf">if</span>(i<span class="sc">==</span><span class="dv">1</span>){pblock<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb4-32"><a href="part-1.html#cb4-32" tabindex="-1"></a>      pblock<span class="ot">&lt;-</span><span class="fu">max</span>(<span class="fu">c</span>(x[i],pblock))</span>
+<span id="cb4-33"><a href="part-1.html#cb4-33" tabindex="-1"></a>      <span class="cf">if</span>(pblock<span class="sc">&lt;</span><span class="dv">0</span>){pblock<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb4-34"><a href="part-1.html#cb4-34" tabindex="-1"></a>      listblock[[i]]<span class="ot">&lt;-</span>pblock</span>
+<span id="cb4-35"><a href="part-1.html#cb4-35" tabindex="-1"></a>    }</span>
+<span id="cb4-36"><a href="part-1.html#cb4-36" tabindex="-1"></a>    listblock</span>
+<span id="cb4-37"><a href="part-1.html#cb4-37" tabindex="-1"></a>  })</span>
+<span id="cb4-38"><a href="part-1.html#cb4-38" tabindex="-1"></a>  </span>
+<span id="cb4-39"><a href="part-1.html#cb4-39" tabindex="-1"></a>  </span>
+<span id="cb4-40"><a href="part-1.html#cb4-40" tabindex="-1"></a>  beam<span class="sc">$</span>pblock<span class="ot">&lt;-</span><span class="fu">unlist</span>(here)</span>
+<span id="cb4-41"><a href="part-1.html#cb4-41" tabindex="-1"></a>  beam</span>
+<span id="cb4-42"><a href="part-1.html#cb4-42" tabindex="-1"></a>}</span>
+<span id="cb4-43"><a href="part-1.html#cb4-43" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="part-1.html#cb4-44" tabindex="-1"></a><span class="co">#&#39; Calculates the top, middle, and bottom of a radar beam in a standard atmosphere</span></span>
+<span id="cb4-45"><a href="part-1.html#cb4-45" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb4-46"><a href="part-1.html#cb4-46" tabindex="-1"></a><span class="co">#&#39;  @param range a vector of ranges in m </span></span>
+<span id="cb4-47"><a href="part-1.html#cb4-47" tabindex="-1"></a><span class="co">#&#39;  @param earhtr the equivalent earth radius at the radar antenna in m</span></span>
+<span id="cb4-48"><a href="part-1.html#cb4-48" tabindex="-1"></a><span class="co">#&#39;  @param anht the height of the radar antenna above sea level in m</span></span>
+<span id="cb4-49"><a href="part-1.html#cb4-49" tabindex="-1"></a><span class="co">#&#39;  @param theta  the tilt angle of the beam in degrees</span></span>
+<span id="cb4-50"><a href="part-1.html#cb4-50" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="part-1.html#cb4-51" tabindex="-1"></a>beamht_std<span class="ot">&lt;-</span><span class="cf">function</span>(range, <span class="at">earthr=</span>earthr, <span class="at">antht=</span>antht,<span class="at">theta=</span>theta){</span>
+<span id="cb4-52"><a href="part-1.html#cb4-52" tabindex="-1"></a>  </span>
+<span id="cb4-53"><a href="part-1.html#cb4-53" tabindex="-1"></a>  mbeam <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(earthr<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>range<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>(<span class="dv">2</span><span class="sc">*</span>range<span class="sc">*</span>earthr<span class="sc">*</span><span class="fu">sin</span>(DEG2RAD<span class="sc">*</span>theta)))<span class="sc">-</span>(earthr)<span class="sc">+</span>antht <span class="co">#middle height of beam above sea level</span></span>
+<span id="cb4-54"><a href="part-1.html#cb4-54" tabindex="-1"></a>  bbeam <span class="ot">&lt;-</span> mbeam<span class="sc">-</span>range<span class="sc">*</span>halfbeam<span class="sc">*</span>(<span class="fu">cos</span>(DEG2RAD<span class="sc">*</span><span class="fl">0.5</span>)) <span class="co">#bottom height of beam above sea level</span></span>
+<span id="cb4-55"><a href="part-1.html#cb4-55" tabindex="-1"></a>  tbeam <span class="ot">&lt;-</span> mbeam<span class="sc">+</span>(range<span class="sc">*</span>halfbeam<span class="sc">*</span>(<span class="fu">cos</span>(DEG2RAD<span class="sc">*</span><span class="fl">0.5</span>)))<span class="co">#top height of beam above sea level</span></span>
+<span id="cb4-56"><a href="part-1.html#cb4-56" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">range=</span>range,<span class="at">mbeam=</span>mbeam, <span class="at">bbeam=</span>bbeam, <span class="at">tbeam=</span>tbeam, <span class="at">theta=</span>theta)</span>
+<span id="cb4-57"><a href="part-1.html#cb4-57" tabindex="-1"></a>  </span>
+<span id="cb4-58"><a href="part-1.html#cb4-58" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="part-2.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Part 3 | AW_2023_Working_with_low_tilt_data.knit</title>
+  <meta name="description" content="Radar Aeroecology Workshop<br />
+Working with low tilt data for mapping animals near the ground</div>" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Part 3 | AW_2023_Working_with_low_tilt_data.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Part 3 | AW_2023_Working_with_low_tilt_data.knit" />
+  
+  
+  
+
+<meta name="author" content="Includes R code written by Jeffrey Buler, Jaci Smolinsky, and Matt Boone, Department of Entomology and Wildlife Ecology, University of Delaware, Newark, DE, USA" />
+
+
+<meta name="date" content="2023-07-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="part-2.html"/>
+<link rel="next" href="part-4.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="part-1.html"><a href="part-1.html"><i class="fa fa-check"></i><b>1</b> Part 1</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="part-1.html"><a href="part-1.html#setup"><i class="fa fa-check"></i><b>1.1</b> Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="part-2.html"><a href="part-2.html"><i class="fa fa-check"></i><b>2</b> Part 2</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="part-2.html"><a href="part-2.html#create-a-polygon-shapefile-basegrid-of-radar-sample-volumes"><i class="fa fa-check"></i><b>2.1</b> Create a polygon shapefile basegrid of radar sample volumes</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="part-3.html"><a href="part-3.html"><i class="fa fa-check"></i><b>3</b> Part 3</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="part-3.html"><a href="part-3.html#determine-ground-heights-underneath-sample-volumes"><i class="fa fa-check"></i><b>3.1</b> Determine ground heights underneath sample volumes</a></li>
+<li class="chapter" data-level="3.2" data-path="part-3.html"><a href="part-3.html#load-basgrid-polygon-into-qgis---easy-way"><i class="fa fa-check"></i><b>3.2</b> Load basgrid polygon into QGIS - easy way</a></li>
+<li class="chapter" data-level="3.3" data-path="part-3.html"><a href="part-3.html#changing-the-layer-properties-to-display-data"><i class="fa fa-check"></i><b>3.3</b> Changing the layer properties to display data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="part-4.html"><a href="part-4.html"><i class="fa fa-check"></i><b>4</b> Part 4</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="part-4.html"><a href="part-4.html#compute-topographic-beam-blockage"><i class="fa fa-check"></i><b>4.1</b> Compute topographic beam blockage</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="part-5.html"><a href="part-5.html"><i class="fa fa-check"></i><b>5</b> Part 5</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="part-5.html"><a href="part-5.html#examine-data-for-making-a-clutter-mask-for-the-basegrid"><i class="fa fa-check"></i><b>5.1</b> Examine data for making a clutter mask for the basegrid</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="part-5.html"><a href="part-5.html#join-table-to-layer-in-qgis"><i class="fa fa-check"></i><b>5.1.1</b> Join table to layer in QGIS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="part-6.html"><a href="part-6.html"><i class="fa fa-check"></i><b>6</b> Part 6</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="part-6.html"><a href="part-6.html#estimating-beam-propagation-using-radiosonde-data"><i class="fa fa-check"></i><b>6.1</b> Estimating beam propagation using radiosonde data</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="part-7-on-your-own.html"><a href="part-7-on-your-own.html"><i class="fa fa-check"></i><b>7</b> Part 7 (On your own)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="part-7-on-your-own.html"><a href="part-7-on-your-own.html#modeling-bird-stopover-distributions"><i class="fa fa-check"></i><b>7.1</b> Modeling bird stopover distributions</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">Radar Aeroecology Workshop<br />
+Working with low tilt data for mapping animals near the ground</div></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="part-3" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Part 3<a href="part-3.html#part-3" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="determine-ground-heights-underneath-sample-volumes" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Determine ground heights underneath sample volumes<a href="part-3.html#determine-ground-heights-underneath-sample-volumes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now that you have a basegrid made, we will overlay it with a Digital Elevation Model (DEM) to determine the mean ground height underneath each sample volume. Determining ground heights under sample volumes is important for estimaitng beam heights and topographic blockage later.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="part-3.html#cb7-1" tabindex="-1"></a><span class="do">## Grab DEM data using elevater package</span></span>
+<span id="cb7-2"><a href="part-3.html#cb7-2" tabindex="-1"></a>dem <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(my_spatial_polys_rp, <span class="at">z =</span> <span class="dv">10</span>)</span>
+<span id="cb7-3"><a href="part-3.html#cb7-3" tabindex="-1"></a>dem<span class="ot">&lt;-</span><span class="fu">rast</span>(dem) <span class="co">#convert it to a SpatRaster</span></span>
+<span id="cb7-4"><a href="part-3.html#cb7-4" tabindex="-1"></a><span class="do">## Plot it</span></span>
+<span id="cb7-5"><a href="part-3.html#cb7-5" tabindex="-1"></a><span class="fu">plot</span>(dem)</span></code></pre></div>
+<p><img src="AW_2023_Working_with_low_tilt_data_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="part-3.html#cb8-1" tabindex="-1"></a><span class="do">## Perform Zonal stats </span></span>
+<span id="cb8-2"><a href="part-3.html#cb8-2" tabindex="-1"></a>base_dem<span class="ot">&lt;-</span><span class="fu">st_transform</span>(my_spatial_polys_rp,<span class="fu">crs</span>(dem))</span>
+<span id="cb8-3"><a href="part-3.html#cb8-3" tabindex="-1"></a>base_sf1<span class="ot">&lt;-</span><span class="fu">rasterize</span>(base_dem,dem,<span class="at">field=</span><span class="st">&quot;id&quot;</span>)</span>
+<span id="cb8-4"><a href="part-3.html#cb8-4" tabindex="-1"></a>demz<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">zonal</span>(dem,base_sf1,<span class="at">fun=</span><span class="st">&#39;mean&#39;</span>))</span>
+<span id="cb8-5"><a href="part-3.html#cb8-5" tabindex="-1"></a>demz<span class="sc">$</span>groundht <span class="ot">&lt;-</span> <span class="fu">round</span>(demz[,<span class="dv">2</span>], <span class="sc">-</span><span class="dv">1</span>)  <span class="do">##round DEM to nearest 10-meters</span></span>
+<span id="cb8-6"><a href="part-3.html#cb8-6" tabindex="-1"></a>demz<span class="ot">&lt;-</span>demz[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</span>
+<span id="cb8-7"><a href="part-3.html#cb8-7" tabindex="-1"></a>my_spatial_polys_rp <span class="ot">&lt;-</span> <span class="fu">merge</span>(my_spatial_polys_rp, demz, <span class="at">by.x=</span><span class="st">&#39;id&#39;</span>,<span class="at">all.x=</span>T) </span>
+<span id="cb8-8"><a href="part-3.html#cb8-8" tabindex="-1"></a>my_spatial_polys_rp<span class="sc">$</span>groundht[my_spatial_polys_rp<span class="sc">$</span>groundht<span class="sc">&lt;</span><span class="dv">0</span>]<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb8-9"><a href="part-3.html#cb8-9" tabindex="-1"></a>my_spatial_polys_rp<span class="sc">$</span>groundht[my_spatial_polys_rp<span class="sc">$</span>groundht<span class="sc">==</span><span class="st">&quot;NaN&quot;</span>]<span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb8-10"><a href="part-3.html#cb8-10" tabindex="-1"></a>my_spatial_polys_rp<span class="sc">$</span>groundht<span class="ot">&lt;-</span><span class="fu">na_locf</span>(<span class="fu">na_locf</span>(my_spatial_polys_rp<span class="sc">$</span>groundht))</span>
+<span id="cb8-11"><a href="part-3.html#cb8-11" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="part-3.html#cb8-12" tabindex="-1"></a><span class="do">## Save as a shapefile</span></span>
+<span id="cb8-13"><a href="part-3.html#cb8-13" tabindex="-1"></a><span class="fu">st_write</span>(my_spatial_polys_rp, <span class="fu">paste0</span>(OUT,<span class="st">&quot;/&quot;</span>,site,<span class="st">&quot;_&quot;</span>,maxrange<span class="sc">/</span><span class="dv">1000</span>,<span class="st">&quot;km_super_grid.shp&quot;</span>), <span class="at">append=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Deleting layer `KLWX_5km_super_grid&#39; using driver `ESRI Shapefile&#39;
+## Writing layer `KLWX_5km_super_grid&#39; to data source 
+##   `C:/Users/jbule/Dropbox/RAW_2022/KLWX_5km_super_grid.shp&#39; using driver `ESRI Shapefile&#39;
+## Writing 9360 features with 4 fields and geometry type Polygon.</code></pre>
+</div>
+<div id="load-basgrid-polygon-into-qgis---easy-way" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Load basgrid polygon into QGIS - easy way<a href="part-3.html#load-basgrid-polygon-into-qgis---easy-way" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Via Browser Panel:</p>
+<pre><code>1.  When you open QGIS, there will be two windows on the left side: Browser Panel and Layers Panel
+2.  Navigate in the Browser Panel to the file you&#39;d like to add to QGIS. 
+3.  Click on the basegrid shapefile you just created (probably called &quot;KLWX_5km_super_grid.shp&quot;) and drag it into the Layers Panel or double-click it.</code></pre>
+</div>
+<div id="changing-the-layer-properties-to-display-data" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Changing the layer properties to display data<a href="part-3.html#changing-the-layer-properties-to-display-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<pre><code>1.  In the Layers Panel, right-click on the basegrid shapefile and click Properties
+2.  A new window will open.  Click Symbology in the left-side menu.  
+3.  At the top of the window, click the down arrow and click on Graduated
+4.  Under Column, find the column name &quot;groundht&quot; to display. 
+5.  Under Symbol, click on the bar to Change and click Simple fill.  Click the down arrow on the Stroke Color bar and click Transparent Stroke.
+6.  Pick a color ramp you like or create one using the Edit button next to the Color ramp 
+7.  Under Classes, click Classify.  You can adjust the Mode of classification (e.g., Equal Interval) and the number of Classes (e.g., 10).  
+8.  Click OK when you are happy with your selections.</code></pre>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="part-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="part-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

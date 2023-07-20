@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Part 2 | AW_2023_Working_with_low_tilt_data.knit</title>
+  <meta name="description" content="Radar Aeroecology Workshop<br />
+Working with low tilt data for mapping animals near the ground</div>" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Part 2 | AW_2023_Working_with_low_tilt_data.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Part 2 | AW_2023_Working_with_low_tilt_data.knit" />
+  
+  
+  
+
+<meta name="author" content="Includes R code written by Jeffrey Buler, Jaci Smolinsky, and Matt Boone, Department of Entomology and Wildlife Ecology, University of Delaware, Newark, DE, USA" />
+
+
+<meta name="date" content="2023-07-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="part-1.html"/>
+<link rel="next" href="part-3.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="part-1.html"><a href="part-1.html"><i class="fa fa-check"></i><b>1</b> Part 1</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="part-1.html"><a href="part-1.html#setup"><i class="fa fa-check"></i><b>1.1</b> Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="part-2.html"><a href="part-2.html"><i class="fa fa-check"></i><b>2</b> Part 2</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="part-2.html"><a href="part-2.html#create-a-polygon-shapefile-basegrid-of-radar-sample-volumes"><i class="fa fa-check"></i><b>2.1</b> Create a polygon shapefile basegrid of radar sample volumes</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="part-3.html"><a href="part-3.html"><i class="fa fa-check"></i><b>3</b> Part 3</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="part-3.html"><a href="part-3.html#determine-ground-heights-underneath-sample-volumes"><i class="fa fa-check"></i><b>3.1</b> Determine ground heights underneath sample volumes</a></li>
+<li class="chapter" data-level="3.2" data-path="part-3.html"><a href="part-3.html#load-basgrid-polygon-into-qgis---easy-way"><i class="fa fa-check"></i><b>3.2</b> Load basgrid polygon into QGIS - easy way</a></li>
+<li class="chapter" data-level="3.3" data-path="part-3.html"><a href="part-3.html#changing-the-layer-properties-to-display-data"><i class="fa fa-check"></i><b>3.3</b> Changing the layer properties to display data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="part-4.html"><a href="part-4.html"><i class="fa fa-check"></i><b>4</b> Part 4</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="part-4.html"><a href="part-4.html#compute-topographic-beam-blockage"><i class="fa fa-check"></i><b>4.1</b> Compute topographic beam blockage</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="part-5.html"><a href="part-5.html"><i class="fa fa-check"></i><b>5</b> Part 5</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="part-5.html"><a href="part-5.html#examine-data-for-making-a-clutter-mask-for-the-basegrid"><i class="fa fa-check"></i><b>5.1</b> Examine data for making a clutter mask for the basegrid</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="part-5.html"><a href="part-5.html#join-table-to-layer-in-qgis"><i class="fa fa-check"></i><b>5.1.1</b> Join table to layer in QGIS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="part-6.html"><a href="part-6.html"><i class="fa fa-check"></i><b>6</b> Part 6</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="part-6.html"><a href="part-6.html#estimating-beam-propagation-using-radiosonde-data"><i class="fa fa-check"></i><b>6.1</b> Estimating beam propagation using radiosonde data</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="part-7-on-your-own.html"><a href="part-7-on-your-own.html"><i class="fa fa-check"></i><b>7</b> Part 7 (On your own)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="part-7-on-your-own.html"><a href="part-7-on-your-own.html#modeling-bird-stopover-distributions"><i class="fa fa-check"></i><b>7.1</b> Modeling bird stopover distributions</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">Radar Aeroecology Workshop<br />
+Working with low tilt data for mapping animals near the ground</div></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="part-2" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Part 2<a href="part-2.html#part-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="create-a-polygon-shapefile-basegrid-of-radar-sample-volumes" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Create a polygon shapefile basegrid of radar sample volumes<a href="part-2.html#create-a-polygon-shapefile-basegrid-of-radar-sample-volumes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This will create a polygon shapefile based on the polar coordinates of the radar sample volumes at the lowest tilt angle based on the sample volumes dimensions declared earlier. The maximum range (<code>maxrange</code>) for creating the basegrid was set to 5 km so that the process will run quickly for this exercise. However, usually <code>maxrange</code> should usually be set to 100 km.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="part-2.html#cb5-1" tabindex="-1"></a><span class="do">###use &quot;destPoint&quot; from package geosphere to estimate the destination latitude and </span></span>
+<span id="cb5-2"><a href="part-2.html#cb5-2" tabindex="-1"></a><span class="do">##longitude given a starting latitude and longitude(radar origin), bearing and distance</span></span>
+<span id="cb5-3"><a href="part-2.html#cb5-3" tabindex="-1"></a><span class="do">#######################################################################################</span></span>
+<span id="cb5-4"><a href="part-2.html#cb5-4" tabindex="-1"></a>ptm <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb5-5"><a href="part-2.html#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="part-2.html#cb5-6" tabindex="-1"></a><span class="do">##lon1,lat1</span></span>
+<span id="cb5-7"><a href="part-2.html#cb5-7" tabindex="-1"></a>points<span class="ot">&lt;-</span><span class="fu">data.frame</span>()</span>
+<span id="cb5-8"><a href="part-2.html#cb5-8" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ranges)){</span>
+<span id="cb5-9"><a href="part-2.html#cb5-9" tabindex="-1"></a>  loop<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">destPoint</span>(<span class="fu">c</span>(X_origin,Y_origin),<span class="at">b=</span>azimuths, <span class="at">d=</span>ranges[i]))</span>
+<span id="cb5-10"><a href="part-2.html#cb5-10" tabindex="-1"></a>  loop<span class="sc">$</span>azimuth<span class="ot">&lt;-</span>azimuths</span>
+<span id="cb5-11"><a href="part-2.html#cb5-11" tabindex="-1"></a>  points<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">rbind</span>(points, loop))}</span>
+<span id="cb5-12"><a href="part-2.html#cb5-12" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="part-2.html#cb5-13" tabindex="-1"></a>  <span class="fu">colnames</span>(points)[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="st">&quot;lon1&quot;</span></span>
+<span id="cb5-14"><a href="part-2.html#cb5-14" tabindex="-1"></a>  <span class="fu">colnames</span>(points)[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="st">&quot;lat1&quot;</span></span>
+<span id="cb5-15"><a href="part-2.html#cb5-15" tabindex="-1"></a>  points<span class="sc">$</span>range<span class="ot">&lt;-</span>range</span>
+<span id="cb5-16"><a href="part-2.html#cb5-16" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="part-2.html#cb5-17" tabindex="-1"></a><span class="co">#lon2,lat2</span></span>
+<span id="cb5-18"><a href="part-2.html#cb5-18" tabindex="-1"></a>points2<span class="ot">&lt;-</span><span class="fu">data.frame</span>()</span>
+<span id="cb5-19"><a href="part-2.html#cb5-19" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ranges)){</span>
+<span id="cb5-20"><a href="part-2.html#cb5-20" tabindex="-1"></a>  loop2<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">destPoint</span>(<span class="fu">c</span>(X_origin,Y_origin),<span class="at">b=</span>azimuths, <span class="at">d=</span>ranges[i]<span class="sc">+</span>depth<span class="sc">*</span><span class="fu">cos</span>(theta<span class="sc">*</span>DEG2RAD)))</span>
+<span id="cb5-21"><a href="part-2.html#cb5-21" tabindex="-1"></a>  points2<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">rbind</span>(points2, loop2))}</span>
+<span id="cb5-22"><a href="part-2.html#cb5-22" tabindex="-1"></a>  <span class="fu">colnames</span>(points2)[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="st">&quot;lon2&quot;</span></span>
+<span id="cb5-23"><a href="part-2.html#cb5-23" tabindex="-1"></a>  <span class="fu">colnames</span>(points2)[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="st">&quot;lat2&quot;</span></span>
+<span id="cb5-24"><a href="part-2.html#cb5-24" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="part-2.html#cb5-25" tabindex="-1"></a><span class="co">#lon3,lat3</span></span>
+<span id="cb5-26"><a href="part-2.html#cb5-26" tabindex="-1"></a>points3<span class="ot">&lt;-</span><span class="fu">data.frame</span>()</span>
+<span id="cb5-27"><a href="part-2.html#cb5-27" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ranges)){</span>
+<span id="cb5-28"><a href="part-2.html#cb5-28" tabindex="-1"></a>  loop3<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">destPoint</span>(<span class="fu">c</span>(X_origin,Y_origin),<span class="at">b=</span>azimuths<span class="sc">+</span>step, <span class="at">d=</span>ranges[i]<span class="sc">+</span>depth<span class="sc">*</span><span class="fu">cos</span>(theta<span class="sc">*</span>DEG2RAD)))</span>
+<span id="cb5-29"><a href="part-2.html#cb5-29" tabindex="-1"></a>  points3<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">rbind</span>(points3, loop3))}</span>
+<span id="cb5-30"><a href="part-2.html#cb5-30" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="part-2.html#cb5-31" tabindex="-1"></a>  <span class="fu">colnames</span>(points3)[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="st">&quot;lon3&quot;</span></span>
+<span id="cb5-32"><a href="part-2.html#cb5-32" tabindex="-1"></a>  <span class="fu">colnames</span>(points3)[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="st">&quot;lat3&quot;</span></span>
+<span id="cb5-33"><a href="part-2.html#cb5-33" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="part-2.html#cb5-34" tabindex="-1"></a><span class="co">#lon4,lat4</span></span>
+<span id="cb5-35"><a href="part-2.html#cb5-35" tabindex="-1"></a>points4<span class="ot">&lt;-</span><span class="fu">data.frame</span>()</span>
+<span id="cb5-36"><a href="part-2.html#cb5-36" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ranges)){</span>
+<span id="cb5-37"><a href="part-2.html#cb5-37" tabindex="-1"></a>  loop4<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">destPoint</span>(<span class="fu">c</span>(X_origin,Y_origin),<span class="at">b=</span>azimuths<span class="sc">+</span>step, <span class="at">d=</span>ranges[i]))</span>
+<span id="cb5-38"><a href="part-2.html#cb5-38" tabindex="-1"></a>  points4<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">rbind</span>(points4, loop4))}</span>
+<span id="cb5-39"><a href="part-2.html#cb5-39" tabindex="-1"></a></span>
+<span id="cb5-40"><a href="part-2.html#cb5-40" tabindex="-1"></a>  <span class="fu">colnames</span>(points4)[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="st">&quot;lon4&quot;</span></span>
+<span id="cb5-41"><a href="part-2.html#cb5-41" tabindex="-1"></a>  <span class="fu">colnames</span>(points4)[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="st">&quot;lat4&quot;</span></span>
+<span id="cb5-42"><a href="part-2.html#cb5-42" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="part-2.html#cb5-43" tabindex="-1"></a>points<span class="ot">&lt;-</span><span class="fu">cbind</span>(points, points2, points3, points4)</span>
+<span id="cb5-44"><a href="part-2.html#cb5-44" tabindex="-1"></a>points<span class="sc">$</span>lon5<span class="ot">&lt;-</span>points<span class="sc">$</span>lon1</span>
+<span id="cb5-45"><a href="part-2.html#cb5-45" tabindex="-1"></a>points<span class="sc">$</span>lat5<span class="ot">&lt;-</span>points<span class="sc">$</span>lat1</span>
+<span id="cb5-46"><a href="part-2.html#cb5-46" tabindex="-1"></a><span class="do">##reorder columns</span></span>
+<span id="cb5-47"><a href="part-2.html#cb5-47" tabindex="-1"></a>points<span class="ot">&lt;-</span>points[,<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>)]</span>
+<span id="cb5-48"><a href="part-2.html#cb5-48" tabindex="-1"></a></span>
+<span id="cb5-49"><a href="part-2.html#cb5-49" tabindex="-1"></a><span class="do">##make a data frame with coordinates for each polygon grouped with &quot;id&quot; field</span></span>
+<span id="cb5-50"><a href="part-2.html#cb5-50" tabindex="-1"></a><span class="do">##should be 5 rows of data for each polygon (sample volume)</span></span>
+<span id="cb5-51"><a href="part-2.html#cb5-51" tabindex="-1"></a><span class="do">#######################################################################################</span></span>
+<span id="cb5-52"><a href="part-2.html#cb5-52" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">sapply</span>(<span class="fu">seq</span>(<span class="fu">nrow</span>(points)), <span class="cf">function</span>(s) <span class="fu">c</span>(points<span class="sc">$</span>lon1[s], points<span class="sc">$</span>lon2[s], points<span class="sc">$</span>lon3[s], points<span class="sc">$</span>lon4[s], points<span class="sc">$</span>lon5[s])))</span>
+<span id="cb5-53"><a href="part-2.html#cb5-53" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">sapply</span>(<span class="fu">seq</span>(<span class="fu">nrow</span>(points)), <span class="cf">function</span>(r) <span class="fu">c</span>(points<span class="sc">$</span>lat1[r], points<span class="sc">$</span>lat2[r], points<span class="sc">$</span>lat3[r], points<span class="sc">$</span>lat4[r], points<span class="sc">$</span>lat5[r])))</span>
+<span id="cb5-54"><a href="part-2.html#cb5-54" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="part-2.html#cb5-55" tabindex="-1"></a>radar<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">id=</span><span class="fu">sapply</span>(ids,c), <span class="at">X=</span><span class="fu">sapply</span>(x,c), <span class="at">Y=</span><span class="fu">sapply</span>(y,c))</span>
+<span id="cb5-56"><a href="part-2.html#cb5-56" tabindex="-1"></a></span>
+<span id="cb5-57"><a href="part-2.html#cb5-57" tabindex="-1"></a><span class="do">########################################################</span></span>
+<span id="cb5-58"><a href="part-2.html#cb5-58" tabindex="-1"></a><span class="do">## assign projection and create sf object of polygons ##</span></span>
+<span id="cb5-59"><a href="part-2.html#cb5-59" tabindex="-1"></a><span class="do">########################################################</span></span>
+<span id="cb5-60"><a href="part-2.html#cb5-60" tabindex="-1"></a></span>
+<span id="cb5-61"><a href="part-2.html#cb5-61" tabindex="-1"></a>my_spatial_polys <span class="ot">&lt;-</span> radar <span class="sc">%&gt;%</span></span>
+<span id="cb5-62"><a href="part-2.html#cb5-62" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-63"><a href="part-2.html#cb5-63" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb5-64"><a href="part-2.html#cb5-64" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">geometry =</span> <span class="fu">st_combine</span>(geometry)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-65"><a href="part-2.html#cb5-65" tabindex="-1"></a>  <span class="fu">st_cast</span>(<span class="st">&quot;POLYGON&quot;</span>)</span>
+<span id="cb5-66"><a href="part-2.html#cb5-66" tabindex="-1"></a></span>
+<span id="cb5-67"><a href="part-2.html#cb5-67" tabindex="-1"></a><span class="do">#####################################</span></span>
+<span id="cb5-68"><a href="part-2.html#cb5-68" tabindex="-1"></a><span class="do">## If another projection is needed ##</span></span>
+<span id="cb5-69"><a href="part-2.html#cb5-69" tabindex="-1"></a><span class="do">#####################################</span></span>
+<span id="cb5-70"><a href="part-2.html#cb5-70" tabindex="-1"></a></span>
+<span id="cb5-71"><a href="part-2.html#cb5-71" tabindex="-1"></a>my_spatial_polys_rp <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(my_spatial_polys, <span class="dv">26918</span>) <span class="co">#EPSG code for UTM Zone 18</span></span>
+<span id="cb5-72"><a href="part-2.html#cb5-72" tabindex="-1"></a></span>
+<span id="cb5-73"><a href="part-2.html#cb5-73" tabindex="-1"></a><span class="co"># assign value labels to each polygon (id, azimuth, range).  </span></span>
+<span id="cb5-74"><a href="part-2.html#cb5-74" tabindex="-1"></a><span class="co"># setup for midpoint of pulse volume for super-res; change values for other resolution data</span></span>
+<span id="cb5-75"><a href="part-2.html#cb5-75" tabindex="-1"></a>my_spatial_polys_rp<span class="sc">$</span>azimuth <span class="ot">&lt;-</span> points<span class="sc">$</span>azimuth<span class="fl">+0.25</span></span>
+<span id="cb5-76"><a href="part-2.html#cb5-76" tabindex="-1"></a>my_spatial_polys_rp<span class="sc">$</span>range <span class="ot">&lt;-</span> points<span class="sc">$</span>range<span class="sc">+</span><span class="dv">125</span></span>
+<span id="cb5-77"><a href="part-2.html#cb5-77" tabindex="-1"></a></span>
+<span id="cb5-78"><a href="part-2.html#cb5-78" tabindex="-1"></a><span class="co"># Stop the clock</span></span>
+<span id="cb5-79"><a href="part-2.html#cb5-79" tabindex="-1"></a><span class="fu">proc.time</span>() <span class="sc">-</span> ptm</span></code></pre></div>
+<pre><code>##    user  system elapsed 
+##   24.33    0.61   26.88</code></pre>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="part-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="part-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

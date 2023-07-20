@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Part 7 (On your own) | AW_2023_Working_with_low_tilt_data.knit</title>
+  <meta name="description" content="Radar Aeroecology Workshop<br />
+Working with low tilt data for mapping animals near the ground</div>" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Part 7 (On your own) | AW_2023_Working_with_low_tilt_data.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Part 7 (On your own) | AW_2023_Working_with_low_tilt_data.knit" />
+  
+  
+  
+
+<meta name="author" content="Includes R code written by Jeffrey Buler, Jaci Smolinsky, and Matt Boone, Department of Entomology and Wildlife Ecology, University of Delaware, Newark, DE, USA" />
+
+
+<meta name="date" content="2023-07-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="part-6.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="part-1.html"><a href="part-1.html"><i class="fa fa-check"></i><b>1</b> Part 1</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="part-1.html"><a href="part-1.html#setup"><i class="fa fa-check"></i><b>1.1</b> Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="part-2.html"><a href="part-2.html"><i class="fa fa-check"></i><b>2</b> Part 2</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="part-2.html"><a href="part-2.html#create-a-polygon-shapefile-basegrid-of-radar-sample-volumes"><i class="fa fa-check"></i><b>2.1</b> Create a polygon shapefile basegrid of radar sample volumes</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="part-3.html"><a href="part-3.html"><i class="fa fa-check"></i><b>3</b> Part 3</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="part-3.html"><a href="part-3.html#determine-ground-heights-underneath-sample-volumes"><i class="fa fa-check"></i><b>3.1</b> Determine ground heights underneath sample volumes</a></li>
+<li class="chapter" data-level="3.2" data-path="part-3.html"><a href="part-3.html#load-basgrid-polygon-into-qgis---easy-way"><i class="fa fa-check"></i><b>3.2</b> Load basgrid polygon into QGIS - easy way</a></li>
+<li class="chapter" data-level="3.3" data-path="part-3.html"><a href="part-3.html#changing-the-layer-properties-to-display-data"><i class="fa fa-check"></i><b>3.3</b> Changing the layer properties to display data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="part-4.html"><a href="part-4.html"><i class="fa fa-check"></i><b>4</b> Part 4</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="part-4.html"><a href="part-4.html#compute-topographic-beam-blockage"><i class="fa fa-check"></i><b>4.1</b> Compute topographic beam blockage</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="part-5.html"><a href="part-5.html"><i class="fa fa-check"></i><b>5</b> Part 5</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="part-5.html"><a href="part-5.html#examine-data-for-making-a-clutter-mask-for-the-basegrid"><i class="fa fa-check"></i><b>5.1</b> Examine data for making a clutter mask for the basegrid</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="part-5.html"><a href="part-5.html#join-table-to-layer-in-qgis"><i class="fa fa-check"></i><b>5.1.1</b> Join table to layer in QGIS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="part-6.html"><a href="part-6.html"><i class="fa fa-check"></i><b>6</b> Part 6</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="part-6.html"><a href="part-6.html#estimating-beam-propagation-using-radiosonde-data"><i class="fa fa-check"></i><b>6.1</b> Estimating beam propagation using radiosonde data</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="part-7-on-your-own.html"><a href="part-7-on-your-own.html"><i class="fa fa-check"></i><b>7</b> Part 7 (On your own)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="part-7-on-your-own.html"><a href="part-7-on-your-own.html#modeling-bird-stopover-distributions"><i class="fa fa-check"></i><b>7.1</b> Modeling bird stopover distributions</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">Radar Aeroecology Workshop<br />
+Working with low tilt data for mapping animals near the ground</div></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="part-7-on-your-own" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Part 7 (On your own)<a href="part-7-on-your-own.html#part-7-on-your-own" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="modeling-bird-stopover-distributions" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Modeling bird stopover distributions<a href="part-7-on-your-own.html#modeling-bird-stopover-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This last section is to quickly model bird stopover distributions using Boosted Regression Trees. You will use a subset of data from three radars along the mid-Atlantic USA. The data have already been processed to produce the mean Vertically-Integrated Reflectivity (<code>meanVIR</code>) and coefficient of variation of VIR (<code>cvVIR</code>) in units of cm2 per hectare for autumn stopover density of land birds pooled across years from 2008-2014. The data were aggregated to a 1km x 1km resolution grid and subsetted to cells separated by 5km to improve spatial independence of the data. There are several explanatory variables also summarized for the grid cells that include:</p>
+<pre><code>`UTMX` - Easting coordinate
+
+`UTMY` - Northing coordinate
+
+`elev` - elevation in meters above sea level
+
+`dcoast` - distance from the nearest coastline in km
+
+`pwood` - proportion of evergreen pine forest cover in grid cell
+
+`emmarsh` - proportion of emergent marsh cover in grid cell
+
+`hwood` - proportion of deciduous hardwood forest cover in grid cell
+
+`urban` - proportion of urban cover in grid cell
+
+`ag` - proportion of agricultural land cover in grid cell
+
+`ndvimean` - mean seasonal Normalized Difference Vegetation Index
+
+`ndvistd` - standard deviation of NDVI
+
+`near_radar` - proximity to the nearest radar in m</code></pre>
+<p>Let’s start by getting some libraries and functions set up.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="part-7-on-your-own.html#cb17-1" tabindex="-1"></a>reqPackages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;mgcv&#39;</span>,<span class="st">&#39;fields&#39;</span>,<span class="st">&#39;dismo&#39;</span>,<span class="st">&#39;spdep&#39;</span>,<span class="st">&quot;RColorBrewer&quot;</span>,<span class="st">&quot;plotrix&quot;</span>)</span>
+<span id="cb17-2"><a href="part-7-on-your-own.html#cb17-2" tabindex="-1"></a>get.packages <span class="ot">&lt;-</span> reqPackages[<span class="sc">!</span>(reqPackages <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="st">&quot;Package&quot;</span>])]</span>
+<span id="cb17-3"><a href="part-7-on-your-own.html#cb17-3" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">length</span>(get.packages)<span class="sc">&gt;</span><span class="dv">0</span>) <span class="fu">install.packages</span>(get.packages,<span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-4"><a href="part-7-on-your-own.html#cb17-4" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="part-7-on-your-own.html#cb17-5" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
+<span id="cb17-6"><a href="part-7-on-your-own.html#cb17-6" tabindex="-1"></a><span class="fu">library</span>(fields)</span>
+<span id="cb17-7"><a href="part-7-on-your-own.html#cb17-7" tabindex="-1"></a><span class="fu">library</span>(dismo)</span>
+<span id="cb17-8"><a href="part-7-on-your-own.html#cb17-8" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
+<span id="cb17-9"><a href="part-7-on-your-own.html#cb17-9" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb17-10"><a href="part-7-on-your-own.html#cb17-10" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span>
+<span id="cb17-11"><a href="part-7-on-your-own.html#cb17-11" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="part-7-on-your-own.html#cb17-12" tabindex="-1"></a><span class="do">##Function to flatten a correlation matrix into a data frame</span></span>
+<span id="cb17-13"><a href="part-7-on-your-own.html#cb17-13" tabindex="-1"></a>flattenCorrMatrix <span class="ot">&lt;-</span> <span class="cf">function</span>(cormat) {</span>
+<span id="cb17-14"><a href="part-7-on-your-own.html#cb17-14" tabindex="-1"></a>  ut <span class="ot">&lt;-</span> <span class="fu">upper.tri</span>(cormat)</span>
+<span id="cb17-15"><a href="part-7-on-your-own.html#cb17-15" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb17-16"><a href="part-7-on-your-own.html#cb17-16" tabindex="-1"></a>    <span class="at">row =</span> <span class="fu">rownames</span>(cormat)[<span class="fu">row</span>(cormat)[ut]],</span>
+<span id="cb17-17"><a href="part-7-on-your-own.html#cb17-17" tabindex="-1"></a>    <span class="at">column =</span> <span class="fu">rownames</span>(cormat)[<span class="fu">col</span>(cormat)[ut]],</span>
+<span id="cb17-18"><a href="part-7-on-your-own.html#cb17-18" tabindex="-1"></a>    <span class="at">cor  =</span>(cormat)[ut]</span>
+<span id="cb17-19"><a href="part-7-on-your-own.html#cb17-19" tabindex="-1"></a>   </span>
+<span id="cb17-20"><a href="part-7-on-your-own.html#cb17-20" tabindex="-1"></a>  )</span>
+<span id="cb17-21"><a href="part-7-on-your-own.html#cb17-21" tabindex="-1"></a>}</span>
+<span id="cb17-22"><a href="part-7-on-your-own.html#cb17-22" tabindex="-1"></a><span class="do">##Function for resetting plotting parameters</span></span>
+<span id="cb17-23"><a href="part-7-on-your-own.html#cb17-23" tabindex="-1"></a>resetPar <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb17-24"><a href="part-7-on-your-own.html#cb17-24" tabindex="-1"></a>  <span class="fu">dev.new</span>()</span>
+<span id="cb17-25"><a href="part-7-on-your-own.html#cb17-25" tabindex="-1"></a>  op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-26"><a href="part-7-on-your-own.html#cb17-26" tabindex="-1"></a>  <span class="fu">dev.off</span>()</span>
+<span id="cb17-27"><a href="part-7-on-your-own.html#cb17-27" tabindex="-1"></a>  op</span>
+<span id="cb17-28"><a href="part-7-on-your-own.html#cb17-28" tabindex="-1"></a>}</span></code></pre></div>
+<p>OK. Now let’s load up the data and check for multicollinearity among variables.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="part-7-on-your-own.html#cb18-1" tabindex="-1"></a><span class="fu">setwd</span>(OUT)</span>
+<span id="cb18-2"><a href="part-7-on-your-own.html#cb18-2" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;bird_density_1kmgrid_subset.csv&quot;</span>)</span>
+<span id="cb18-3"><a href="part-7-on-your-own.html#cb18-3" tabindex="-1"></a><span class="do">##Check for multicollinearity</span></span>
+<span id="cb18-4"><a href="part-7-on-your-own.html#cb18-4" tabindex="-1"></a>cormatrix<span class="ot">&lt;-</span><span class="fu">cor</span>(data)</span>
+<span id="cb18-5"><a href="part-7-on-your-own.html#cb18-5" tabindex="-1"></a>b<span class="ot">&lt;-</span><span class="fu">flattenCorrMatrix</span>(cormatrix)</span>
+<span id="cb18-6"><a href="part-7-on-your-own.html#cb18-6" tabindex="-1"></a>b <span class="ot">=</span> b[<span class="fu">order</span>(b<span class="sc">$</span>cor),]</span>
+<span id="cb18-7"><a href="part-7-on-your-own.html#cb18-7" tabindex="-1"></a>b</span></code></pre></div>
+<pre><code>##         row     column          cor
+## 13     UTMX     dcoast -0.660281926
+## 9      UTMX       elev -0.568684073
+## 55    urban         ag -0.480984604
+## 1   meanVIR      cvVIR -0.471253500
+## 65    urban   ndvimean -0.456862403
+## 45    hwood      urban -0.454107332
+## 76    urban    ndvistd -0.422026577
+## 63  emmarsh   ndvimean -0.384281051
+## 11  meanVIR     dcoast -0.349726905
+## 54    hwood         ag -0.342681560
+## 73    pwood    ndvistd -0.313515073
+## 27   dcoast    emmarsh -0.268047685
+## 7   meanVIR       elev -0.259619483
+## 70     UTMY    ndvistd -0.239895868
+## 49     UTMY         ag -0.228294034
+## 68    cvVIR    ndvistd -0.218279726
+## 43    pwood      urban -0.217716027
+## 85    pwood near_radar -0.211926385
+## 48     UTMX         ag -0.207225835
+## 36  emmarsh      hwood -0.197652896
+## 26     elev    emmarsh -0.185540343
+## 52    pwood         ag -0.178216438
+## 58     UTMX   ndvimean -0.162907321
+## 69     UTMX    ndvistd -0.157243526
+## 57    cvVIR   ndvimean -0.155895351
+## 53  emmarsh         ag -0.150611389
+## 30    cvVIR      hwood -0.147769079
+## 44  emmarsh      urban -0.146133101
+## 81     UTMX near_radar -0.138298338
+## 37  meanVIR      urban -0.128589504
+## 16  meanVIR      pwood -0.118121145
+## 14     UTMY     dcoast -0.110878523
+## 47    cvVIR         ag -0.098076862
+## 20     elev      pwood -0.092663404
+## 21   dcoast      pwood -0.072153288
+## 28    pwood    emmarsh -0.067489177
+## 72   dcoast    ndvistd -0.060408936
+## 78 ndvimean    ndvistd -0.060178225
+## 59     UTMY   ndvimean -0.057024256
+## 3     cvVIR       UTMX -0.053009199
+## 31     UTMX      hwood -0.048767322
+## 32     UTMY      hwood -0.042097558
+## 41     elev      urban -0.039051484
+## 25     UTMY    emmarsh -0.036744665
+## 89       ag near_radar -0.034941343
+## 46  meanVIR         ag -0.020625505
+## 4   meanVIR       UTMY -0.014910710
+## 86  emmarsh near_radar -0.007550344
+## 22  meanVIR    emmarsh -0.003898394
+## 19     UTMY      pwood -0.001314135
+## 90 ndvimean near_radar  0.005538626
+## 42   dcoast      urban  0.025559503
+## 23    cvVIR    emmarsh  0.032346303
+## 71     elev    ndvistd  0.032594312
+## 87    hwood near_radar  0.045453310
+## 66       ag   ndvimean  0.052631811
+## 91  ndvistd near_radar  0.053568245
+## 51   dcoast         ag  0.066641052
+## 88    urban near_radar  0.073751109
+## 35    pwood      hwood  0.074206857
+## 10     UTMY       elev  0.081053876
+## 34   dcoast      hwood  0.086336336
+## 74  emmarsh    ndvistd  0.086750074
+## 79  meanVIR near_radar  0.087946351
+## 50     elev         ag  0.094285697
+## 39     UTMX      urban  0.095125598
+## 33     elev      hwood  0.106928100
+## 17    cvVIR      pwood  0.114340312
+## 8     cvVIR       elev  0.125258116
+## 80    cvVIR near_radar  0.125643627
+## 18     UTMX      pwood  0.136885520
+## 24     UTMX    emmarsh  0.154395008
+## 38    cvVIR      urban  0.155108682
+## 56  meanVIR   ndvimean  0.155463442
+## 82     UTMY near_radar  0.156599689
+## 84   dcoast near_radar  0.157354656
+## 5     cvVIR       UTMY  0.163427334
+## 75    hwood    ndvistd  0.173566982
+## 61   dcoast   ndvimean  0.197846183
+## 67  meanVIR    ndvistd  0.228904439
+## 60     elev   ndvimean  0.236595646
+## 29  meanVIR      hwood  0.239859255
+## 12    cvVIR     dcoast  0.258564880
+## 2   meanVIR       UTMX  0.258823992
+## 40     UTMY      urban  0.267292868
+## 62    pwood   ndvimean  0.267336954
+## 83     elev near_radar  0.350132218
+## 77       ag    ndvistd  0.386065559
+## 15     elev     dcoast  0.550849402
+## 64    hwood   ndvimean  0.598296970
+## 6      UTMX       UTMY  0.614191000</code></pre>
+<p>Nothing too strongly correlated (|r|&gt;0.7). Let’s move on.</p>
+<p>Let’s plot the data. It’s not too fancy but gives us an impression of the bird distribution patterns. Hotter color = higher bird density.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="part-7-on-your-own.html#cb20-1" tabindex="-1"></a>dataproj<span class="ot">&lt;-</span><span class="fu">st_as_sf</span>(data, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;UTMX&quot;</span>, <span class="st">&quot;UTMY&quot;</span>))</span>
+<span id="cb20-2"><a href="part-7-on-your-own.html#cb20-2" tabindex="-1"></a><span class="fu">st_crs</span>(dataproj)<span class="ot">&lt;-</span><span class="dv">26918</span> <span class="co">#UTM 18N</span></span>
+<span id="cb20-3"><a href="part-7-on-your-own.html#cb20-3" tabindex="-1"></a>gbmap <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="fu">gmap</span>(dataproj, <span class="at">type =</span> <span class="st">&quot;satellite&quot;</span>,<span class="at">map_key=</span><span class="st">&quot;AIzaSyDZohZKjKe4J14NrZBxbf58HV097oEzgdE&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning: [rast] unknown extent</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="part-7-on-your-own.html#cb22-1" tabindex="-1"></a>dataproj<span class="ot">&lt;-</span><span class="fu">st_transform</span>(dataproj, <span class="fu">crs</span>(gbmap))<span class="co"># Google Maps are in Mercator projection. This projects the points to that projection to enable mapping</span></span>
+<span id="cb22-2"><a href="part-7-on-your-own.html#cb22-2" tabindex="-1"></a><span class="fu">palette</span>(<span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">9</span>, <span class="at">name =</span> <span class="st">&quot;OrRd&quot;</span>))</span>
+<span id="cb22-3"><a href="part-7-on-your-own.html#cb22-3" tabindex="-1"></a><span class="fu">plot</span>(gbmap) </span>
+<span id="cb22-4"><a href="part-7-on-your-own.html#cb22-4" tabindex="-1"></a><span class="fu">points</span>(dataproj, <span class="at">col =</span> plotrix<span class="sc">:::</span><span class="fu">rescale</span>(dataproj<span class="sc">$</span>meanVIR, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">9</span>)),<span class="at">pch=</span><span class="dv">20</span>)</span></code></pre></div>
+<p><img src="AW_2023_Working_with_low_tilt_data_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Let’s model VIR with a Boosted Regression Tree. We will set the tree complexity to 1 to first examine main effects with no interactions among covariates. Note that no data transformations are performed. This is because assumptions of normality of data are not required.</p>
+<p>The boosting process iteratively tunes the models to more closely fit the training data. We will set the bag.fraction to 0.5, which means 50% of the data will be used to train the models while the remainder are used to cross-validate the models. The boosting continues until the point of minimal holdout deviance is reached. Once the deviance starts to creep back up, it means we are starting to overfit the model. We want to aim for around 1000 trees before reaching the stopping point. You can adjust the learning rate to tune how many trees are run.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="part-7-on-your-own.html#cb23-1" tabindex="-1"></a>brt_model  <span class="ot">&lt;-</span> <span class="fu">gbm.step</span>(<span class="at">data=</span>data, </span>
+<span id="cb23-2"><a href="part-7-on-your-own.html#cb23-2" tabindex="-1"></a>                       <span class="at">gbm.x =</span> <span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>,<span class="st">&quot;near_radar&quot;</span>,<span class="st">&quot;pwood&quot;</span>,<span class="st">&quot;hwood&quot;</span>,<span class="st">&quot;urban&quot;</span>,<span class="st">&quot;ndvimean&quot;</span>,<span class="st">&quot;ndvistd&quot;</span>,<span class="st">&quot;dcoast&quot;</span>,<span class="st">&quot;ag&quot;</span>,<span class="st">&quot;emmarsh&quot;</span>),</span>
+<span id="cb23-3"><a href="part-7-on-your-own.html#cb23-3" tabindex="-1"></a>                       <span class="at">gbm.y =</span> <span class="st">&quot;meanVIR&quot;</span>,</span>
+<span id="cb23-4"><a href="part-7-on-your-own.html#cb23-4" tabindex="-1"></a>                       <span class="at">family=</span><span class="st">&quot;gaussian&quot;</span>,</span>
+<span id="cb23-5"><a href="part-7-on-your-own.html#cb23-5" tabindex="-1"></a>                       <span class="at">tree.complexity =</span> <span class="dv">5</span>, <span class="co">#set to 1 for no interactions - set &gt;1 for interactions</span></span>
+<span id="cb23-6"><a href="part-7-on-your-own.html#cb23-6" tabindex="-1"></a>                       <span class="at">learning.rate =</span> <span class="fl">0.1</span>,</span>
+<span id="cb23-7"><a href="part-7-on-your-own.html#cb23-7" tabindex="-1"></a>                       <span class="at">bag.fraction =</span> <span class="fl">0.5</span>,<span class="at">n.trees=</span><span class="dv">100</span>)</span></code></pre></div>
+<pre><code>## Loading required namespace: gbm</code></pre>
+<pre><code>## 
+##  
+##  GBM STEP - version 2.9 
+##  
+## Performing cross-validation optimisation of a boosted regression tree model 
+## for NA and using a family of gaussian 
+## Using 3472 observations and 10 predictors 
+## creating 10 initial models of 100 trees 
+## 
+##  folds are unstratified 
+## total mean deviance =  0.2019 
+## tolerance is fixed at  2e-04 
+## ntrees resid. dev. 
+## 100    0.0969 
+## now adding trees... 
+## 200   0.0907 
+## 300   0.0886 
+## 400   0.0877 
+## 500   0.0869 
+## 600   0.0869 
+## 700   0.0864 
+## 800   0.0867 
+## 900   0.0868 
+## 1000   0.0868 
+## 1100   0.0869 
+## 1200   0.087 
+## 1300   0.0866 
+## 1400   0.0866 
+## 1500   0.0869 
+## 1600   0.0868 
+## 1700   0.0869 
+## 1800   0.087 
+## 1900   0.087 
+## 2000   0.0873 
+## 2100   0.0873 
+## 2200   0.0877</code></pre>
+<pre><code>## fitting final gbm model with a fixed number of 700 trees for NA</code></pre>
+<p><img src="AW_2023_Working_with_low_tilt_data_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre><code>## 
+## mean total deviance = 0.202 
+## mean residual deviance = 0.035 
+##  
+## estimated cv deviance = 0.086 ; se = 0.004 
+##  
+## training data correlation = 0.913 
+## cv correlation =  0.757 ; se = 0.008 
+##  
+## elapsed time -  0.93 minutes</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="part-7-on-your-own.html#cb28-1" tabindex="-1"></a><span class="fu">summary</span>(brt_model)</span></code></pre></div>
+<p><img src="AW_2023_Working_with_low_tilt_data_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<pre><code>##                   var   rel.inf
+## dcoast         dcoast 21.335562
+## near_radar near_radar 17.178529
+## elev             elev 13.207224
+## hwood           hwood 11.989027
+## ndvimean     ndvimean  9.106993
+## ndvistd       ndvistd  8.568222
+## ag                 ag  8.005161
+## urban           urban  5.685826
+## emmarsh       emmarsh  2.796909
+## pwood           pwood  2.126548</code></pre>
+<p>The output shows the covariates ranked by their relative influence in explaning variance of the response variable. The relative influence among covariates will always add up to 100%. Look for the “cv correlation”. This is the cross-validation correlation.</p>
+<div id="does-it-appear-that-the-brt-models-are-informative" class="section level4 hasAnchor" number="7.1.0.1">
+<h4><span class="header-section-number">7.1.0.1</span> Does it appear that the BRT models are informative?<a href="part-7-on-your-own.html#does-it-appear-that-the-brt-models-are-informative" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Now let’s produce the partial dependency plots to see the functional responses between bird density and the predictor variables.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="part-7-on-your-own.html#cb30-1" tabindex="-1"></a><span class="fu">gbm.plot</span>(brt_model,<span class="at">plot.layout=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),<span class="at">common.scale =</span> F)</span></code></pre></div>
+<p><img src="AW_2023_Working_with_low_tilt_data_files/figure-html/unnamed-chunk-14-1.png" width="672" /><img src="AW_2023_Working_with_low_tilt_data_files/figure-html/unnamed-chunk-14-2.png" width="672" /><img src="AW_2023_Working_with_low_tilt_data_files/figure-html/unnamed-chunk-14-3.png" width="672" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="part-7-on-your-own.html#cb31-1" tabindex="-1"></a><span class="do">##If you model tree complexity &gt;1 then look for interactions below</span></span>
+<span id="cb31-2"><a href="part-7-on-your-own.html#cb31-2" tabindex="-1"></a>inter<span class="ot">&lt;-</span><span class="fu">gbm.interactions</span>(brt_model) <span class="co">#look for interactions among variables</span></span></code></pre></div>
+<pre><code>## gbm.interactions - version 2.9
+## Cross tabulating interactions for gbm model with 10 predictors</code></pre>
+<pre><code>## 1 2 3 4 5 6 7 8 9</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="part-7-on-your-own.html#cb34-1" tabindex="-1"></a>inter[<span class="dv">1</span>] <span class="co">#let&#39;s see the top interactions ranked from strongest to weakest</span></span></code></pre></div>
+<pre><code>## $rank.list
+##   var1.index var1.names var2.index var2.names int.size
+## 1          2 near_radar          1       elev     9.60
+## 2          8     dcoast          2 near_radar     3.28
+## 3          5      urban          2 near_radar     2.42
+## 4          7    ndvistd          2 near_radar     2.03
+## 5          8     dcoast          4      hwood     1.87</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="part-7-on-your-own.html#cb36-1" tabindex="-1"></a><span class="fu">gbm.perspec</span>(brt_model,<span class="dv">2</span>,<span class="dv">8</span>,<span class="at">z.range=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">4</span>)) <span class="co">#this function creates a perspective plot to visualize any interactions. Just replace the &quot;2&quot; and &quot;7&quot; with the index number of the two covariates you want to display</span></span></code></pre></div>
+<pre><code>## maximum value = 1.46</code></pre>
+<p><img src="AW_2023_Working_with_low_tilt_data_files/figure-html/unnamed-chunk-14-4.png" width="672" /></p>
+</div>
+<div id="notice-that-the-variable-near_radar-is-rather-influential.-in-theory-the-correction-for-range-bias-should-remove-any-relationship-between-vir-and-range-from-the-radar.-so-what-do-you-think-is-going-on-here-hint---think-about-the-width-of-the-beam-near-the-radar-and-beam-filling." class="section level4 hasAnchor" number="7.1.0.2">
+<h4><span class="header-section-number">7.1.0.2</span> Notice that the variable <code>near_radar</code> is rather influential. In theory, the correction for “range” bias should remove any relationship between VIR and range from the radar. So what do you think is going on here? Hint - think about the width of the beam near the radar and beam filling.<a href="part-7-on-your-own.html#notice-that-the-variable-near_radar-is-rather-influential.-in-theory-the-correction-for-range-bias-should-remove-any-relationship-between-vir-and-range-from-the-radar.-so-what-do-you-think-is-going-on-here-hint---think-about-the-width-of-the-beam-near-the-radar-and-beam-filling." class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="look-at-the-other-relationships-between-mean-vir-and-predictors.-is-there-evidence-that-birds-are-concentrated-near-the-coastline-which-habitat-type-seems-to-have-the-strongest-relationship-with-bird-density-what-does-this-tell-you-about-the-types-of-birds-that-the-radar-is-detecting-how-do-you-interpret-the-relationship-of-bird-density-with-ndvi-are-there-any-surprising-relationships-here-with-any-covariates" class="section level4 hasAnchor" number="7.1.0.3">
+<h4><span class="header-section-number">7.1.0.3</span> Look at the other relationships between mean VIR and predictors. Is there evidence that birds are concentrated near the coastline? Which habitat type seems to have the strongest relationship with bird density? What does this tell you about the types of birds that the radar is detecting? How do you interpret the relationship of bird density with NDVI? Are there any surprising relationships here with any covariates?<a href="part-7-on-your-own.html#look-at-the-other-relationships-between-mean-vir-and-predictors.-is-there-evidence-that-birds-are-concentrated-near-the-coastline-which-habitat-type-seems-to-have-the-strongest-relationship-with-bird-density-what-does-this-tell-you-about-the-types-of-birds-that-the-radar-is-detecting-how-do-you-interpret-the-relationship-of-bird-density-with-ndvi-are-there-any-surprising-relationships-here-with-any-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="now-try-running-the-models-by-increasing-the-tree-complexity-to-3-or-more.-uncomment-the-code-ive-included-to-allow-you-to-determine-the-strongest-interactions.-are-there-any-interesting-interactions-here-do-the-brt-models-now-explain-more-of-the-deviance" class="section level4 hasAnchor" number="7.1.0.4">
+<h4><span class="header-section-number">7.1.0.4</span> Now try running the models by increasing the tree complexity to 3 or more. Uncomment the code I’ve included to allow you to determine the strongest interactions. Are there any interesting interactions here? Do the BRT models now explain more of the deviance?<a href="part-7-on-your-own.html#now-try-running-the-models-by-increasing-the-tree-complexity-to-3-or-more.-uncomment-the-code-ive-included-to-allow-you-to-determine-the-strongest-interactions.-are-there-any-interesting-interactions-here-do-the-brt-models-now-explain-more-of-the-deviance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="next-try-including-the-utmx-and-utmy-variables-into-the-model.-do-the-results-change-at-all" class="section level4 hasAnchor" number="7.1.0.5">
+<h4><span class="header-section-number">7.1.0.5</span> Next try including the UTMX and UTMY variables into the model. Do the results change at all?<a href="part-7-on-your-own.html#next-try-including-the-utmx-and-utmy-variables-into-the-model.-do-the-results-change-at-all" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="part-6.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

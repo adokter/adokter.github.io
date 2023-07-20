@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Part 4 | AW_2023_Working_with_low_tilt_data.knit</title>
+  <meta name="description" content="Radar Aeroecology Workshop<br />
+Working with low tilt data for mapping animals near the ground</div>" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Part 4 | AW_2023_Working_with_low_tilt_data.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Part 4 | AW_2023_Working_with_low_tilt_data.knit" />
+  
+  
+  
+
+<meta name="author" content="Includes R code written by Jeffrey Buler, Jaci Smolinsky, and Matt Boone, Department of Entomology and Wildlife Ecology, University of Delaware, Newark, DE, USA" />
+
+
+<meta name="date" content="2023-07-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="part-3.html"/>
+<link rel="next" href="part-5.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="part-1.html"><a href="part-1.html"><i class="fa fa-check"></i><b>1</b> Part 1</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="part-1.html"><a href="part-1.html#setup"><i class="fa fa-check"></i><b>1.1</b> Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="part-2.html"><a href="part-2.html"><i class="fa fa-check"></i><b>2</b> Part 2</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="part-2.html"><a href="part-2.html#create-a-polygon-shapefile-basegrid-of-radar-sample-volumes"><i class="fa fa-check"></i><b>2.1</b> Create a polygon shapefile basegrid of radar sample volumes</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="part-3.html"><a href="part-3.html"><i class="fa fa-check"></i><b>3</b> Part 3</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="part-3.html"><a href="part-3.html#determine-ground-heights-underneath-sample-volumes"><i class="fa fa-check"></i><b>3.1</b> Determine ground heights underneath sample volumes</a></li>
+<li class="chapter" data-level="3.2" data-path="part-3.html"><a href="part-3.html#load-basgrid-polygon-into-qgis---easy-way"><i class="fa fa-check"></i><b>3.2</b> Load basgrid polygon into QGIS - easy way</a></li>
+<li class="chapter" data-level="3.3" data-path="part-3.html"><a href="part-3.html#changing-the-layer-properties-to-display-data"><i class="fa fa-check"></i><b>3.3</b> Changing the layer properties to display data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="part-4.html"><a href="part-4.html"><i class="fa fa-check"></i><b>4</b> Part 4</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="part-4.html"><a href="part-4.html#compute-topographic-beam-blockage"><i class="fa fa-check"></i><b>4.1</b> Compute topographic beam blockage</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="part-5.html"><a href="part-5.html"><i class="fa fa-check"></i><b>5</b> Part 5</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="part-5.html"><a href="part-5.html#examine-data-for-making-a-clutter-mask-for-the-basegrid"><i class="fa fa-check"></i><b>5.1</b> Examine data for making a clutter mask for the basegrid</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="part-5.html"><a href="part-5.html#join-table-to-layer-in-qgis"><i class="fa fa-check"></i><b>5.1.1</b> Join table to layer in QGIS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="part-6.html"><a href="part-6.html"><i class="fa fa-check"></i><b>6</b> Part 6</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="part-6.html"><a href="part-6.html#estimating-beam-propagation-using-radiosonde-data"><i class="fa fa-check"></i><b>6.1</b> Estimating beam propagation using radiosonde data</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="part-7-on-your-own.html"><a href="part-7-on-your-own.html"><i class="fa fa-check"></i><b>7</b> Part 7 (On your own)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="part-7-on-your-own.html"><a href="part-7-on-your-own.html#modeling-bird-stopover-distributions"><i class="fa fa-check"></i><b>7.1</b> Modeling bird stopover distributions</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">Radar Aeroecology Workshop<br />
+Working with low tilt data for mapping animals near the ground</div></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="part-4" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Part 4<a href="part-4.html#part-4" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="compute-topographic-beam-blockage" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Compute topographic beam blockage<a href="part-4.html#compute-topographic-beam-blockage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will use a previously processed complete basegrid shapefile with ground height already computed for this part. The following code will propagate a beam at the low tilt angle with standard refraction and measure how much of the beam gets blocked by topographic relief along individual rays. This is an important step in helping to mask regions within the radar domain where detection and accurate measurement of animals in the air is impossible or highly uncertain. Note that we just read in the dbf file (attribute table) of the shapefile to modify it.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="part-4.html#cb12-1" tabindex="-1"></a><span class="do">## read in basegrid with range, azimuth, and ground heights rounded to nearest 10 meter</span></span>
+<span id="cb12-2"><a href="part-4.html#cb12-2" tabindex="-1"></a>basegrid <span class="ot">&lt;-</span><span class="fu">read.dbf</span>(<span class="fu">paste0</span>(OUT,<span class="st">&#39;/&#39;</span>,site,<span class="st">&#39;_100km_super_grid_DEM.dbf&#39;</span>)) </span>
+<span id="cb12-3"><a href="part-4.html#cb12-3" tabindex="-1"></a><span class="do">## pass the beam_block function over the basegrid</span></span>
+<span id="cb12-4"><a href="part-4.html#cb12-4" tabindex="-1"></a>block<span class="ot">&lt;-</span><span class="fu">beam_block</span>(<span class="at">data=</span>basegrid, <span class="at">theta=</span>theta)</span>
+<span id="cb12-5"><a href="part-4.html#cb12-5" tabindex="-1"></a>basegrid<span class="ot">&lt;-</span><span class="fu">merge</span>(basegrid,block,<span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;range&quot;</span>,<span class="st">&quot;azimuth&quot;</span>))</span>
+<span id="cb12-6"><a href="part-4.html#cb12-6" tabindex="-1"></a><span class="do">## make things look pretty</span></span>
+<span id="cb12-7"><a href="part-4.html#cb12-7" tabindex="-1"></a>basegrid<span class="ot">&lt;-</span>basegrid[<span class="fu">order</span>(basegrid<span class="sc">$</span>id),]</span>
+<span id="cb12-8"><a href="part-4.html#cb12-8" tabindex="-1"></a>col_id<span class="ot">&lt;-</span><span class="fu">grep</span>(<span class="st">&quot;id&quot;</span>,<span class="fu">names</span>(basegrid))</span>
+<span id="cb12-9"><a href="part-4.html#cb12-9" tabindex="-1"></a><span class="do">## reorder columns so id is first column name</span></span>
+<span id="cb12-10"><a href="part-4.html#cb12-10" tabindex="-1"></a>basegrid<span class="ot">&lt;-</span>basegrid[, <span class="fu">c</span>(col_id, (<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(basegrid))[<span class="sc">-</span>col_id])]  </span>
+<span id="cb12-11"><a href="part-4.html#cb12-11" tabindex="-1"></a>basegrid<span class="sc">$</span>id<span class="ot">&lt;-</span><span class="fu">as.integer</span>(basegrid<span class="sc">$</span>id)</span>
+<span id="cb12-12"><a href="part-4.html#cb12-12" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="part-4.html#cb12-13" tabindex="-1"></a><span class="fu">write.dbf</span>(basegrid, <span class="fu">paste0</span>(OUT,<span class="st">&#39;/&#39;</span>,site,<span class="st">&quot;_100km_super_grid_DEM.dbf&quot;</span>))</span></code></pre></div>
+<p>The map of topographic beam blockage should look like this…</p>
+<pre><code>## Warning: [rast] unknown extent</code></pre>
+<p><img src="AW_2023_Working_with_low_tilt_data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Open the basegrid up in QGIS to display the beam blockage (variable “pblock”) following the steps outlined before to display the ground height.</p>
+<div id="do-the-regions-of-beam-blockage-match-the-location-of-high-elevation-ridge-lines" class="section level4 hasAnchor" number="4.1.0.1">
+<h4><span class="header-section-number">4.1.0.1</span> Do the regions of beam blockage match the location of high elevation ridge lines?<a href="part-4.html#do-the-regions-of-beam-blockage-match-the-location-of-high-elevation-ridge-lines" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In my lab, we mask out regions where beam blockage is &gt;= 25% from analyses.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="part-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="part-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
