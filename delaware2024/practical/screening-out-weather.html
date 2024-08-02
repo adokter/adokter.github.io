@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Screening out weather | Introductory exercises with bioRad</title>
+  <meta name="description" content="3 Screening out weather | Introductory exercises with bioRad" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Screening out weather | Introductory exercises with bioRad" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Screening out weather | Introductory exercises with bioRad" />
+  
+  
+  
+
+<meta name="author" content="Adriaan M. Dokter" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="basic-visualization-of-radar-scans.html"/>
+<link rel="next" href="vertical-profiles.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting started</a></li>
+<li class="chapter" data-level="2" data-path="basic-visualization-of-radar-scans.html"><a href="basic-visualization-of-radar-scans.html"><i class="fa fa-check"></i><b>2</b> Basic visualization of radar scans</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic-visualization-of-radar-scans.html"><a href="basic-visualization-of-radar-scans.html#the-structure-of-polar-volumes"><i class="fa fa-check"></i><b>2.1</b> The structure of polar volumes</a></li>
+<li class="chapter" data-level="2.2" data-path="basic-visualization-of-radar-scans.html"><a href="basic-visualization-of-radar-scans.html#plotting-radar-scans"><i class="fa fa-check"></i><b>2.2</b> Plotting radar scans</a></li>
+<li class="chapter" data-level="2.3" data-path="basic-visualization-of-radar-scans.html"><a href="basic-visualization-of-radar-scans.html#overlaying-radar-scans-on-maps"><i class="fa fa-check"></i><b>2.3</b> Overlaying radar scans on maps</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="screening-out-weather.html"><a href="screening-out-weather.html"><i class="fa fa-check"></i><b>3</b> Screening out weather</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-correlation-coefficient"><i class="fa fa-check"></i><b>3.1</b> using correlation coefficient</a></li>
+<li class="chapter" data-level="3.2" data-path="screening-out-weather.html"><a href="screening-out-weather.html#using-mistnet"><i class="fa fa-check"></i><b>3.2</b> using MistNet</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="vertical-profiles.html"><a href="vertical-profiles.html"><i class="fa fa-check"></i><b>4</b> Vertical profiles</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="vertical-profiles.html"><a href="vertical-profiles.html#loading-processed-vertical-profiles"><i class="fa fa-check"></i><b>4.1</b> Loading processed vertical profiles</a></li>
+<li class="chapter" data-level="4.2" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-single-vertical-profiles"><i class="fa fa-check"></i><b>4.2</b> Inspecting single vertical profiles</a></li>
+<li class="chapter" data-level="4.3" data-path="vertical-profiles.html"><a href="vertical-profiles.html#plotting-vertical-profile-time-series"><i class="fa fa-check"></i><b>4.3</b> Plotting vertical profile time series</a></li>
+<li class="chapter" data-level="4.4" data-path="vertical-profiles.html"><a href="vertical-profiles.html#vertical-and-time-integration-of-profiles"><i class="fa fa-check"></i><b>4.4</b> Vertical and time integration of profiles</a></li>
+<li class="chapter" data-level="4.5" data-path="vertical-profiles.html"><a href="vertical-profiles.html#manipulating-vertical-profile-time-series-data"><i class="fa fa-check"></i><b>4.5</b> Manipulating vertical profile time series data</a></li>
+<li class="chapter" data-level="4.6" data-path="vertical-profiles.html"><a href="vertical-profiles.html#inspecting-precipitation-signals-in-profiles"><i class="fa fa-check"></i><b>4.6</b> Inspecting precipitation signals in profiles</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="range-bias-correction.html"><a href="range-bias-correction.html"><i class="fa fa-check"></i><b>5</b> Range bias correction</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="range-bias-correction.html"><a href="range-bias-correction.html#processing-a-polar-volume-into-a-profile"><i class="fa fa-check"></i><b>5.1</b> Processing a polar volume into a profile</a></li>
+<li class="chapter" data-level="5.2" data-path="range-bias-correction.html"><a href="range-bias-correction.html#range-bias-correction-and-vertical-integration-on-a-map"><i class="fa fa-check"></i><b>5.2</b> Range bias correction and vertical integration on a map</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="processing-many-polar-volumes.html"><a href="processing-many-polar-volumes.html"><i class="fa fa-check"></i><b>6</b> Processing many polar volumes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="processing-many-polar-volumes.html"><a href="processing-many-polar-volumes.html#accessing-radar-data"><i class="fa fa-check"></i><b>6.1</b> Accessing radar data</a></li>
+<li class="chapter" data-level="6.2" data-path="processing-many-polar-volumes.html"><a href="processing-many-polar-volumes.html#processing-multiple-polar-volumes"><i class="fa fa-check"></i><b>6.2</b> Processing multiple polar volumes</a></li>
+<li class="chapter" data-level="6.3" data-path="processing-many-polar-volumes.html"><a href="processing-many-polar-volumes.html#parallel-processing"><i class="fa fa-check"></i><b>6.3</b> Parallel processing</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="further-analysis-outside-biorad.html"><a href="further-analysis-outside-biorad.html"><i class="fa fa-check"></i><b>7</b> Further analysis outside bioRad</a></li>
+<li class="chapter" data-level="8" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>8</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="troubleshooting.html"><a href="troubleshooting.html#cannot-find-proj.db"><i class="fa fa-check"></i><b>8.1</b> Cannot find proj.db</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introductory exercises with bioRad</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="screening-out-weather" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Screening out weather<a href="screening-out-weather.html#screening-out-weather" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="using-correlation-coefficient" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> using correlation coefficient<a href="screening-out-weather.html#using-correlation-coefficient" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Screening precipitation based on correlation coefficient is arguably the most simple and established approach for screening out weather in cases where dual-polarization data is available. It is based on removing data above a certain <span class="math inline">\(\rho_{/HV}\)</span> tresholds, most commonly 0.95.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="screening-out-weather.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We will screen out the reflectivity areas with for which the</span></span>
+<span id="cb8-2"><a href="screening-out-weather.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># correlation coefficient is &gt; 0.95 (indicating precipitation)</span></span>
+<span id="cb8-3"><a href="screening-out-weather.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We do so by redefining parameter DBZH, replacing pixels with NA values</span></span>
+<span id="cb8-4"><a href="screening-out-weather.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># whenever RHOHV &gt; 0.95</span></span>
+<span id="cb8-5"><a href="screening-out-weather.html#cb8-5" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DBZH =</span> <span class="fu">ifelse</span>(RHOHV <span class="sc">&gt;</span> <span class="fl">0.95</span>, <span class="cn">NA</span>, DBZH))</span>
+<span id="cb8-6"><a href="screening-out-weather.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the original and cleaned up reflectivity:</span></span>
+<span id="cb8-7"><a href="screening-out-weather.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">param =</span> <span class="st">&quot;DBZH&quot;</span>, <span class="at">zlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">40</span>), <span class="at">map=</span><span class="st">&quot;osm&quot;</span>)</span></code></pre></div>
+</div>
+<div id="using-mistnet" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> using MistNet<a href="screening-out-weather.html#using-mistnet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You can also use MistNet for screening out weather when
+* the radar operates at S-band wavelengths
+* you only have single polarization data available (specifically, the three basic quantities radial velocity VRADH, reflectivity DBZH, and spectrum width WRADH).</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="screening-out-weather.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># apply the MistNet model to the polar volume file and load it as a polar volume (pvol):</span></span>
+<span id="cb9-2"><a href="screening-out-weather.html#cb9-2" aria-hidden="true" tabindex="-1"></a>my_pvol <span class="ot">&lt;-</span> <span class="fu">apply_mistnet</span>(my_pvolfiles[<span class="dv">1</span>])</span>
+<span id="cb9-3"><a href="screening-out-weather.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># mistnet will add additional parameters to the</span></span>
+<span id="cb9-4"><a href="screening-out-weather.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># elevation scans at 0.5, 1.5, 2.5, 3.5 and 4.5 degrees</span></span>
+<span id="cb9-5"><a href="screening-out-weather.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s extract the scan closest to 0.5 degrees:</span></span>
+<span id="cb9-6"><a href="screening-out-weather.html#cb9-6" aria-hidden="true" tabindex="-1"></a>my_scan <span class="ot">&lt;-</span> <span class="fu">get_scan</span>(my_pvol, <span class="fl">0.5</span>)</span>
+<span id="cb9-7"><a href="screening-out-weather.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot some summary info about the scan to the console:</span></span>
+<span id="cb9-8"><a href="screening-out-weather.html#cb9-8" aria-hidden="true" tabindex="-1"></a>my_scan</span></code></pre></div>
+<p>MistNet adds several new parameters:</p>
+<ul>
+<li><code>WEATHER</code>: a probability (0-1) for the weather class</li>
+<li><code>BIOLOGY</code>: a probability (0-1) for the biology class</li>
+<li><code>BACKGROUND</code>: a probability (0-1) for the background (empty space) class</li>
+<li><code>CELL</code>: the final segmentation, which is based on the WEATHER parameters of all five MistNet elevation scans. <code>CELL</code> also includes a border calculated by a region growing approach. <code>CELL</code> values equal 1 for the additional border, and 2 for the originally segmented precipitation area by MistNet.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="screening-out-weather.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># as before, project the scan as a ppi:</span></span>
+<span id="cb10-2"><a href="screening-out-weather.html#cb10-2" aria-hidden="true" tabindex="-1"></a>my_ppi <span class="ot">&lt;-</span> <span class="fu">project_as_ppi</span>(my_scan)</span>
+<span id="cb10-3"><a href="screening-out-weather.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the probability for the WEATHER class</span></span>
+<span id="cb10-4"><a href="screening-out-weather.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_ppi, <span class="at">param =</span> <span class="st">&#39;WEATHER&#39;</span>)</span>
+<span id="cb10-5"><a href="screening-out-weather.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the final segmentation result:</span></span>
+<span id="cb10-6"><a href="screening-out-weather.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the probability for the WEATHER class</span></span>
+<span id="cb10-7"><a href="screening-out-weather.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_ppi, <span class="at">param =</span> <span class="st">&#39;CELL&#39;</span>)</span>
+<span id="cb10-8"><a href="screening-out-weather.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s remove the identified precipitation area (and additional border) from the ppi, and plot it:</span></span>
+<span id="cb10-9"><a href="screening-out-weather.html#cb10-9" aria-hidden="true" tabindex="-1"></a>my_ppi_clean <span class="ot">&lt;-</span> <span class="fu">calculate_param</span>(my_ppi, <span class="at">DBZH =</span> <span class="fu">ifelse</span>(CELL <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="cn">NA</span>, DBZH))</span>
+<span id="cb10-10"><a href="screening-out-weather.html#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(my_ppi_clean, <span class="at">param =</span> <span class="st">&#39;DBZH&#39;</span>)</span></code></pre></div>
+<p><strong>Exercise 4:</strong> Calculate and plot a ‘cleaned up’ PPI for the radial velocity that includes only
+the segmentation by MistNet and not the additional border. Remember that the segmentation
+by Mistnet has a CELL value 2, and the border has a CELL value 1.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="basic-visualization-of-radar-scans.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vertical-profiles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

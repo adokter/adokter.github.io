@@ -1,0 +1,18 @@
+# Timing practical
+
+90 mins total
+
+- 00 - 10: 1. Getting Started and introductions
+- 10 - 20: 2. Basic Visualization
+- 20 - 30: answers (Q1-Q3)
+- 30 - 40: 3. Screening out Weather
+- 40 - 45: answer Q4
+- 45 - 50: short break
+- 50 - 60: 4.1-4.3 (plotting/inspecting profiles)
+- 60 - 70: answer Q5-Q8
+- 70 - 75: 4.4 (making the integrated plots)
+- 75 - 85: Q9-Q11 as a group (pen and paper, if on schedule)
+- 85 - 90: 4.6 Inspecting precip
+
+
+
