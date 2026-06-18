@@ -210,7 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.1</span> Processing a polar volume into a profile<a href="range-bias-correction.html#processing-a-polar-volume-into-a-profile" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="range-bias-correction.html#cb104-1" tabindex="-1"></a><span class="co"># download a polar volume for the KBRO radar in Brownsville, TX</span></span>
 <span id="cb104-2"><a href="range-bias-correction.html#cb104-2" tabindex="-1"></a>my_pvol <span class="ot">&lt;-</span> <span class="fu">get_pvol</span>(<span class="st">&quot;KBRO&quot;</span>,<span class="fu">as.POSIXct</span>(<span class="st">&quot;2017-05-14 05:50:00&quot;</span>))</span></code></pre></div>
-<pre><code>## Filename = /var/folders/85/mhhbjmj50wnb0_g0kntpzrw80000gr/T//Rtmp3sYQpp/KBRO20170514_054747_V0611a264864e0fa, callid = KBRO</code></pre>
+<pre><code>## Filename = /var/folders/85/mhhbjmj50wnb0_g0kntpzrw80000gr/T//Rtmpd0QsIA/KBRO20170514_054747_V0611df64791a053, callid = KBRO</code></pre>
 <pre><code>## Reading RSL polar volume with nominal time 20170514-054747, source: RAD:KBRO,PLC:BROWNSVILLE,state:TX,radar_name:KBRO</code></pre>
 <div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="range-bias-correction.html#cb107-1" tabindex="-1"></a><span class="co"># calculate the profile, correlation-coefficient is used automatically to remove precipitation:</span></span>
 <span id="cb107-2"><a href="range-bias-correction.html#cb107-2" tabindex="-1"></a><span class="co"># we calculate 60 layers of 50 meter width, so up to 60*50=3000 m.</span></span>
@@ -304,7 +304,7 @@ during the take-off phase that is best estimated relative to ground level.</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="range-bias-correction.html#cb117-1" tabindex="-1"></a><span class="co"># Download a polar volume for KCCX radar</span></span>
 <span id="cb117-2"><a href="range-bias-correction.html#cb117-2" tabindex="-1"></a><span class="co"># This in the Appalachian mountains of Central Pennsylvania</span></span>
 <span id="cb117-3"><a href="range-bias-correction.html#cb117-3" tabindex="-1"></a>pvol <span class="ot">&lt;-</span> getRad<span class="sc">::</span><span class="fu">get_pvol</span>(<span class="st">&quot;KCCX&quot;</span>, <span class="fu">as.POSIXct</span>(<span class="st">&quot;2013-10-08 23:24:30&quot;</span>, <span class="at">tz=</span><span class="st">&quot;UTC&quot;</span>))</span></code></pre></div>
-<pre><code>## Filename = /var/folders/85/mhhbjmj50wnb0_g0kntpzrw80000gr/T//Rtmp3sYQpp/KCCX20131008_232430_V06.gz11a2676be6c65, callid = KCCX</code></pre>
+<pre><code>## Filename = /var/folders/85/mhhbjmj50wnb0_g0kntpzrw80000gr/T//Rtmpd0QsIA/KCCX20131008_232430_V06.gz11df6667eeb2, callid = KCCX</code></pre>
 <pre><code>## Reading RSL polar volume with nominal time 20131008-232430, source: RAD:KCCX,PLC:STATE_COLLEGE,state:PA,radar_name:KCCX</code></pre>
 <pre><code>## Warning: dimensions of scan parameter 1 at elev 3.515630 do not match scan dimensions, resampling ...</code></pre>
 <pre><code>## Warning: dimensions of scan parameter 2 at elev 3.515630 do not match scan dimensions, resampling ...</code></pre>
