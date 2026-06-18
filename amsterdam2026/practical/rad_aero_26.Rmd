@@ -313,9 +313,9 @@ my_vpts[1:50]
 # here we extract a single timestep, which gives you back a vertical profile class object:
 my_vpts[100]
 # to plot the full time series from 0-3000 m above ground level:
-plot(my_vpts, ylim=c(0,3000))
-# remove one corrupted profile (timestep 46):
-my_vpts <- my_vpts[-46]
+plot(my_vpts[-c(40,80)], ylim=c(0,3000))
+# remove one corrupted profile (timestep 52):
+my_vpts <- my_vpts[-52]
 # check the help file for the plotting function of profile time series
 # Because profile timeseries are of class 'vpts', it's associated plotting function
 # is called plot.vpts:

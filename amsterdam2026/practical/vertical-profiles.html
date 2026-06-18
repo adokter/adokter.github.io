@@ -240,9 +240,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-4"><a href="vertical-profiles.html#cb16-4" tabindex="-1"></a><span class="co"># here we extract a single timestep, which gives you back a vertical profile class object:</span></span>
 <span id="cb16-5"><a href="vertical-profiles.html#cb16-5" tabindex="-1"></a>my_vpts[<span class="dv">100</span>]</span>
 <span id="cb16-6"><a href="vertical-profiles.html#cb16-6" tabindex="-1"></a><span class="co"># to plot the full time series from 0-3000 m above ground level:</span></span>
-<span id="cb16-7"><a href="vertical-profiles.html#cb16-7" tabindex="-1"></a><span class="fu">plot</span>(my_vpts, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">3000</span>))</span>
-<span id="cb16-8"><a href="vertical-profiles.html#cb16-8" tabindex="-1"></a><span class="co"># remove one corrupted profile (timestep 46):</span></span>
-<span id="cb16-9"><a href="vertical-profiles.html#cb16-9" tabindex="-1"></a>my_vpts <span class="ot">&lt;-</span> my_vpts[<span class="sc">-</span><span class="dv">46</span>]</span>
+<span id="cb16-7"><a href="vertical-profiles.html#cb16-7" tabindex="-1"></a><span class="fu">plot</span>(my_vpts[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">40</span>,<span class="dv">80</span>)], <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">3000</span>))</span>
+<span id="cb16-8"><a href="vertical-profiles.html#cb16-8" tabindex="-1"></a><span class="co"># remove one corrupted profile (timestep 52):</span></span>
+<span id="cb16-9"><a href="vertical-profiles.html#cb16-9" tabindex="-1"></a>my_vpts <span class="ot">&lt;-</span> my_vpts[<span class="sc">-</span><span class="dv">52</span>]</span>
 <span id="cb16-10"><a href="vertical-profiles.html#cb16-10" tabindex="-1"></a><span class="co"># check the help file for the plotting function of profile time series</span></span>
 <span id="cb16-11"><a href="vertical-profiles.html#cb16-11" tabindex="-1"></a><span class="co"># Because profile timeseries are of class &#39;vpts&#39;, it&#39;s associated plotting function</span></span>
 <span id="cb16-12"><a href="vertical-profiles.html#cb16-12" tabindex="-1"></a><span class="co"># is called plot.vpts:</span></span>
